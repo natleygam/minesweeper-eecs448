@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <title>Minesweeper (2018)</title>
+  </head>
+
+  <body class="bg-secondary">
+
+    <!--
+    game set up modal
+    -->
+    <div class="modal fade bg-info" tabindex="-1" role="dialog" id="modal_game_setup">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <img class="img-fluid" style="height:03vw;" src="/images/minesweeper-quick-lose.png">
+          <div class="modal-header">
+            <h2 class="modal-title">Game Setup</h2>
+          </div>
+          <div class="modal-body">
+            <p class="card-text">Give us some information and we'll set up your game.</p>
+            <form>
+              <div class="form-group">
+                <label for="input_board_size" class="bmd-label-floating">Board size</label>
+                <input type="number" class="form-control" id="input_board_size">
+                <span class="bmd-help">Boards will always be square.</span>
+              </div>
+              <div class="form-group">
+                <label for="input_mine_count" class="bmd-label-floating">Mine count</label>
+                <input type="number" class="form-control" id="input_mine_count">
+              </div>
+              <button type="button" class="btn btn-raised btn-success" onclick="validateConfig()">Start</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <label class="text-muted">
+              Version 0.0.0
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    game board modal
+    -->
+    <div class="modal fade bg-secondary" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_game_board">
+      <div class="modal-dialog modal-dialog-centered" id="modal_dialog_game_board" role="document">
+        <div class="modal-content">
+          <nav class="navbar navbar-light bg-light justify-content-between">
+            <span class="navbar-brand mb-0 h1">Minesweeper (2018)</span>
+            <span class="navbar-item" id="label_stopwatch">Elapsed time: 00:00:00</span>
+          </nav>
+          <div class="modal-body" id="modal_body_game_board">
+            <table class="table table-bordered bg-secondary" id="table_game_board">
+            </table>
+          </div>
+          <div class="modal-footer">
+            <label class="text-muted">
+              Version 0.0.0
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    start game modal
+    -->
+    <div class="modal fade bg-success" tabindex="-1" role="dialog" id="modal_start_game">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Ready?</h2>
+          </div>
+          <div class="modal-body">
+            <button type="button" class="btn btn-raised btn-success" onclick="startGame()">Yep</button>
+            <button type="button" class="btn btn-raised btn-danger" onclick="getConfig()">Nope, let's go back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    bad config input modal
+    -->
+    <div class="modal fade bg-warning" tabindex="-1" role="dialog" id="modal_bad_config">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Whoops...</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="phrase_board_size"><strong>Bad Board Size:</strong> Nice try, boards are made of numbers.</p>
+            <p id="phrase_mine_count"><strong>Bad Mine Count:</strong> Good one, but mines can count. Give a number. And make it less than the board size too.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <!-- Optional JavaScript -->
+    <script src="js/ajax_index.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

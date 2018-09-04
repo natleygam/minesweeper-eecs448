@@ -1,0 +1,18 @@
+body {
+  /* background-color: #757575; */
+  font-family: 'VT323', monospace;
+}
+
+#modal_dialog_game_board {
+    position: relative;
+    display: table;
+    overflow-y: initial !important;
+    overflow-x: auto;
+    width: auto;
+    min-width: 300px;
+    min-height: 300px;
+}
+
+#modal_body_game_board {
+    overflow-y: auto;
+}
