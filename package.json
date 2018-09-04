@@ -1,0 +1,24 @@
+{
+  "name": "minesweeper-eecs448",
+  "version": "1.0.0",
+  "description": "Minesweeper (2018)",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvanBrown96/minesweeper-eecs448.git"
+  },
+  "author": "Benjamin Streit, Blake Rieschick, Evan Brown",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvanBrown96/minesweeper-eecs448/issues"
+  },
+  "homepage": "https://github.com/EvanBrown96/minesweeper-eecs448#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "path": "^0.12.7"
+  }
+}
