@@ -30,9 +30,12 @@
             <p class="card-text">Give us some information and we'll set up your game.</p>
             <form>
               <div class="form-group">
-                <label for="input_board_size" class="bmd-label-floating">Board size</label>
-                <input type="number" class="form-control" id="input_board_size">
-                <span class="bmd-help">Boards will always be square.</span>
+                <label for="input_board_rows" class="bmd-label-floating">Number of rows</label>
+                <input type="number" class="form-control" id="input_board_rows">
+              </div>
+              <div class="form-group">
+                <label for="input_board_cols" class="bmd-label-floating">Number of columns</label>
+                <input type="number" class="form-control" id="input_board_cols">
               </div>
               <div class="form-group">
                 <label for="input_mine_count" class="bmd-label-floating">Mine count</label>
@@ -103,8 +106,8 @@
             </button>
           </div>
           <div class="modal-body">
-            <p id="phrase_board_size"><strong>Bad Board Size:</strong> Nice try, boards are made of numbers.</p>
-            <p id="phrase_mine_count"><strong>Bad Mine Count:</strong> Good one, but mines can count. Give a number. And make it less than the board size too.</p>
+            <p id="phrase_board_size"><strong>Bad Board Size:</strong> Nice try, boards are made of numbers. Make it bigger than one while you're at it.</p>
+            <p id="phrase_mine_count"><strong>Bad Mine Count:</strong> Good one, but mines can count. Give a number. And make it less than the number of squares too.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Got it</button>

@@ -4,10 +4,11 @@ var game_board;
 /*
   * Builds game environment
 */
-function buildGameBoard(board_size, mine_count) {
+function buildGameBoard(board_rows, board_cols, mine_count) {
   // config object to send to backend
   const config = {
-    board_size: board_size,
+    board_rows: board_rows,
+    board_cols: board_cols,
     mine_count: mine_count
   };
   // making call to backend
@@ -22,6 +23,5 @@ function buildGameBoard(board_size, mine_count) {
         console.log(data);
       }
   });
-  // returning built game board
   return game_board;
 }

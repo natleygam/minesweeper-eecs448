@@ -18,7 +18,7 @@ function getConfig() {
 }
 
 /*
-  * Ensures board_size and mine_count is in proper format
+  * Ensures board_rows, board_cols, and mine_count is in proper format
   * Presents modal if in bad format
   * Calls buildGame() if in good format
 */
@@ -28,20 +28,26 @@ function validateConfig() {
   document.getElementById('phrase_mine_count').style.display = "block";
 
   // get input values
-  const board_size = document.getElementById('input_board_size').value;
+  const board_rows = document.getElementById('input_board_rows').value;
+  const board_cols = document.getElementById('input_board_cols').value;
   const mine_count = document.getElementById('input_mine_count').value;
 
   var bad_board_size = false;
   var bad_mine_count = false;
 
-  // check for bad entry on board_size
+  // check for bad entry on board_rows and board_cols
   // hide error phrases on modal if entry is good
-  if (board_size == "") {
+  if (board_rows == "" || board_rows < 2) {
     bad_board_size = true;
   } else {
     document.getElementById('phrase_board_size').style.display = "none";
   }
-  if (mine_count == "" || (mine_count >= (board_size - 1))) {
+  if (board_cols == "" || board_cols < 2) {
+    bad_board_size = true;
+  } else {
+    document.getElementById('phrase_board_size').style.display = "none";
+  }
+  if (mine_count == "" || mine_count < 1 || mine_count > ((board_rows * board_cols)-1)) {
     bad_mine_count = true;
   } else  {
     document.getElementById('phrase_mine_count').style.display = "none";
@@ -53,7 +59,7 @@ function validateConfig() {
     $('#modal_bad_config').modal('show');
   } else {
     // build game board upon good config
-    var game_board = buildGameBoard(board_size, mine_count);
+    var game_board = buildGameBoard(board_rows, board_cols, mine_count);
     // dismiss config modal
     $('#modal_game_setup').modal('hide');
     // show game start modal
@@ -73,7 +79,7 @@ function displayGameBoard(game_board) {
   // setting cell value equal to game board value at that index
   for (var i = 0; i < game_board.length; i++) {
     var new_row = table.insertRow(i);
-    for (var j = 0; j < game_board.length; j++) {
+    for (var j = 0; j < game_board[0].length; j++) {
       var new_cell = new_row.insertCell(j);
       current_row = table.rows[i];
       current_cell = current_row.cells[j];
