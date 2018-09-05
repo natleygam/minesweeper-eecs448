@@ -80,6 +80,8 @@ function displayGameBoard(game_board) {
       current_cell.setAttribute('row', i);
       current_cell.setAttribute('col', j);
       current_cell.setAttribute('value', game_board[i][j]);
+      current_cell.setAttribute('flagged', false);
+      current_cell.style.backgroundSize = 'contain';
     }
   }
 
@@ -99,12 +101,29 @@ function displayGameBoard(game_board) {
 */
 $('#table_game_board').click(function(data) {
   var cell = data.target || data.srcElement;
-  const cell_obj = {
-    row: cell.getAttribute('row'),
-    col: cell.getAttribute('col'),
-    value: cell.getAttribute('value')
-  };
-  cellClicked(cell_obj);
+  // if the cell is flagged, then don't do anything on click
+  if(cell.getAttribute('flagged') != 'true'){
+    const cell_obj = {
+      row: cell.getAttribute('row'),
+      col: cell.getAttribute('col'),
+      value: cell.getAttribute('value')
+    };
+
+    cellClicked(cell_obj);
+  }
+});
+
+
+/**
+  * right click listener
+*/
+$('#table_game_board').contextmenu(function(data) {
+  var cell = data.target || data.srcElement;
+
+  cellFlagged(cell);
+
+  // return false prevents right-click menu from coming up
+  return false;
 });
 
 /*
@@ -112,6 +131,24 @@ $('#table_game_board').click(function(data) {
 */
 function cellClicked(cell) {
   console.log(cell);
+};
+
+/*
+  * toggles flagged status of a cell
+*/
+function cellFlagged(cell) {
+
+  // get opposite of the current flagged status
+  var new_flagged_status = !(cell.getAttribute('flagged') == 'true');
+  // toggle flagged status
+  cell.setAttribute('flagged', new_flagged_status);
+  console.log(cell);
+  if(new_flagged_status){
+    cell.setAttribute('background', "/images/flag.jpg");
+  }
+  else{
+    cell.setAttribute('background', "");
+  }
 };
 
 /**
