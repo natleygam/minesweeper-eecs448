@@ -19,10 +19,9 @@
     <!--
     game set up modal
     -->
-    <div class="modal fade bg-info" tabindex="-1" role="dialog" id="modal_game_setup">
+    <div class="modal fade bg-info" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_game_setup">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <img class="img-fluid" style="height:03vw;" src="/images/minesweeper-quick-lose.png">
           <div class="modal-header">
             <h2 class="modal-title">Game Setup</h2>
           </div>
@@ -61,6 +60,7 @@
         <div class="modal-content">
           <nav class="navbar navbar-light bg-light justify-content-between">
             <span class="navbar-brand mb-0 h1">Minesweeper (2018)</span>
+            <img src="/images/smiley.png" id="board_image_smiley" style="width:25px;"/>
             <span class="navbar-item" id="label_stopwatch">Elapsed time: 00:00:00</span>
           </nav>
           <div class="modal-body" id="modal_body_game_board">
@@ -79,7 +79,7 @@
     <!--
     start game modal
     -->
-    <div class="modal fade bg-success" tabindex="-1" role="dialog" id="modal_start_game">
+    <div class="modal fade bg-success" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_start_game">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -96,7 +96,7 @@
     <!--
     bad config input modal
     -->
-    <div class="modal fade bg-warning" tabindex="-1" role="dialog" id="modal_bad_config">
+    <div class="modal fade bg-warning" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_bad_config">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
