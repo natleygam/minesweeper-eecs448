@@ -108,6 +108,9 @@ function displayGameBoard(game_board) {
   // displaying game board modal
   console.log('showing modal again');
   $('#modal_game_board').modal('show');
+
+  // make all of the cells square, based on their widths
+  $('#table_game_board td').height($('#table_game_board td').width());
 }
 
 /**
