@@ -1,4 +1,5 @@
 // variables for use in index page
+var game_board_before_start;
 var game_board;
 
 /*
@@ -17,11 +18,12 @@ function buildGameBoard(board_rows, board_cols, mine_count) {
       data: config,
       success: function (data) {
         console.log(data);
+        game_board_before_start = data;
         game_board = data;
       },
       error: function (data) {
         console.log(data);
       }
   });
-  return game_board;
+  return game_board_before_start;
 }

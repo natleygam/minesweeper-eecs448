@@ -79,18 +79,21 @@ function displayGameBoard(game_board) {
   // getting table
   var table = document.getElementById('table_game_board');
 
+  // clearing table in case coming from a resetGame()
+  $("#table_game_board tr").remove();
+
   // iterating through each row and each cell of the gameboard
   // creating new rows and new cells for each element
   // setting cell value equal to game board value at that index
-  for (var i = 0; i < game_board.length; i++) {
+  for (var i = 0; i < game_board_before_start.length; i++) {
     var new_row = table.insertRow(i);
-    for (var j = 0; j < game_board[0].length; j++) {
+    for (var j = 0; j < game_board_before_start[0].length; j++) {
       var new_cell = new_row.insertCell(j);
       current_row = table.rows[i];
       current_cell = current_row.cells[j];
       current_cell.setAttribute('row', i);
       current_cell.setAttribute('col', j);
-      current_cell.setAttribute('value', game_board[i][j]);
+      current_cell.setAttribute('value', game_board_before_start[i][j]);
       current_cell.setAttribute('flagged', false);
       current_cell.style.backgroundSize = 'contain';
     }
@@ -103,6 +106,7 @@ function displayGameBoard(game_board) {
   });
 
   // displaying game board modal
+  console.log('showing modal again');
   $('#modal_game_board').modal('show');
 }
 
@@ -170,6 +174,16 @@ function runStopwatch() {
 }
 
 /**
+  * Clears set timeout and resets stopwatch variables
+*/
+function resetStopwatch() {
+  clearTimeout(stopwatch);
+  seconds = 0;
+  minutes = 0;
+  hours = 0;
+}
+
+/**
   * Increments stopwatch variables and updates stopwatch label on gameboard
 */
 function incrementStopWatch() {
@@ -215,7 +229,22 @@ function startGame() {
   // hide start game modal
   $('#modal_start_game').modal('hide');
   // display gameboard
-  displayGameBoard(game_board);
+  displayGameBoard(game_board_before_start);
   // start stopwatch
   runStopwatch();
+}
+
+/**
+  * Resets game with current settings by re-presenting game board modal
+  * Resets stopwatch
+*/
+function resetGame() {
+  // resetting stopwatch
+  resetStopwatch();
+  // displaying gameboard again
+  displayGameBoard(game_board_before_start);
+  // start stopwatch again
+  runStopwatch();
+  // present snackbar alerting user that reset was successful
+  $.snackbar({content: "Game reset!"});
 }

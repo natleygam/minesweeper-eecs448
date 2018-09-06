@@ -22,6 +22,7 @@
     <div class="modal fade bg-info" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_game_setup">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+          <img class="img-fluid" style="height:03vw;" src="/images/minesweeper-quick-lose.png">
           <div class="modal-header">
             <h2 class="modal-title">Game Setup</h2>
           </div>
@@ -55,12 +56,12 @@
     <!--
     game board modal
     -->
-    <div class="modal fade bg-secondary" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_game_board">
+    <div class="modal fade bg-secondary" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="false" id="modal_game_board">
       <div class="modal-dialog modal-dialog-centered" id="modal_dialog_game_board" role="document">
         <div class="modal-content">
           <nav class="navbar navbar-light bg-light justify-content-between">
             <span class="navbar-brand mb-0 h1">Minesweeper (2018)</span>
-            <img src="/images/smiley.png" id="board_image_smiley" style="width:25px;"/>
+            <a onclick="resetGame()"><img src="/images/smiley.png" id="board_image_smiley" style="width:25px;"/></a>
             <span class="navbar-item" id="label_stopwatch">Elapsed time: 00:00:00</span>
           </nav>
           <div class="modal-body" id="modal_body_game_board">
@@ -116,9 +117,11 @@
       </div>
     </div>
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- jQuery first, then Popper.js, SnackbarJS, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <!-- SnackbarJS plugin -->
+    <script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"></script>
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
     <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
     <!-- Optional JavaScript -->
