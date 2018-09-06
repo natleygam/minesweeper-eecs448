@@ -40,22 +40,27 @@ function validateConfig() {
   if (board_rows == "" || board_rows < 2) {
     bad_board_size = true;
   } else {
-    document.getElementById('phrase_board_size').style.display = "none";
+    //document.getElementById('phrase_board_size').style.display = "none";
   }
   if (board_cols == "" || board_cols < 2) {
     bad_board_size = true;
   } else {
-    document.getElementById('phrase_board_size').style.display = "none";
+    //document.getElementById('phrase_board_size').style.display = "none";
   }
   if (mine_count == "" || mine_count < 1 || mine_count > ((board_rows * board_cols)-1)) {
     bad_mine_count = true;
   } else  {
-    document.getElementById('phrase_mine_count').style.display = "none";
+    //document.getElementById('phrase_mine_count').style.display = "none";
   }
 
   // show error modal if either error is triggered
   if (bad_board_size == true || bad_mine_count == true) {
-    //$('#modal_game_setup').modal('hide');
+    if (bad_board_size != true) {
+      document.getElementById('phrase_board_size').style.display = "none";
+    }
+    if (bad_mine_count != true) {
+      document.getElementById('phrase_mine_count').style.display = "none";
+    }
     $('#modal_bad_config').modal('show');
   } else {
     // build game board upon good config
