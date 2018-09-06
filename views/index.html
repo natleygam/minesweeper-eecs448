@@ -61,8 +61,18 @@
         <div class="modal-content">
           <nav class="navbar navbar-light bg-light justify-content-between">
             <span class="navbar-brand mb-0 h1">Minesweeper (2018)</span>
-            <a onclick="resetGame()"><img src="/images/smiley.png" id="board_image_smiley" style="width:25px;"/></a>
-            <span class="navbar-item" id="label_stopwatch">Elapsed time: 00:00:00</span>
+          </nav>
+          <nav class="navbar navbar-light bg-light justify-content-between">
+            <span class="navbar-item" id="flag_indicator">
+              <img src="/images/flag.png" style="width:25px;"/>
+              <span id="flag_count">10</span>
+            </span>
+            <a class = "navbar-item" onclick="resetGame()">
+              <img src="/images/smiley.png" id="board_image_smiley" style="width:25px;"/>
+            </a>
+            <span class="navbar-item" id="label_stopwatch">
+              Elapsed time: 00:00:00
+            </span>
           </nav>
           <div class="modal-body" id="modal_body_game_board">
             <table class="table table-bordered bg-secondary" id="table_game_board">
