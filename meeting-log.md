@@ -35,3 +35,15 @@ Location: Eaton Hall
   * Discussed work done over past few days
   * Created necessary Epics and associated Stories for foreseeable work on app
   * Discussed next meeting time for later this week
+
+## Meeting \#4
+Date: Friday, September 7, 2018
+
+Time: 11:35 - 11:50 PM
+
+Location: Eaton Hall
+
+  * Discussed work done over past few days
+  * Discussed issues/bugs that have come up during implementation
+  * Discussed moving board module to front-end as it's own class
+  * Discussed scheduling and location of next meeting
