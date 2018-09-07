@@ -35,7 +35,7 @@ class Stopwatch {
 
     // update label
     var label = document.getElementById('label_stopwatch')
-    label.innerHTML = 'Elapsed time: ';
+    label.innerHTML = '';
     if (this.hours > 9) {
       label.innerHTML += this.hours + ':';
     } else {
