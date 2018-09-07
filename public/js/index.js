@@ -2,7 +2,7 @@
 var seconds = 0;
 var minutes = 0;
 var hours = 0;
-var stopwatch;
+var stopwatch = new Stopwatch();
 
 var flag_count;
 
@@ -110,7 +110,6 @@ function displayGameBoard(game_board) {
   });
 
   // displaying game board modal
-  console.log('showing modal again');
   $('#modal_game_board').modal('show');
 
   // make all of the cells square, based on their widths
@@ -196,63 +195,9 @@ function updateFlags(new_count){
 }
 
 /**
-  * Begins set timeout function to increment stopwatch variables
-*/
-function runStopwatch() {
-  stopwatch = setTimeout(incrementStopWatch, 1000);
-}
-
-/**
-  * Clears set timeout and resets stopwatch variables
-*/
-function resetStopwatch() {
-  clearTimeout(stopwatch);
-  seconds = 0;
-  minutes = 0;
-  hours = 0;
-}
-
-/**
-  * Increments stopwatch variables and updates stopwatch label on gameboard
-*/
-function incrementStopWatch() {
-  // increment variables
-  seconds++;
-  if (seconds >= 60) {
-    seconds = 0;
-    minutes++;
-    if (minutes >= 60) {
-      minutes = 0;
-      hours++;
-    }
-  }
-
-  // update label
-  var label = document.getElementById('label_stopwatch')
-  label.innerHTML = 'Elapsed time: ';
-  if (hours > 9) {
-    label.innerHTML += hours + ':';
-  } else {
-    label.innerHTML += '0' + hours + ':';
-  }
-  if (minutes > 9) {
-    label.innerHTML += minutes + ':';
-  } else {
-    label.innerHTML += '0' + minutes + ':';
-  }
-  if (seconds > 9) {
-    label.innerHTML += seconds;
-  } else {
-    label.innerHTML += '0' + seconds;
-  }
-
-  // call function to continue stopwatch
-  runStopwatch();
-}
-
-/**
-  * Starts game
-  * TODO make this a better comment
+  * Dismisses start game modal
+  * Calls function to display game board
+  * Starts stopwatch
 */
 function startGame() {
   // hide start game modal
@@ -260,20 +205,23 @@ function startGame() {
   // display gameboard
   displayGameBoard(game_board_before_start);
   // start stopwatch
-  runStopwatch();
+  stopwatch.run();
+
 }
 
 /**
   * Resets game with current settings by re-presenting game board modal
   * Resets stopwatch
+  * Starts stopwatch again
+  * Presents snackbar upon completion
 */
 function resetGame() {
   // resetting stopwatch
-  resetStopwatch();
+  stopwatch.reset();
   // displaying gameboard again
   displayGameBoard(game_board_before_start);
   // start stopwatch again
-  runStopwatch();
+  stopwatch.run();
   // present snackbar alerting user that reset was successful
   $.snackbar({content: "Game reset!"});
 }
