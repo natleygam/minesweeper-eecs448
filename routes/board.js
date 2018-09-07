@@ -18,48 +18,30 @@ router.get('/buildBoard', function(req, res) {
   * Lopps if not all mines used, returns game_board upon successful use of all mines
 */
 function buildBoard(board_rows, board_cols, mine_count) {
-  // boolean to tell loop to continue or stop
-  var good_board = false;
-  // double value to aid loop in creating proper boards for increasingly large dimensions
-  var loop_count = 0.0;
 
-  // begin attempts to build board
-  while (good_board == false) {
-    // counting variable to ensure all mines are used
-    var used_mines = 0;
-    // creating 2d array to act as game board
-    var game_board = [];
-    for (var i = 0; i < board_rows; i++) {
-      game_board[i] = [];
-    }
-    // populating game board
-    for (var i = 0; i < board_rows; i++) {
-      for (var j = 0; j < board_cols; j++) {
-        // boolean to determine if index should be mine
-        // only checks if there are still mines left
-        if (used_mines < mine_count) {
-          const is_mine = Math.random() < .25 + loop_count;
-          if (is_mine == true) {
-            game_board[i][j] = "M";
-            used_mines++;
-          } else {
-            game_board[i][j] = "*";
-          }
-        } else {
-          game_board[i][j] = "*";
-        }
-      }
-    }
-
-    // stop loop
-    if (used_mines == mine_count) {
-      good_board = true;
-    } else {
-    // let loop go again if all mines weren't used
-    // increase odds of mine for next loop
-      loop_count += 0.15;
+  // creating 2d array to act as game board
+  var game_board = [];
+  for(var i = 0; i < board_rows; i++) {
+    game_board[i] = [];
+    for(var j = 0; j < board_cols; j++) {
+      game_board[i][j] = "*";
     }
   }
+
+  // populating game board
+  var mine_placed;
+  for(var i = 0; i < mine_count; i++) {
+    mine_placed = false;
+    do{
+      var row = Math.floor(Math.random() * board_rows);
+      var col = Math.floor(Math.random() * board_cols);
+      if(game_board[row][col] == "*"){
+        mine_placed = true;
+        game_board[row][col] = "M";
+      }
+    }while(!mine_placed);
+  }
+
   // return good board now that out of loop
   return game_board;
 }
