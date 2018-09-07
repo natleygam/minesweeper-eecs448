@@ -5,6 +5,7 @@ var hours = 0;
 var stopwatch = new Stopwatch();
 
 var flag_count;
+var initial_mine_count;
 
 getConfig();
 
@@ -72,6 +73,7 @@ function validateConfig() {
     // show game start modal
     $('#modal_start_game').modal('show');
     // set the initial flag count
+    initial_mine_count = mine_count;
     updateFlags(mine_count);
   }
 }
@@ -218,6 +220,8 @@ function startGame() {
 function resetGame() {
   // resetting stopwatch
   stopwatch.reset();
+  // resetting flag count
+  updateFlags(initial_mine_count);
   // displaying gameboard again
   displayGameBoard(game_board_before_start);
   // start stopwatch again
