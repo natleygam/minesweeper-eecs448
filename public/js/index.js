@@ -4,6 +4,8 @@ var minutes = 0;
 var hours = 0;
 var stopwatch;
 
+var flag_count;
+
 getConfig();
 
 /**
@@ -69,6 +71,8 @@ function validateConfig() {
     $('#modal_game_setup').modal('hide');
     // show game start modal
     $('#modal_start_game').modal('show');
+    // set the initial flag count
+    updateFlags(mine_count);
   }
 }
 
@@ -108,6 +112,9 @@ function displayGameBoard(game_board) {
   // displaying game board modal
   console.log('showing modal again');
   $('#modal_game_board').modal('show');
+
+  // make all of the cells square, based on their widths
+  $('#table_game_board td').height($('#table_game_board td').width());
 }
 
 /**
@@ -133,6 +140,7 @@ $('#table_game_board').click(function(data) {
   * right click listener
 */
 $('#table_game_board').contextmenu(function(data) {
+
   var cell = data.target || data.srcElement;
 
   cellFlagged(cell);
@@ -159,12 +167,33 @@ function cellFlagged(cell) {
   cell.setAttribute('flagged', new_flagged_status);
   console.log(cell);
   if(new_flagged_status){
-    cell.setAttribute('background', "/images/flag.jpg");
+    if(flag_count > 0){
+      cell.setAttribute('background', "/images/flag.png");
+      decrementFlags();
+    }
   }
   else{
     cell.setAttribute('background', "");
+    incrementFlags();
   }
 };
+
+/*
+  * updates the flag count variable/display
+*/
+
+function incrementFlags(){
+  updateFlags(flag_count+1);
+}
+
+function decrementFlags(){
+  updateFlags(flag_count-1);
+}
+
+function updateFlags(new_count){
+  flag_count = new_count;
+  $('#flag_count').html(flag_count);
+}
 
 /**
   * Begins set timeout function to increment stopwatch variables
