@@ -158,24 +158,23 @@ function cellClicked(cell) {
 };
 
 /*
-  * toggles flagged status of a cell
+  * Toggles flagged status of a cell
 */
 function cellFlagged(cell) {
-
-  // get opposite of the current flagged status
-  var new_flagged_status = !(cell.getAttribute('flagged') == 'true');
-  // toggle flagged status
-  cell.setAttribute('flagged', new_flagged_status);
-  console.log(cell);
-  if(new_flagged_status){
-    if(flag_count > 0){
+  // cell is currently flagged
+  // toggle
+  if (cell.getAttribute('flagged') == 'true') {
+    cell.setAttribute('flagged', 'false');
+    cell.setAttribute('background', "");
+    incrementFlags();
+  } else {
+    // cell is not currently flagged
+    // toggle only if user has flags left
+    if (flag_count > 0) {
+      cell.setAttribute('flagged', 'true');
       cell.setAttribute('background', "/images/flag.png");
       decrementFlags();
     }
-  }
-  else{
-    cell.setAttribute('background', "");
-    incrementFlags();
   }
 };
 
