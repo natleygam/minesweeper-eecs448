@@ -42,6 +42,30 @@ function buildBoard(board_rows, board_cols, mine_count) {
     }while(!mine_placed);
   }
 
+  // generating adjacency counts
+  var cur_mines;
+  for(var i = 0; i < board_rows; i++) {
+    for(var j = 0; j < board_cols; j++) {
+      // if cell is a mine, don't need to generate count for it (duh)
+      if(game_board[i][j] != "M"){
+        cur_mines = 0;
+        // go through all adjacent cells.
+        for(var k = i-1; k <= i+1; k++) {
+          for(var l = j-1; l <= j+1; l++) {
+            // check is adjecent cell is within bounds
+            if(k >= 0 && l >= 0 && k < board_rows && l < board_cols){
+              if(game_board[k][l] == "M"){
+                cur_mines++;
+              }
+            }
+          }
+        }
+
+        game_board[i][j] = cur_mines;
+      }
+    }
+  }
+  
   // return good board now that out of loop
   return game_board;
 }
