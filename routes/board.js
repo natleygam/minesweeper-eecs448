@@ -65,7 +65,7 @@ function buildBoard(board_rows, board_cols, mine_count) {
       }
     }
   }
-  
+
   // return good board now that out of loop
   return game_board;
 }

@@ -40,7 +40,7 @@ const route_board = require('./routes/board');
  * port to allow connections on
  * @type {Number}
  */
-const port = 3000;
+const port = 3002;
 
 
 
