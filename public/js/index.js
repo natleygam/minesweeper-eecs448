@@ -2,10 +2,7 @@
 var seconds = 0;
 var minutes = 0;
 var hours = 0;
-var stopwatch = new Stopwatch();
-
-var flag_count;
-var initial_mine_count;
+var stopwatch;
 
 getConfig();
 
@@ -72,9 +69,6 @@ function validateConfig() {
     $('#modal_game_setup').modal('hide');
     // show game start modal
     $('#modal_start_game').modal('show');
-    // set the initial flag count
-    initial_mine_count = mine_count;
-    updateFlags(mine_count);
   }
 }
 
@@ -112,10 +106,8 @@ function displayGameBoard(game_board) {
   });
 
   // displaying game board modal
+  console.log('showing modal again');
   $('#modal_game_board').modal('show');
-
-  // make all of the cells square, based on their widths
-  $('#table_game_board td').height($('#table_game_board td').width());
 }
 
 /**
@@ -126,13 +118,13 @@ $('#table_game_board').click(function(data) {
   var cell = data.target || data.srcElement;
   // if the cell is flagged, then don't do anything on click
   if(cell.getAttribute('flagged') != 'true'){
-    const cell_obj = {
-      row: cell.getAttribute('row'),
-      col: cell.getAttribute('col'),
-      value: cell.getAttribute('value')
-    };
+    // const cell_obj = {
+    //   row: cell.getAttribute('row'),
+    //   col: cell.getAttribute('col'),
+    //   value: cell.getAttribute('value')
+    // };
 
-    cellClicked(cell_obj);
+    cellClicked(cell);
   }
 });
 
@@ -141,7 +133,6 @@ $('#table_game_board').click(function(data) {
   * right click listener
 */
 $('#table_game_board').contextmenu(function(data) {
-
   var cell = data.target || data.srcElement;
 
   cellFlagged(cell);
@@ -150,55 +141,153 @@ $('#table_game_board').contextmenu(function(data) {
   return false;
 });
 
-/*
-  * TODO this function
-*/
+
+//Display Cell value
+//Displays the cell value on the game_board
+function displayValue(cell)
+{
+  var cellId = cell.getAttribute('row') + ',' + cell.getAttribute('col');
+  cell.setAttribute('id', cellId);
+  cell.setAttribute('isDisplayed', true);
+  document.getElementById(cellId).innerHTML = cell.getAttribute('value');
+}
+
+//Calls displayValue() to show cell values and then handles the rules
+//when telling what other cells will need to be cleared due to game rules
 function cellClicked(cell) {
   console.log(cell);
-};
 
-/*
-  * Toggles flagged status of a cell
-*/
-function cellFlagged(cell) {
-  // cell is currently flagged
-  // toggle
-  if (cell.getAttribute('flagged') == 'true') {
-    cell.setAttribute('flagged', 'false');
-    cell.setAttribute('background', "");
-    incrementFlags();
-  } else {
-    // cell is not currently flagged
-    // toggle only if user has flags left
-    if (flag_count > 0) {
-      cell.setAttribute('flagged', 'true');
-      cell.setAttribute('background', "/images/flag.png");
-      decrementFlags();
-    }
+  //Show Clicked Cell Value
+  //displayValue(cell);
+
+  //If Cell Value is mine
+  if(cell.getAttribute('value') == "M")
+  {
+    //End Game modal
+  }
+
+  //If Cell Value is Not mine
+  if(cell.getAttribute('value') != "M")
+  {
+    recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
   }
 };
 
+//Recursivly reveals the correct cells
+function recReveal(i, j)
+{
+  if(parseInt(i, 10) < game_board_before_start.length && parseInt(j, 10) < game_board_before_start[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0)
+  {
+    //Get Cell at i,j
+    var table = document.getElementById('table_game_board');
+    var row = table.rows[i];
+    var cell = row.cells[j];
+
+    if(!cell.getAttribute('isDisplayed'))
+    {
+      if(cell.getAttribute('value') == "0")
+      {
+        console.log("value 0 found" + cell.getAttribute('row') + cell.getAttribute('col'));
+        displayValue(cell);
+
+        //Look in all directions
+        recReveal(i,parseInt(j, 10) + 1);
+        recReveal(parseInt(i, 10) + 1,parseInt(j, 10) + 1);
+        recReveal(parseInt(i, 10) + 1,j);
+        recReveal(parseInt(i, 10) + 1,parseInt(j, 10) - 1);
+        recReveal(i,parseInt(j, 10) - 1);
+        recReveal(parseInt(i, 10) - 1,parseInt(j, 10) - 1);
+        recReveal(parseInt(i, 10) - 1,j);
+        recReveal(parseInt(i, 10) - 1,parseInt(j, 10) + 1);
+      }
+      else if(cell.getAttribute('value') == "M")
+      {
+
+      }
+      else
+      {
+        displayValue(cell);
+      }
+    }
+  }
+}
+
 /*
-  * updates the flag count variable/display
+  * toggles flagged status of a cell
 */
+function cellFlagged(cell) {
 
-function incrementFlags(){
-  updateFlags(flag_count+1);
-}
+  // get opposite of the current flagged status
+  var new_flagged_status = !(cell.getAttribute('flagged') == 'true');
+  // toggle flagged status
+  cell.setAttribute('flagged', new_flagged_status);
+  console.log(cell);
+  if(new_flagged_status){
+    cell.setAttribute('background', "/images/flag.jpg");
+  }
+  else{
+    cell.setAttribute('background', "");
+  }
+};
 
-function decrementFlags(){
-  updateFlags(flag_count-1);
-}
-
-function updateFlags(new_count){
-  flag_count = new_count;
-  $('#flag_count').html(flag_count);
+/**
+  * Begins set timeout function to increment stopwatch variables
+*/
+function runStopwatch() {
+  stopwatch = setTimeout(incrementStopWatch, 1000);
 }
 
 /**
-  * Dismisses start game modal
-  * Calls function to display game board
-  * Starts stopwatch
+  * Clears set timeout and resets stopwatch variables
+*/
+function resetStopwatch() {
+  clearTimeout(stopwatch);
+  seconds = 0;
+  minutes = 0;
+  hours = 0;
+}
+
+/**
+  * Increments stopwatch variables and updates stopwatch label on gameboard
+*/
+function incrementStopWatch() {
+  // increment variables
+  seconds++;
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes++;
+    if (minutes >= 60) {
+      minutes = 0;
+      hours++;
+    }
+  }
+
+  // update label
+  var label = document.getElementById('label_stopwatch')
+  label.innerHTML = 'Elapsed time: ';
+  if (hours > 9) {
+    label.innerHTML += hours + ':';
+  } else {
+    label.innerHTML += '0' + hours + ':';
+  }
+  if (minutes > 9) {
+    label.innerHTML += minutes + ':';
+  } else {
+    label.innerHTML += '0' + minutes + ':';
+  }
+  if (seconds > 9) {
+    label.innerHTML += seconds;
+  } else {
+    label.innerHTML += '0' + seconds;
+  }
+
+  // call function to continue stopwatch
+  runStopwatch();
+}
+
+/**
+  * Starts game
+  * TODO make this a better comment
 */
 function startGame() {
   // hide start game modal
@@ -206,25 +295,20 @@ function startGame() {
   // display gameboard
   displayGameBoard(game_board_before_start);
   // start stopwatch
-  stopwatch.run();
-
+  runStopwatch();
 }
 
 /**
   * Resets game with current settings by re-presenting game board modal
   * Resets stopwatch
-  * Starts stopwatch again
-  * Presents snackbar upon completion
 */
 function resetGame() {
   // resetting stopwatch
-  stopwatch.reset();
-  // resetting flag count
-  updateFlags(initial_mine_count);
+  resetStopwatch();
   // displaying gameboard again
   displayGameBoard(game_board_before_start);
   // start stopwatch again
-  stopwatch.run();
+  runStopwatch();
   // present snackbar alerting user that reset was successful
   $.snackbar({content: "Game reset!"});
 }

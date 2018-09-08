@@ -21,6 +21,6 @@ app.use('/index', route_index);
 app.use('/board', route_board);
 
 // expose public port
-const port = 3000;
+const port = 3002;
 app.listen(port);
 console.log("minesweeper has started on port " + port);
