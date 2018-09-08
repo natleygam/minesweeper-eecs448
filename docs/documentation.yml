@@ -1,0 +1,8 @@
+toc:
+  - name: Project Information
+    file: ../README.md
+    children:
+      - name: app.js
+        description: describe app.js here
+      - name: public/js/index.js
+        description: describe index.js here
