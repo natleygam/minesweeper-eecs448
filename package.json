@@ -4,7 +4,8 @@
   "description": "Minesweeper (2018)",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "node app.js",
+    "docgen": "documentation build --config docs/documentation.yml ./app.js ./public/js/** ./routes/** -f html -o docs -g"
   },
   "repository": {
     "type": "git",
