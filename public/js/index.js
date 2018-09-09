@@ -6,6 +6,7 @@ var stopwatch = new Stopwatch();
 
 var flag_count;
 var initial_mine_count;
+var first_click = true;
 
 getConfig();
 
@@ -123,6 +124,12 @@ function displayGameBoard(game_board) {
   * onclick listener for getting location of table cell
 */
 $('#table_game_board').click(function(data) {
+  // check to see if first click
+  if (first_click == true) {
+    // start stopwatch
+    stopwatch.run();
+    first_click = false;
+  }
   var cell = data.target || data.srcElement;
   // if the cell is flagged, then don't do anything on click
   if(cell.getAttribute('flagged') != 'true'){
@@ -268,9 +275,6 @@ function startGame() {
   $('#modal_start_game').modal('hide');
   // display gameboard
   displayGameBoard(game_board_before_start);
-  // start stopwatch
-  stopwatch.run();
-
 }
 
 /**
@@ -286,8 +290,8 @@ function resetGame() {
   updateFlags(initial_mine_count);
   // displaying gameboard again
   displayGameBoard(game_board_before_start);
-  // start stopwatch again
-  stopwatch.run();
+  // resetting first click
+  first_click = true;
   // present snackbar alerting user that reset was successful
   $.snackbar({content: "Game reset!"});
 }

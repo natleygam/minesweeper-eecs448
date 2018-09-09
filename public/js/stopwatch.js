@@ -75,11 +75,15 @@ class Stopwatch {
 
   /**
     * Clears set timeout and resets stopwatch variables
+    * Resets label to 00:00:00
   */
   reset() {
     clearTimeout(this.watch);
     this.seconds = 0;
     this.minutes = 0;
     this.hours = 0;
+
+    var label = document.getElementById('label_stopwatch')
+    label.innerHTML = '00:00:00';
   };
 }
