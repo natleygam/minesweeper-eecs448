@@ -141,7 +141,6 @@ $('#table_game_board').click(function(data) {
   * right click listener
 */
 $('#table_game_board').contextmenu(function(data) {
-
   var cell = data.target || data.srcElement;
 
   cellFlagged(cell);
