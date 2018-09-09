@@ -223,10 +223,14 @@ function cellFlagged(cell) {
   cell.setAttribute('flagged', new_flagged_status);
   console.log(cell);
   if(new_flagged_status){
-    cell.setAttribute('background', "/images/flag.jpg");
+    if(flag_count > 0){
+      cell.setAttribute('background', "/images/flag.png");
+      decrementFlags();
+    }
   }
   else{
     cell.setAttribute('background', "");
+    incrementFlags();
   }
 };
 
