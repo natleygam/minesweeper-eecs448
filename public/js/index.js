@@ -126,13 +126,13 @@ $('#table_game_board').click(function(data) {
   var cell = data.target || data.srcElement;
   // if the cell is flagged, then don't do anything on click
   if(cell.getAttribute('flagged') != 'true'){
-    const cell_obj = {
-      row: cell.getAttribute('row'),
-      col: cell.getAttribute('col'),
-      value: cell.getAttribute('value')
-    };
+    // const cell_obj = {
+    //   row: cell.getAttribute('row'),
+    //   col: cell.getAttribute('col'),
+    //   value: cell.getAttribute('value')
+    // };
 
-    cellClicked(cell_obj);
+    cellClicked(cell);
   }
 });
 
@@ -149,12 +149,74 @@ $('#table_game_board').contextmenu(function(data) {
   return false;
 });
 
-/*
-  * TODO this function
-*/
+//Display Cell value
+//Displays the cell value on the game_board
+function displayValue(cell)
+{
+  var cellId = cell.getAttribute('row') + ',' + cell.getAttribute('col');
+  cell.setAttribute('id', cellId);
+  cell.setAttribute('isDisplayed', true);
+  document.getElementById(cellId).innerHTML = cell.getAttribute('value');
+}
+
+//Calls displayValue() to show cell values and then handles the rules
+//when telling what other cells will need to be cleared due to game rules
 function cellClicked(cell) {
   console.log(cell);
+
+  //Show Clicked Cell Value
+  //displayValue(cell);
+
+  //If Cell Value is mine
+  if(cell.getAttribute('value') == "M")
+  {
+    //End Game modal
+  }
+
+  //If Cell Value is Not mine
+  if(cell.getAttribute('value') != "M")
+  {
+    recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
+  }
 };
+
+//Recursivly reveals the correct cells
+function recReveal(i, j)
+{
+  if(parseInt(i, 10) < game_board_before_start.length && parseInt(j, 10) < game_board_before_start[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0)
+  {
+    //Get Cell at i,j
+    var table = document.getElementById('table_game_board');
+    var row = table.rows[i];
+    var cell = row.cells[j];
+
+    if(!cell.getAttribute('isDisplayed'))
+    {
+      if(cell.getAttribute('value') == "0")
+      {
+        displayValue(cell);
+
+        //Look in all directions
+        recReveal(i,parseInt(j, 10) + 1);
+        recReveal(parseInt(i, 10) + 1,parseInt(j, 10) + 1);
+        recReveal(parseInt(i, 10) + 1,j);
+        recReveal(parseInt(i, 10) + 1,parseInt(j, 10) - 1);
+        recReveal(i,parseInt(j, 10) - 1);
+        recReveal(parseInt(i, 10) - 1,parseInt(j, 10) - 1);
+        recReveal(parseInt(i, 10) - 1,j);
+        recReveal(parseInt(i, 10) - 1,parseInt(j, 10) + 1);
+      }
+      else if(cell.getAttribute('value') == "M")
+      {
+
+      }
+      else
+      {
+        displayValue(cell);
+      }
+    }
+  }
+}
 
 /*
   * Toggles flagged status of a cell
