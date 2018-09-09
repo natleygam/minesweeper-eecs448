@@ -19,7 +19,7 @@
     <!--
     game set up modal
     -->
-    <div class="modal fade bg-info" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_game_setup">
+    <div class="modal fade bg-info" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_game_setup" onkeypress="javascript: if(event.keyCode == 13) validateConfig();">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <img class="img-fluid" style="height:03vw;" src="/images/minesweeper-quick-lose.png">
@@ -93,7 +93,7 @@
     <!--
     start game modal
     -->
-    <div class="modal fade bg-success" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_start_game">
+    <div class="modal fade bg-success" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_start_game" onkeypress="javascript: if(event.keyCode == 13) startGame();">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -110,7 +110,7 @@
     <!--
     bad config input modal
     -->
-    <div class="modal fade bg-warning" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_bad_config">
+    <div class="modal fade bg-warning" tabindex="-1" role="dialog" id="modal_bad_config" onkeypress="javascript: if(event.keyCode == 13) $('#modal_bad_config').modal('hide');">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">

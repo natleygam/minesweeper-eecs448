@@ -2,7 +2,10 @@
 var seconds = 0;
 var minutes = 0;
 var hours = 0;
-var stopwatch;
+var stopwatch = new Stopwatch();
+
+var flag_count;
+var initial_mine_count;
 
 getConfig();
 
@@ -69,6 +72,9 @@ function validateConfig() {
     $('#modal_game_setup').modal('hide');
     // show game start modal
     $('#modal_start_game').modal('show');
+    // set the initial flag count
+    initial_mine_count = mine_count;
+    updateFlags(mine_count);
   }
 }
 
@@ -106,8 +112,10 @@ function displayGameBoard(game_board) {
   });
 
   // displaying game board modal
-  console.log('showing modal again');
   $('#modal_game_board').modal('show');
+
+  // make all of the cells square, based on their widths
+  $('#table_game_board td').height($('#table_game_board td').width());
 }
 
 /**
@@ -216,82 +224,44 @@ function recReveal(i, j)
   * toggles flagged status of a cell
 */
 function cellFlagged(cell) {
-
-  // get opposite of the current flagged status
-  var new_flagged_status = !(cell.getAttribute('flagged') == 'true');
-  // toggle flagged status
-  cell.setAttribute('flagged', new_flagged_status);
-  console.log(cell);
-  if(new_flagged_status){
-    if(flag_count > 0){
+  // cell is currently flagged
+  // toggle
+  if (cell.getAttribute('flagged') == 'true') {
+    cell.setAttribute('flagged', 'false');
+    cell.setAttribute('background', "");
+    incrementFlags();
+  } else {
+    // cell is not currently flagged
+    // toggle only if user has flags left
+    if (flag_count > 0) {
+      cell.setAttribute('flagged', 'true');
       cell.setAttribute('background', "/images/flag.png");
       decrementFlags();
     }
   }
-  else{
-    cell.setAttribute('background', "");
-    incrementFlags();
-  }
 };
 
-/**
-  * Begins set timeout function to increment stopwatch variables
+/*
+  * updates the flag count variable/display
 */
-function runStopwatch() {
-  stopwatch = setTimeout(incrementStopWatch, 1000);
+
+function incrementFlags(){
+  updateFlags(flag_count+1);
+}
+
+function decrementFlags(){
+  updateFlags(flag_count-1);
+}
+
+function updateFlags(new_count){
+  flag_count = new_count;
+  $('#flag_count').html(flag_count);
 }
 
 /**
-  * Clears set timeout and resets stopwatch variables
-*/
-function resetStopwatch() {
-  clearTimeout(stopwatch);
-  seconds = 0;
-  minutes = 0;
-  hours = 0;
-}
-
-/**
-  * Increments stopwatch variables and updates stopwatch label on gameboard
-*/
-function incrementStopWatch() {
-  // increment variables
-  seconds++;
-  if (seconds >= 60) {
-    seconds = 0;
-    minutes++;
-    if (minutes >= 60) {
-      minutes = 0;
-      hours++;
-    }
-  }
-
-  // update label
-  var label = document.getElementById('label_stopwatch')
-  label.innerHTML = 'Elapsed time: ';
-  if (hours > 9) {
-    label.innerHTML += hours + ':';
-  } else {
-    label.innerHTML += '0' + hours + ':';
-  }
-  if (minutes > 9) {
-    label.innerHTML += minutes + ':';
-  } else {
-    label.innerHTML += '0' + minutes + ':';
-  }
-  if (seconds > 9) {
-    label.innerHTML += seconds;
-  } else {
-    label.innerHTML += '0' + seconds;
-  }
-
-  // call function to continue stopwatch
-  runStopwatch();
-}
-
-/**
-  * Starts game
-  * TODO make this a better comment
+  * Dismisses start game modal
+  * Calls function to display game board
+  * Starts stopwatch
 */
 function startGame() {
   // hide start game modal
@@ -299,20 +269,25 @@ function startGame() {
   // display gameboard
   displayGameBoard(game_board_before_start);
   // start stopwatch
-  runStopwatch();
+  stopwatch.run();
+
 }
 
 /**
   * Resets game with current settings by re-presenting game board modal
   * Resets stopwatch
+  * Starts stopwatch again
+  * Presents snackbar upon completion
 */
 function resetGame() {
   // resetting stopwatch
-  resetStopwatch();
+  stopwatch.reset();
+  // resetting flag count
+  updateFlags(initial_mine_count);
   // displaying gameboard again
   displayGameBoard(game_board_before_start);
   // start stopwatch again
-  runStopwatch();
+  stopwatch.run();
   // present snackbar alerting user that reset was successful
   $.snackbar({content: "Game reset!"});
 }
