@@ -150,7 +150,9 @@ $('#table_game_board').click(function(data) {
 $('#table_game_board').contextmenu(function(data) {
   var cell = data.target || data.srcElement;
 
-  cellFlagged(cell);
+  if(cell.getAttribute('isDisplayed') != "true"){
+    cellFlagged(cell);
+  }
 
   // return false prevents right-click menu from coming up
   return false;
