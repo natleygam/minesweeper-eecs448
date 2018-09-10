@@ -13,6 +13,8 @@ getConfig();
   * Calls modal to get game config
 */
 function getConfig() {
+  // resetting stopwatch in case coming from game lose modal
+  stopwatch.reset();
   // hiding start game modal and game board modal in case coming from there
   $('#modal_game_board').modal('hide');
   $('#modal_start_game').modal('hide');
