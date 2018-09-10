@@ -47,3 +47,17 @@ Location: Eaton Hall
   * Discussed issues/bugs that have come up during implementation
   * Discussed moving board module to front-end as it's own class
   * Discussed scheduling and location of next meeting
+
+## Meeting \#5
+Date: Monday, September 10, 2018
+
+Time: 11:35 - 11:50 PM
+
+Location: Eaton Hall
+
+  * Discussed work done over the weekend
+  * Discussed issues/bugs that have come up during implementation
+  * Discussed moving module functionality to it's own class, introducing
+    GameManager and ModalManager classes
+  * Discussed work to be done before next meeting by each team member
+  * Discussed scheduling and location of next meeting
