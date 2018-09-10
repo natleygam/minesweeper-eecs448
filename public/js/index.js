@@ -1,3 +1,4 @@
+
 /**
  * instance of stopwatch for timing games
  * @type {Stopwatch}
