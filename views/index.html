@@ -19,7 +19,7 @@
     <!--
     game set up modal
     -->
-    <div class="modal fade bg-info" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_game_setup" onkeypress="javascript: if(event.keyCode == 13) validateConfig();">
+    <div class="modal fade bg-info" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_game_setup" onkeypress="javascript: if(event.keyCode == 13) game_manager.validateConfig();">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <img class="img-fluid" style="height:03vw;" src="/images/minesweeper-quick-lose.png">
@@ -41,7 +41,7 @@
                 <label for="input_mine_count" class="bmd-label-floating">Mine count</label>
                 <input type="number" class="form-control" id="input_mine_count">
               </div>
-              <button type="button" class="btn btn-raised btn-success" onclick="validateConfig()">Start</button>
+              <button type="button" class="btn btn-raised btn-success" onclick="javascript: game_manager.validateConfig();">Start</button>
             </form>
           </div>
           <div class="modal-footer">
@@ -67,7 +67,7 @@
               <img src="/images/flag.png" style="width:25px;"/>
               <span id="flag_count">10</span>
             </span>
-            <a class = "navbar-item" onclick="resetGame()">
+            <a class = "navbar-item" onclick="javsscript: game_manager.resetGame();">
               <img src="/images/smiley.png" id="board_image_smiley" style="width:25px;"/>
             </a>
             <div>
@@ -93,15 +93,15 @@
     <!--
     start game modal
     -->
-    <div class="modal fade bg-success" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_start_game" onkeypress="javascript: if(event.keyCode == 13) startGame();">
+    <div class="modal fade bg-success" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_start_game" onkeypress="javascript: if(event.keyCode == 13) game_manager.startGame();">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h2 class="modal-title">Ready?</h2>
           </div>
           <div class="modal-body">
-            <button type="button" class="btn btn-raised btn-success" onclick="startGame()">Yep</button>
-            <button type="button" class="btn btn-raised btn-danger" onclick="getConfig()">Nope, let's go back</button>
+            <button type="button" class="btn btn-raised btn-success" onclick="javsscript: game_manager.startGame();">Yep</button>
+            <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.getConfig();">Nope, let's go back</button>
           </div>
         </div>
       </div>
@@ -143,8 +143,8 @@
             You clicked on a mine.
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-raised btn-success" onclick="resetGame()">New Game</button>
-            <button type="button" class="btn btn-raised btn-danger" onclick="getConfig()">Back to Menu</button>
+            <button type="button" class="btn btn-raised btn-success" onclick="javascript: game_manager.resetGame();">New Game</button>
+            <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.getConfig();">Back to Menu</button>
           </div>
         </div>
       </div>
@@ -164,8 +164,8 @@
             Elapsed time: <span id="win_time">(put time here)</span>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-raised btn-success" onclick="resetGame()">New Game</button>
-            <button type="button" class="btn btn-raised btn-danger" onclick="getConfig()">Back to Menu</button>
+            <button type="button" class="btn btn-raised btn-success" onclick="javascript: game_manager.resetGame();">New Game</button>
+            <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.getConfig();">Back to Menu</button>
           </div>
         </div>
       </div>
@@ -182,6 +182,8 @@
     <!-- Optional JavaScript -->
     <script src="js/board.js"></script>
     <script src="js/stopwatch.js"></script>
+    <script src="js/ModalManager.js"></script>
+    <script src="js/GameManager.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>
