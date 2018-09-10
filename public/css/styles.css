@@ -16,3 +16,24 @@ body {
 #modal_body_game_board {
     overflow-y: auto;
 }
+
+#table_game_board td {
+    background-size: contain;
+    position: relative;
+}
+
+#table_game_board td:after {
+  content: '';
+	display: block;
+  margin-top: 100%;
+}
+
+#table_game_board td .content {
+  	text-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    line-height: 200%;
+  }

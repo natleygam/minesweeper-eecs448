@@ -107,7 +107,7 @@ class GameBoard {
         current_cell.setAttribute('col', j);
         current_cell.setAttribute('value', this.initial_board[i][j]);
         current_cell.setAttribute('flagged', false);
-        current_cell.style.backgroundSize = 'contain';
+        current_cell.innerHTML = "<div class='content'></div>";
       }
     }
 
@@ -121,7 +121,7 @@ class GameBoard {
     $('#modal_game_board').modal('show');
 
     // make all of the cells square, based on their widths
-    $('#table_game_board td').height($('#table_game_board td').width());
+    //$('#table_game_board td').height($('#table_game_board td').width());
   }
 
   /**
@@ -260,10 +260,10 @@ class GameBoard {
    */
   displayValue(cell)
   {
-    var cellId = cell.getAttribute('row') + ',' + cell.getAttribute('col');
-    cell.setAttribute('id', cellId);
+    //var cellId = cell.getAttribute('row') + ',' + cell.getAttribute('col');
+    //cell.setAttribute('id', cellId);
     cell.setAttribute('isDisplayed', true);
-    document.getElementById(cellId).innerHTML = cell.getAttribute('value');
+    cell.firstChild.innerHTML = cell.getAttribute('value');
   }
 
   /**

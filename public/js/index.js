@@ -14,7 +14,7 @@ $('#table_game_board').click(function(data) {
     game_manager.stopwatch.run();
     game_manager.board.first_click = false;
   }
-  var cell = data.target || data.srcElement;
+  var cell = (data.target || data.srcElement).parentElement;
   // if the cell is flagged, then don't do anything on click
   if(cell.getAttribute('flagged') != 'true'){
     game_manager.board.cellClicked(cell);
@@ -28,7 +28,7 @@ $('#table_game_board').click(function(data) {
   * @returns {Boolean} - always returns false to prevent context menu appearing
 */
 $('#table_game_board').contextmenu(function(data) {
-  var cell = data.target || data.srcElement;
+  var cell = (data.target || data.srcElement).parentElement;
 
   if(cell.getAttribute('isDisplayed') != "true") {
     game_manager.board.cellFlagged(cell);
