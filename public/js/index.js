@@ -144,6 +144,8 @@ function resetGame() {
   stopwatch.reset();
   // resetting flag count
   board.initialFlagCount(board.initial_flag_count);
+  // building new board with current config
+  board.buildGameBoard(board.num_rows, board.num_cols, board.initial_mine_count);
   // displaying gameboard again
   board.displayGameBoard(board.initial_board);
   // present snackbar alerting user that reset was successful

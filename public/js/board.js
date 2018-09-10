@@ -2,16 +2,16 @@
   * Definition of game board object
 */
 class GameBoard {
-
   // object properties
   constructor() {
     this.initial_board;
     this.board;
+    this.num_rows;
+    this.num_cols;
     this.initial_mine_count = 0;
     this.current_mine_count = 0;
     this.initial_flag_count = 0;
     this.current_flag_count = 0;
-    this.current_flaged_mine_count = 0;
     this.first_click = true;
   }
 
@@ -21,11 +21,14 @@ class GameBoard {
     * Builds game board to spec
     * Loops if not all mines used
     * Sets equal to initial_board and board upon successful use of all mines
-    * @param {Number} board_rows - number of rows specified for board
-    * @param {Number} board_cols - number of cols specified for board
-    * @param {Number} mine_count - number of mines specified for board
+    * @param {Int} board_rows - number of rows specified for board
+    * @param {Int} board_cols - number of cols specified for board
+    * @param {Int} mine_count - number of mines specified for board
   */
   buildGameBoard(board_rows, board_cols, mine_count) {
+    // setting board dimensions
+    this.num_rows = board_rows;
+    this.num_cols = board_cols;
     // creating 2d array to act as game board
     this.board = [];
     for(var i = 0; i < board_rows; i++) {
@@ -121,7 +124,7 @@ class GameBoard {
 
   /**
     * Sets initial mine count
-    * @param {Number} initial_mine_count value to be set as initial mine count
+    * @param {Int} initial_mine_count - value to be set as initial mine count
   */
   initialMineCount(initial_mine_count) {
     this.initial_mine_count = initial_mine_count;
@@ -141,7 +144,7 @@ class GameBoard {
 
   /**
     * Sets initial flag count
-    * @param {Number} initial_flag_count - value to be set as initial flag count
+    * @param {Int} initial_flag_count - value to be set as initial flag count
   */
   initialFlagCount(initial_flag_count) {
     this.initial_flag_count = initial_flag_count;
@@ -153,34 +156,13 @@ class GameBoard {
     * Updates flag count according to operation
     * @param {String} operation - increment or decrement flag count
   */
-  updateFlagCount(operation, cell) {
+  updateFlagCount(operation) {
     if (operation == "increment") {
       this.current_flag_count++;
-      if(cell.getAttribute('value') == "M")
-      {
-        this.current_flaged_mine_count--;
-      }
     } else if (operation == "decrement") {
       this.current_flag_count--;
-      if(cell.getAttribute('value') == "M")
-      {
-        this.current_flaged_mine_count++;
-      }
     }
     document.getElementById('flag_count').innerHTML = this.current_flag_count;
-  }
-
-  //Function to trigger with each on click when number of flags = 0
-  //that checks if the user has statisfied every condition to win the game
-  checkWin()
-  {
-    console.log("current mine count: " + this.initial_mine_count + "current flagged mines: " + this.current_flaged_mine_count);
-    if(this.initial_mine_count == this.current_flaged_mine_count)
-    {
-      //Win Game Modal
-      console.log("congrats game won!");
-      $('#modal_win').modal('show');
-    }
   }
 
   //Calls displayValue() to show cell values and then handles the rules
@@ -202,11 +184,7 @@ class GameBoard {
     }
   };
 
-  /**
-   * Recursively reveals the the cell at (i, j) and any adjacent cells, if applicable
-   * @param {Number} i - row index of current cell
-   * @param {Number} j - column index of current cell
-   */
+  //Recursivly reveals the correct cells
   recReveal(i, j)
   {
     if(parseInt(i, 10) < this.initial_board.length && parseInt(j, 10) < this.initial_board[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0)
@@ -239,7 +217,6 @@ class GameBoard {
           // recReveal will only be initially called on non-mine cells from the
           // conditionals in cellClicked, and will only be called recursively
           // by cells that have no adjacent mines - Evan
-
         }
         else if(cell.getAttribute('flagged') == "false")
         {
@@ -249,10 +226,8 @@ class GameBoard {
     }
   }
 
-  /**
-   * Displays the cell value on the game_board
-   * @param {Object} cell - DOM object of the cell that was clicked
-   */
+  //Display Cell value
+  //Displays the cell value on the game_board
   displayValue(cell)
   {
     var cellId = cell.getAttribute('row') + ',' + cell.getAttribute('col');
@@ -261,9 +236,8 @@ class GameBoard {
     document.getElementById(cellId).innerHTML = cell.getAttribute('value');
   }
 
-  /**
+  /*
     * toggles flagged status of a cell
-    * @param {Object} cell - DOM object of the cell that was clicked
   */
   cellFlagged(cell) {
     // cell is currently flagged
@@ -271,21 +245,15 @@ class GameBoard {
     if (cell.getAttribute('flagged') == 'true') {
       cell.setAttribute('flagged', 'false');
       cell.setAttribute('background', "");
-      this.updateFlagCount("increment", cell);
+      this.updateFlagCount("increment");
     } else {
       // cell is not currently flagged
       // toggle only if user has flags left
       if (this.current_flag_count > 0) {
         cell.setAttribute('flagged', 'true');
         cell.setAttribute('background', "/images/flag.png");
-        this.updateFlagCount("decrement", cell);
-        console.log("current flag amount after decrement: " + this.current_flag_count);
-        if(this.current_flag_count == 0)
-        {
-          this.checkWin();
-        }
+        this.updateFlagCount("decrement");
       }
-
     }
   }
 }
