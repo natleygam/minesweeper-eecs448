@@ -200,7 +200,7 @@ function recReveal(i, j)
 
     if(!cell.getAttribute('isDisplayed'))
     {
-      if(cell.getAttribute('value') == "0")
+      if(cell.getAttribute('value') == "0" && cell.getAttribute('flagged') == "false")
       {
         console.log("value 0 found" + cell.getAttribute('row') + cell.getAttribute('col'));
         displayValue(cell);
@@ -217,9 +217,12 @@ function recReveal(i, j)
       }
       else if(cell.getAttribute('value') == "M")
       {
-
+        // could be wrong, but I don't think this will ever occur, since
+        // recReveal will only be initially called on non-mine cells from the
+        // conditionals in cellClicked, and will only be called recursively
+        // by cells that have no adjacent mines - Evan
       }
-      else
+      else if(cell.getAttribute('flagged') == "false")
       {
         displayValue(cell);
       }
