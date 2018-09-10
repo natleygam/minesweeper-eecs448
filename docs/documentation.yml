@@ -3,6 +3,31 @@ toc:
     file: ../README.md
     children:
       - name: app.js
-        description: describe app.js here
+        description: |
+          main js file of project
+
+          add more description here
+
       - name: public/js/index.js
-        description: describe index.js here
+        description: |
+          controls general aspects of the page
+
+          more description here
+
+      - name: public/js/board.js
+        description: |
+          controls board functions and data
+
+          more description here
+
+      - name: public/js/stopwatch.js
+        description: |
+          controls stopwatch functions and display
+
+          more description here
+
+      - name: routes/index.js
+        description: |
+          serves page html
+          
+          more description

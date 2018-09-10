@@ -2,6 +2,7 @@
   * Definition of game board object
 */
 class GameBoard {
+
   // object properties
   constructor() {
     this.initial_board;
@@ -20,9 +21,9 @@ class GameBoard {
     * Builds game board to spec
     * Loops if not all mines used
     * Sets equal to initial_board and board upon successful use of all mines
-    * @param {Int} board_rows - number of rows specified for board
-    * @param {Int} board_cols - number of cols specified for board
-    * @param {Int} mine_count - number of mines specified for board
+    * @param {Number} board_rows - number of rows specified for board
+    * @param {Number} board_cols - number of cols specified for board
+    * @param {Number} mine_count - number of mines specified for board
   */
   buildGameBoard(board_rows, board_cols, mine_count) {
     // creating 2d array to act as game board
@@ -120,7 +121,7 @@ class GameBoard {
 
   /**
     * Sets initial mine count
-    * @param {Int} initial_mine_count - value to be set as initial mine count
+    * @param {Number} initial_mine_count value to be set as initial mine count
   */
   initialMineCount(initial_mine_count) {
     this.initial_mine_count = initial_mine_count;
@@ -140,7 +141,7 @@ class GameBoard {
 
   /**
     * Sets initial flag count
-    * @param {Int} initial_flag_count - value to be set as initial flag count
+    * @param {Number} initial_flag_count - value to be set as initial flag count
   */
   initialFlagCount(initial_flag_count) {
     this.initial_flag_count = initial_flag_count;
@@ -201,7 +202,11 @@ class GameBoard {
     }
   };
 
-  //Recursivly reveals the correct cells
+  /**
+   * Recursively reveals the the cell at (i, j) and any adjacent cells, if applicable
+   * @param {Number} i - row index of current cell
+   * @param {Number} j - column index of current cell
+   */
   recReveal(i, j)
   {
     if(parseInt(i, 10) < this.initial_board.length && parseInt(j, 10) < this.initial_board[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0)
@@ -244,8 +249,10 @@ class GameBoard {
     }
   }
 
-  //Display Cell value
-  //Displays the cell value on the game_board
+  /**
+   * Displays the cell value on the game_board
+   * @param {Object} cell - DOM object of the cell that was clicked
+   */
   displayValue(cell)
   {
     var cellId = cell.getAttribute('row') + ',' + cell.getAttribute('col');
@@ -254,8 +261,9 @@ class GameBoard {
     document.getElementById(cellId).innerHTML = cell.getAttribute('value');
   }
 
-  /*
+  /**
     * toggles flagged status of a cell
+    * @param {Object} cell - DOM object of the cell that was clicked
   */
   cellFlagged(cell) {
     // cell is currently flagged

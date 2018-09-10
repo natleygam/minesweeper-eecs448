@@ -13,7 +13,7 @@ class Stopwatch {
   // object methods
 
   /**
-    * Runs incrementation of stopwatch
+    * tells stopwatch to begin counting
   */
   run() {
     this.watch = setTimeout(this.increment.bind(this), 1000);
@@ -57,7 +57,10 @@ class Stopwatch {
   };
 
   /**
-    * Sets increment values to member variables
+    * directly set time of stopwatch
+    * @param {Number} seconds - number of seconds to display
+    * @param {Number} minutes - number of minutes to display
+    * @param {Number} hours - number of hours to display
   */
   setIncrement(seconds, minutes, hours) {
     this.seconds = seconds;

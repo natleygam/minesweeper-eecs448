@@ -1,10 +1,12 @@
-// variables for stopwatch functionality
-var seconds = 0;
-var minutes = 0;
-var hours = 0;
+/**
+ * instance of stopwatch for timing games
+ * @type {Stopwatch}
+ */
 var stopwatch = new Stopwatch();
 
-// instance of game board
+/**
+ * @type {GameBoard}
+ */
 var board = new GameBoard();
 
 getConfig();
@@ -84,8 +86,8 @@ function validateConfig() {
 }
 
 /**
-  * TODO this comment
-  * onclick listener for getting location of table cell
+  * click listener for board clear events
+  * @param {Event} data
 */
 $('#table_game_board').click(function(data) {
   // check to see if first click
@@ -103,7 +105,9 @@ $('#table_game_board').click(function(data) {
 
 
 /**
-  * right click listener
+  * right click listener for board flag events
+  * @param {Event} data
+  * @returns {Boolean} - always returns false to prevent context menu appearing
 */
 $('#table_game_board').contextmenu(function(data) {
   var cell = data.target || data.srcElement;
