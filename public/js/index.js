@@ -15,8 +15,9 @@ getConfig();
 */
 function getConfig() {
   // hiding start game modal and game board modal in case coming from there
-  $('#modal_start_game').modal('hide');
   $('#modal_game_board').modal('hide');
+  $('#modal_start_game').modal('hide');
+  $('#modal_lose').modal('hide');
   // show games set up modal
   $('#modal_game_setup').modal('show');
 }
@@ -180,6 +181,7 @@ function cellClicked(cell) {
   //If Cell Value is mine
   if(cell.getAttribute('value') == "M")
   {
+    $('#modal_lose').modal('show');
     //End Game modal
   }
 
@@ -289,6 +291,7 @@ function startGame() {
   * Presents snackbar upon completion
 */
 function resetGame() {
+  $('#modal_lose').modal('hide');
   // resetting stopwatch
   stopwatch.reset();
   // resetting flag count

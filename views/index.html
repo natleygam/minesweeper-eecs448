@@ -130,6 +130,48 @@
       </div>
     </div>
 
+    <!--
+    fail game
+    -->
+    <div class="modal fade bg-warning" tabindex="-1" role="dialog" id="modal_lose">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">FAIL</h3>
+          </div>
+          <div class="modal-body">
+            You clicked on a mine.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-raised btn-success" onclick="resetGame()">New Game</button>
+            <button type="button" class="btn btn-raised btn-danger" onclick="getConfig()">Back to Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    win game
+    -->
+    <div class="modal fade bg-warning" tabindex="-1" role="dialog" id="modal_win">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">SUCCESS</h2>
+          </div>
+          <div class="modal-body">
+            You won the game!
+            Elapsed time: <span id="win_time">(put time here)</span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-raised btn-success" onclick="resetGame()">New Game</button>
+            <button type="button" class="btn btn-raised btn-danger" onclick="getConfig()">Back to Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- jQuery first, then Popper.js, SnackbarJS, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
