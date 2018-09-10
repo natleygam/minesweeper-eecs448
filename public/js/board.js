@@ -7,6 +7,8 @@ class GameBoard {
   constructor() {
     this.initial_board;
     this.board;
+    this.num_rows;
+    this.num_cols;
     this.initial_mine_count = 0;
     this.current_mine_count = 0;
     this.initial_flag_count = 0;
@@ -26,6 +28,9 @@ class GameBoard {
     * @param {Number} mine_count - number of mines specified for board
   */
   buildGameBoard(board_rows, board_cols, mine_count) {
+    // setting board dimensions
+    this.num_rows = board_rows;
+    this.num_cols = board_cols;
     // creating 2d array to act as game board
     this.board = [];
     for(var i = 0; i < board_rows; i++) {
