@@ -4,9 +4,8 @@ var minutes = 0;
 var hours = 0;
 var stopwatch = new Stopwatch();
 
-var flag_count;
-var initial_mine_count;
-var first_click = true;
+// instance of game board
+var board = new GameBoard();
 
 getConfig();
 
@@ -69,55 +68,17 @@ function validateConfig() {
     $('#modal_bad_config').modal('show');
   } else {
     // build game board upon good config
-    var game_board = buildGameBoard(board_rows, board_cols, mine_count);
+    board.buildGameBoard(board_rows, board_cols, mine_count);
     // dismiss config modal
     $('#modal_game_setup').modal('hide');
     // show game start modal
     $('#modal_start_game').modal('show');
+    // set the initial mine count
+    board.initialMineCount(mine_count);
     // set the initial flag count
-    initial_mine_count = mine_count;
-    updateFlags(mine_count);
+    var flag_count = mine_count;
+    board.initialFlagCount(flag_count);
   }
-}
-
-/**
-  * Displays game board after populating table in modal
-*/
-function displayGameBoard(game_board) {
-  // getting table
-  var table = document.getElementById('table_game_board');
-
-  // clearing table in case coming from a resetGame()
-  $("#table_game_board tr").remove();
-
-  // iterating through each row and each cell of the gameboard
-  // creating new rows and new cells for each element
-  // setting cell value equal to game board value at that index
-  for (var i = 0; i < game_board_before_start.length; i++) {
-    var new_row = table.insertRow(i);
-    for (var j = 0; j < game_board_before_start[0].length; j++) {
-      var new_cell = new_row.insertCell(j);
-      current_row = table.rows[i];
-      current_cell = current_row.cells[j];
-      current_cell.setAttribute('row', i);
-      current_cell.setAttribute('col', j);
-      current_cell.setAttribute('value', game_board_before_start[i][j]);
-      current_cell.setAttribute('flagged', false);
-      current_cell.style.backgroundSize = 'contain';
-    }
-  }
-
-  // resizing modal
-  $('#modal_game_board').find('.modal-body').css({
-    width: 'auto',
-    height: 'auto', 'max-height':'75vh'
-  });
-
-  // displaying game board modal
-  $('#modal_game_board').modal('show');
-
-  // make all of the cells square, based on their widths
-  $('#table_game_board td').height($('#table_game_board td').width());
 }
 
 /**
@@ -126,21 +87,15 @@ function displayGameBoard(game_board) {
 */
 $('#table_game_board').click(function(data) {
   // check to see if first click
-  if (first_click == true) {
+  if (board.first_click == true) {
     // start stopwatch
     stopwatch.run();
-    first_click = false;
+    board.first_click = false;
   }
   var cell = data.target || data.srcElement;
   // if the cell is flagged, then don't do anything on click
   if(cell.getAttribute('flagged') != 'true'){
-    // const cell_obj = {
-    //   row: cell.getAttribute('row'),
-    //   col: cell.getAttribute('col'),
-    //   value: cell.getAttribute('value')
-    // };
-
-    cellClicked(cell);
+    board.cellClicked(cell);
   }
 });
 
@@ -151,126 +106,13 @@ $('#table_game_board').click(function(data) {
 $('#table_game_board').contextmenu(function(data) {
   var cell = data.target || data.srcElement;
 
-  if(cell.getAttribute('isDisplayed') != "true"){
-    cellFlagged(cell);
+  if(cell.getAttribute('isDisplayed') != "true") {
+    board.cellFlagged(cell);
   }
 
   // return false prevents right-click menu from coming up
   return false;
 });
-
-
-//Display Cell value
-//Displays the cell value on the game_board
-function displayValue(cell)
-{
-  var cellId = cell.getAttribute('row') + ',' + cell.getAttribute('col');
-  cell.setAttribute('id', cellId);
-  cell.setAttribute('isDisplayed', true);
-  document.getElementById(cellId).innerHTML = cell.getAttribute('value');
-}
-
-//Calls displayValue() to show cell values and then handles the rules
-//when telling what other cells will need to be cleared due to game rules
-function cellClicked(cell) {
-  console.log(cell);
-
-  //Show Clicked Cell Value
-  //displayValue(cell);
-
-  //If Cell Value is mine
-  if(cell.getAttribute('value') == "M")
-  {
-    $('#modal_lose').modal('show');
-    //End Game modal
-  }
-
-  //If Cell Value is Not mine
-  if(cell.getAttribute('value') != "M")
-  {
-    recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
-  }
-};
-
-//Recursivly reveals the correct cells
-function recReveal(i, j)
-{
-  if(parseInt(i, 10) < game_board_before_start.length && parseInt(j, 10) < game_board_before_start[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0)
-  {
-    //Get Cell at i,j
-    var table = document.getElementById('table_game_board');
-    var row = table.rows[i];
-    var cell = row.cells[j];
-
-    if(!cell.getAttribute('isDisplayed'))
-    {
-      if(cell.getAttribute('value') == "0" && cell.getAttribute('flagged') == "false")
-      {
-        console.log("value 0 found" + cell.getAttribute('row') + cell.getAttribute('col'));
-        displayValue(cell);
-
-        //Look in all directions
-        recReveal(i,parseInt(j, 10) + 1);
-        recReveal(parseInt(i, 10) + 1,parseInt(j, 10) + 1);
-        recReveal(parseInt(i, 10) + 1,j);
-        recReveal(parseInt(i, 10) + 1,parseInt(j, 10) - 1);
-        recReveal(i,parseInt(j, 10) - 1);
-        recReveal(parseInt(i, 10) - 1,parseInt(j, 10) - 1);
-        recReveal(parseInt(i, 10) - 1,j);
-        recReveal(parseInt(i, 10) - 1,parseInt(j, 10) + 1);
-      }
-      else if(cell.getAttribute('value') == "M")
-      {
-        // could be wrong, but I don't think this will ever occur, since
-        // recReveal will only be initially called on non-mine cells from the
-        // conditionals in cellClicked, and will only be called recursively
-        // by cells that have no adjacent mines - Evan
-      }
-      else if(cell.getAttribute('flagged') == "false")
-      {
-        displayValue(cell);
-      }
-    }
-  }
-}
-
-/*
-  * toggles flagged status of a cell
-*/
-function cellFlagged(cell) {
-  // cell is currently flagged
-  // toggle
-  if (cell.getAttribute('flagged') == 'true') {
-    cell.setAttribute('flagged', 'false');
-    cell.setAttribute('background', "");
-    incrementFlags();
-  } else {
-    // cell is not currently flagged
-    // toggle only if user has flags left
-    if (flag_count > 0) {
-      cell.setAttribute('flagged', 'true');
-      cell.setAttribute('background', "/images/flag.png");
-      decrementFlags();
-    }
-  }
-};
-
-/*
-  * updates the flag count variable/display
-*/
-
-function incrementFlags(){
-  updateFlags(flag_count+1);
-}
-
-function decrementFlags(){
-  updateFlags(flag_count-1);
-}
-
-function updateFlags(new_count){
-  flag_count = new_count;
-  $('#flag_count').html(flag_count);
-}
 
 /**
   * Dismisses start game modal
@@ -281,7 +123,7 @@ function startGame() {
   // hide start game modal
   $('#modal_start_game').modal('hide');
   // display gameboard
-  displayGameBoard(game_board_before_start);
+  board.displayGameBoard();
 }
 
 /**
@@ -295,11 +137,9 @@ function resetGame() {
   // resetting stopwatch
   stopwatch.reset();
   // resetting flag count
-  updateFlags(initial_mine_count);
+  board.updateFlagCount(this.initial_mine_count);
   // displaying gameboard again
-  displayGameBoard(game_board_before_start);
-  // resetting first click
-  first_click = true;
+  board.displayGameBoard(board.initial_board);
   // present snackbar alerting user that reset was successful
   $.snackbar({content: "Game reset!"});
 }

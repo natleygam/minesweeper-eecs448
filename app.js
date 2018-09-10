@@ -28,13 +28,6 @@ var app = express();
  */
 const route_index = require('./routes/index');
 
-/**
- * backend board functionality
- * @type {Object}
- */
-const route_board = require('./routes/board');
-
-
 
 /**
  * port to allow connections on
@@ -55,7 +48,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // assigning routes to app
 app.use('/', route_index);
 app.use('/index', route_index);
-app.use('/board', route_board);
 
 // expose public port
 app.listen(port);
