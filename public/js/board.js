@@ -10,6 +10,7 @@ class GameBoard {
     this.current_mine_count = 0;
     this.initial_flag_count = 0;
     this.current_flag_count = 0;
+    this.current_flaged_mine_count = 0;
     this.first_click = true;
   }
 
@@ -151,13 +152,34 @@ class GameBoard {
     * Updates flag count according to operation
     * @param {String} operation - increment or decrement flag count
   */
-  updateFlagCount(operation) {
+  updateFlagCount(operation, cell) {
     if (operation == "increment") {
       this.current_flag_count++;
+      if(cell.getAttribute('value') == "M")
+      {
+        this.current_flaged_mine_count--;
+      }
     } else if (operation == "decrement") {
       this.current_flag_count--;
+      if(cell.getAttribute('value') == "M")
+      {
+        this.current_flaged_mine_count++;
+      }
     }
     document.getElementById('flag_count').innerHTML = this.current_flag_count;
+  }
+
+  //Function to trigger with each on click when number of flags = 0
+  //that checks if the user has statisfied every condition to win the game
+  checkWin()
+  {
+    console.log("current mine count: " + this.initial_mine_count + "current flagged mines: " + this.current_flaged_mine_count);
+    if(this.initial_mine_count == this.current_flaged_mine_count)
+    {
+      //Win Game Modal
+      console.log("congrats game won!");
+      $('#modal_win').modal('show');
+    }
   }
 
   //Calls displayValue() to show cell values and then handles the rules
@@ -212,6 +234,7 @@ class GameBoard {
           // recReveal will only be initially called on non-mine cells from the
           // conditionals in cellClicked, and will only be called recursively
           // by cells that have no adjacent mines - Evan
+
         }
         else if(cell.getAttribute('flagged') == "false")
         {
@@ -240,15 +263,21 @@ class GameBoard {
     if (cell.getAttribute('flagged') == 'true') {
       cell.setAttribute('flagged', 'false');
       cell.setAttribute('background', "");
-      this.updateFlagCount("increment");
+      this.updateFlagCount("increment", cell);
     } else {
       // cell is not currently flagged
       // toggle only if user has flags left
       if (this.current_flag_count > 0) {
         cell.setAttribute('flagged', 'true');
         cell.setAttribute('background', "/images/flag.png");
-        this.updateFlagCount("decrement");
+        this.updateFlagCount("decrement", cell);
+        console.log("current flag amount after decrement: " + this.current_flag_count);
+        if(this.current_flag_count == 0)
+        {
+          this.checkWin();
+        }
       }
+
     }
   }
 }
