@@ -1,10 +1,15 @@
 /**
+ * id of highscore json from myJSON
+ * @type {String}
+ */
+var myjson_id = "rw7kg";
+
+/**
  * allows for interaction with myjson high score file
  */
 class HighScoreManager{
 
   constructor(){
-    this.myjson_id = "rw7kg";
     this.latest;
     this.good_status = false;
     this.last_pulled;
@@ -26,7 +31,7 @@ class HighScoreManager{
     var add_data = {'name': name, 'time': time, 'percent': percent};
     var index = 0;
 
-    while(index < this.latest[rows][cols][mines].length && (time >= this.latest[rows][cols][mines][index].time || percent >= this.latest[row][cols][mines][index].percent)){
+    while(index < this.latest[rows][cols][mines].length && (time >= this.latest[rows][cols][mines][index].time && percent >= this.latest[rows][cols][mines][index].percent)){
       index++;
     }
 
@@ -41,7 +46,7 @@ class HighScoreManager{
     var callback = $.Deferred();
 
     $.when($.ajax({
-      url:"https://api.myjson.com/bins/" + this.myjson_id,
+      url:"https://api.myjson.com/bins/" + myjson_id,
       type: "PUT",
       data: JSON.stringify(this.latest),
       contentType: "application/json; charset=utf-8",
@@ -70,7 +75,7 @@ class HighScoreManager{
 
   // gets raw json from myjson
   getJSON(){
-    return $.get("https://api.myjson.com/bins/" + this.myjson_id);
+    return $.get("https://api.myjson.com/bins/" + myjson_id);
   }
 
   // pulls scores from myjson and updates status variables
@@ -102,8 +107,25 @@ class HighScoreManager{
 
   }
 
+  // administrative function
+  resetScores(){
+
+    var callback = $.Deferred();
+
+    this.latest = {};
+
+    $.when(this.pushScores()).done(
+      callback.resolve()
+    ).fail(
+      (information) => callback.reject(information)
+    )
+
+    return callback.promise();
+
+  }
+
   // get scores from the local score copy based on variables
-  getScores(rows, cols, mines, start_index, end_index){
+  getScores(rows, cols, mines, start_index, count){
 
     if(!this.good_status){
       return {'good_status': false};
@@ -112,7 +134,7 @@ class HighScoreManager{
     if(this.latest[rows] != null){
       if(this.latest[rows][cols] != null){
         if(this.latest[rows][cols][mines] != null){
-          return {'good_status': true, 'data': this.latest[rows][cols][mines].slice(start_index, end_index)};
+          return {'good_status': true, 'data': this.latest[rows][cols][mines].slice(start_index, start_index+count)};
         }
       }
     }
