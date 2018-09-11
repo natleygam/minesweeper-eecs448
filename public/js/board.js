@@ -15,6 +15,17 @@ class GameBoard {
     this.current_flag_count = 0;
     this.current_flaged_mine_count = 0;
     this.first_click = true;
+    // what color to make each number in the cell
+    this.color_enum = {
+      "1": "blue",
+      "2": "green",
+      "3": "yellow",
+      "4": "orange",
+      "5": "red",
+      "6": "violet",
+      "7": "indigo",
+      "8": "black"
+    }
   }
 
   // object methods
@@ -124,7 +135,7 @@ class GameBoard {
     // make all of the cells square, based on their widths
     //$('#table_game_board td').height($('#table_game_board td').width());
     var cell_size = $('#modal_game_board td .content').width();
-    $('#modal_game_board td').css("font-size", (cell_size/2) + "px");
+    $('#modal_game_board td').css("font-size", (cell_size/1.5) + "px");
   }
 
   /**
@@ -265,8 +276,13 @@ class GameBoard {
   {
     //var cellId = cell.getAttribute('row') + ',' + cell.getAttribute('col');
     //cell.setAttribute('id', cellId);
+    var value = cell.getAttribute('value');
     cell.setAttribute('isDisplayed', true);
-    cell.firstChild.innerHTML = cell.getAttribute('value');
+    if(value != "0"){
+      cell.firstChild.innerHTML = cell.getAttribute('value');
+    }
+    cell.style.color = this.color_enum[value];
+    cell.style.backgroundColor = "silver";
   }
 
   /**
