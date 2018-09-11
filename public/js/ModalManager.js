@@ -46,6 +46,10 @@ class ModalManager {
     $('#modal_win').modal(operation);
   }
 
+  highScoreModal(operation) {
+    $('#modal_high_scores').modal(operation);
+  }
+
   /**
     * Runs operations needed to ready config modal
   */

@@ -181,11 +181,18 @@
             <h3 class="modal-title">High Scores</h3>
           </div>
           <div class="modal-body">
-            <table class="table table-bordered bg-warning" id="hs_table"></table>
+            <table class="table table-bordered" style="background-color: lightblue;" id="hs_table">
+              <tr style="background-color: blue; color: white;">
+                <td></td>
+                <td>Name</td>
+                <td>Time</td>
+                <td>% Cleared</td>
+              </tr>
+            </table>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-raised btn-info">Previous</button>
-            <button type="button" class="btn btn-raised btn-info">Next</button>
+            <button id="prev_hs_page" type="button" class="btn btn-raised btn-info" onclick="game_manager.hs_viewer.prev_page()">Previous</button>
+            <button id="next_hs_page" type="button" class="btn btn-raised btn-info" onclick="game_manager.hs_viewer.next_page()">Next</button>
           </div>
         </div>
       </div>
@@ -204,7 +211,8 @@
     <script src="js/Stopwatch.js"></script>
     <script src="js/ModalManager.js"></script>
     <script src="js/GameManager.js"></script>
-    <script src="js/HighScores.js"></script>
+    <script src="js/HighScoresJSON.js"></script>
+    <script src="js/HighScoresViewer.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

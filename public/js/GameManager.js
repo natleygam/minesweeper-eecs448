@@ -16,6 +16,8 @@ class GameManager {
      * @type {ModalManager}
      */
     this.modal_manager = new ModalManager();
+
+    this.hs_viewer = new HighScoresViewer();
   }
 
   // object methods
@@ -130,5 +132,11 @@ class GameManager {
   */
   loseGame() {
     this.modal_manager.gameLoseModal('show');
+  }
+
+  showHighScores() {
+
+    this.hs_viewer.initialize();
+    this.modal_manager.highScoreModal('show');
   }
 }

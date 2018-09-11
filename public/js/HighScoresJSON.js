@@ -7,7 +7,7 @@ var myjson_id = "rw7kg";
 /**
  * allows for interaction with myjson high score file
  */
-class HighScoreManager{
+class HighScoresJSON{
 
   constructor(){
     this.latest;
