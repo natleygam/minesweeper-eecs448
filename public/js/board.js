@@ -135,14 +135,6 @@ class GameBoard {
     $('#modal_game_board td').css("font-size", (cell_size/1.5) + "px");
   }
 
-  // /**
-  //   * Sets initial mine count
-  //   * @param {Number} initial_mine_count value to be set as initial mine count
-  // */
-  // initialMineCount(initial_mine_count) {
-  //   this.initial_mine_count = initial_mine_count;
-  // }
-
   /**
     * Updates mine count according to operation
     * @param {String} operation - increment or decrement mine count
