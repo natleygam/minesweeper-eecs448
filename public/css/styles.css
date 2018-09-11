@@ -23,9 +23,9 @@ body {
 }
 
 #table_game_board td:after {
-  content: '';
-	display: block;
-  margin-top: 100%;
+    content: '';
+  	display: block;
+    margin-top: 100%;
 }
 
 #table_game_board td .content {
