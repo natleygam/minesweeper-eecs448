@@ -61,3 +61,17 @@ Location: Eaton Hall
     GameManager and ModalManager classes
   * Discussed work to be done before next meeting by each team member
   * Discussed scheduling and location of next meeting
+
+## Meeting \#6
+Date: Tuesday, September 11, 2018
+
+Time: 1:00 - 2:50 PM
+
+Location: Spahr Library
+
+  * Discussed work done since yesterday
+  * Discussed issues/bugs that have come up during implementation
+  * Squashed bugs
+  * Determined final issues/features implementations to be handled before code
+    freeze
+  * Discussed scheduling of next meeting for later this week
