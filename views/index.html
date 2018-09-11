@@ -153,7 +153,7 @@
     <!--
     win game
     -->
-    <div class="modal fade bg-warning" tabindex="-1" role="dialog" id="modal_win">
+    <div class="modal fade bg-success" tabindex="-1" role="dialog" id="modal_win">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -166,6 +166,26 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-raised btn-success" onclick="javascript: game_manager.resetGame();">New Game</button>
             <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.getConfig();">Back to Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    high scores
+    -->
+    <div class="modal fade bg-info" tabindex="-1" role="dialog" id="modal_high_scores">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">High Scores</h3>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered bg-warning" id="hs_table"></table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-raised btn-info">Previous</button>
+            <button type="button" class="btn btn-raised btn-info">Next</button>
           </div>
         </div>
       </div>
