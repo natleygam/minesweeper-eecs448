@@ -108,6 +108,7 @@ class GameBoard {
         current_cell.setAttribute('value', this.initial_board[i][j]);
         current_cell.setAttribute('flagged', false);
         current_cell.innerHTML = "<div class='content'></div>";
+        //current_cell.style.fontSize = "40px";
       }
     }
 
@@ -122,6 +123,8 @@ class GameBoard {
 
     // make all of the cells square, based on their widths
     //$('#table_game_board td').height($('#table_game_board td').width());
+    var cell_size = $('#modal_game_board td .content').width();
+    $('#modal_game_board td').css("font-size", (cell_size/2) + "px");
   }
 
   /**
