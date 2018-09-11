@@ -4,15 +4,15 @@
 class GameBoard {
 
   // object properties
-  constructor() {
+  constructor(num_rows, num_cols, initial_mine_count) {
     this.initial_board;
     this.board;
-    this.num_rows;
-    this.num_cols;
-    this.initial_mine_count = 0;
+    this.num_rows = num_rows;
+    this.num_cols = num_cols;
+    this.initial_mine_count = initial_mine_count;
     this.current_mine_count = 0;
-    this.initial_flag_count = 0;
-    this.current_flag_count = 0;
+    this.initial_flag_count = initial_mine_count;
+    this.current_flag_count = initial_mine_count;
     this.current_flaged_mine_count = 0;
     this.first_click = true;
     // what color to make each number in the cell
@@ -38,26 +38,23 @@ class GameBoard {
     * @param {Number} board_cols - number of cols specified for board
     * @param {Number} mine_count - number of mines specified for board
   */
-  buildGameBoard(board_rows, board_cols, mine_count) {
-    // setting board dimensions
-    this.num_rows = board_rows;
-    this.num_cols = board_cols;
+  buildGameBoard() {
     // creating 2d array to act as game board
     this.board = [];
-    for(var i = 0; i < board_rows; i++) {
+    for(var i = 0; i < this.num_rows; i++) {
       this.board[i] = [];
-      for(var j = 0; j < board_cols; j++) {
+      for(var j = 0; j < this.num_cols; j++) {
         this.board[i][j] = "*";
       }
     }
 
     // populating game board
     var mine_placed;
-    for(var i = 0; i < mine_count; i++) {
+    for(var i = 0; i < this.initial_mine_count; i++) {
       mine_placed = false;
       do {
-        var row = Math.floor(Math.random() * board_rows);
-        var col = Math.floor(Math.random() * board_cols);
+        var row = Math.floor(Math.random() * this.num_rows);
+        var col = Math.floor(Math.random() * this.num_cols);
         if(this.board[row][col] == "*"){
           mine_placed = true;
           this.board[row][col] = "M";
@@ -67,8 +64,8 @@ class GameBoard {
 
     // generating adjacency counts
     var cur_mines;
-    for (var i = 0; i < board_rows; i++) {
-      for (var j = 0; j < board_cols; j++) {
+    for (var i = 0; i < this.num_rows; i++) {
+      for (var j = 0; j < this.num_cols; j++) {
         // if cell is a mine, don't need to generate count for it (duh)
         if (this.board[i][j] != "M") {
           cur_mines = 0;
@@ -76,7 +73,7 @@ class GameBoard {
           for (var k = i-1; k <= i+1; k++) {
             for (var l = j-1; l <= j+1; l++) {
               // check is adjecent cell is within bounds
-              if (k >= 0 && l >= 0 && k < board_rows && l < board_cols) {
+              if (k >= 0 && l >= 0 && k < this.num_rows && l < this.num_cols) {
                 if (this.board[k][l] == "M") {
                   cur_mines++;
                 }
@@ -138,13 +135,13 @@ class GameBoard {
     $('#modal_game_board td').css("font-size", (cell_size/1.5) + "px");
   }
 
-  /**
-    * Sets initial mine count
-    * @param {Number} initial_mine_count value to be set as initial mine count
-  */
-  initialMineCount(initial_mine_count) {
-    this.initial_mine_count = initial_mine_count;
-  }
+  // /**
+  //   * Sets initial mine count
+  //   * @param {Number} initial_mine_count value to be set as initial mine count
+  // */
+  // initialMineCount(initial_mine_count) {
+  //   this.initial_mine_count = initial_mine_count;
+  // }
 
   /**
     * Updates mine count according to operation
