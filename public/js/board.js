@@ -189,16 +189,17 @@ class GameBoard {
     document.getElementById('flag_count').innerHTML = this.current_flag_count;
   }
 
-  //Function to trigger with each on click when number of flags = 0
-  //that checks if the user has statisfied every condition to win the game
+  /*
+    * Function to trigger with each on click when number of flags = 0
+    * That checks if the user has statisfied every condition to win the game
+    * Returns true if user has flagged all mines
+  */
   checkWin()
   {
     console.log("current mine count: " + this.initial_mine_count + "current flagged mines: " + this.current_flaged_mine_count);
     if(this.initial_mine_count == this.current_flaged_mine_count)
     {
-      //Win Game Modal
-      console.log("congrats game won!");
-      $('#modal_win').modal('show');
+      return(true);
     }
   }
 
@@ -210,8 +211,8 @@ class GameBoard {
     //If Cell Value is mine
     if(cell.getAttribute('value') == "M")
     {
-      $('#modal_lose').modal('show');
-      //End Game modal
+      // user lost, return true
+      return(true);
     }
 
     //If Cell Value is Not mine
@@ -304,10 +305,6 @@ class GameBoard {
         cell.setAttribute('background', "/images/flag.png");
         this.updateFlagCount("decrement", cell);
         console.log("current flag amount after decrement: " + this.current_flag_count);
-        if(this.current_flag_count == 0)
-        {
-          this.checkWin();
-        }
       }
 
     }

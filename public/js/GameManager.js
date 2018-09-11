@@ -117,4 +117,18 @@ class GameManager {
     // present snackbar alerting user that reset was successful
     $.snackbar({content: "Game reset!"});
   }
+
+  /**
+    * Presents win game modal
+  */
+  winGame() {
+    this.modal_manager.gameWinModal('show');
+  }
+
+  /**
+    * Presents lose game modal
+  */
+  loseGame() {
+    this.modal_manager.gameLoseModal('show');
+  }
 }
