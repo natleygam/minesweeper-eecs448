@@ -54,6 +54,7 @@ class ModalManager {
     this.gameBoardModal('hide');
     this.gameStartModal('hide');
     this.gameLoseModal('hide');
+    this.gameWinModal('hide');
     // show games set up modal
     this.configModal('show');
   }
@@ -81,5 +82,6 @@ class ModalManager {
   */
   operationReset() {
     this.gameLoseModal('hide');
+    this.gameWinModal('hide');
   }
 }

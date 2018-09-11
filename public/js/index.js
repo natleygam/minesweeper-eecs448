@@ -17,7 +17,10 @@ $('#table_game_board').click(function(data) {
   var cell = (data.target || data.srcElement).parentElement;
   // if the cell is flagged, then don't do anything on click
   if(cell.getAttribute('flagged') != 'true'){
-    game_manager.board.cellClicked(cell);
+    var isLoss = game_manager.board.cellClicked(cell);
+    if (isLoss === true) {
+      game_manager.loseGame();
+    }
   }
 });
 
@@ -32,6 +35,12 @@ $('#table_game_board').contextmenu(function(data) {
 
   if(cell.getAttribute('isDisplayed') != "true") {
     game_manager.board.cellFlagged(cell);
+    if (game_manager.board.current_flag_count == 0) {
+      var is_win = game_manager.board.checkWin();
+      if (is_win === true) {
+        game_manager.winGame();
+      }
+    }
   }
 
   // return false prevents right-click menu from coming up
