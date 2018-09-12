@@ -180,6 +180,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">High Scores</h3>
+            <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.hideHighScores();">Back</button>
           </div>
           <div class="modal-body">
             <div style="display: flex; flex-direction: row;">
@@ -195,7 +196,7 @@
                 <label for="hs_mine_count" class="bmd-label-floating">Mine count</label>
                 <input type="number" class="form-control" id="hs_mine_count">
               </span>
-              <button id="get_scores" type="button" class="btn btn-raised btn-info" onclick="javscript: game_manager.hs_viewer.update_score_criteria();">Get Scores</button>
+              <button id="get_scores" type="button" class="btn btn-raised btn-success" onclick="javscript: game_manager.hs_viewer.update_score_criteria();">Get Scores</button>
             </div>
             <table class="table table-bordered" style="background-color: lightblue;" id="hs_table">
               <tr style="background-color: blue; color: white;">
