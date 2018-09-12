@@ -10,14 +10,26 @@ var myjson_id = "rw7kg";
 class HighScoresJSON{
 
   constructor(){
+    // stores latest JSON object pulled
     this.latest;
+    // if a good return status was received from json server on last call
     this.good_status = false;
+    // time JSON was last pulled
     this.last_pulled;
   }
 
-  // adds a score to the local scores copy
+  /**
+   * adds a score to the local scores copy
+   * @param {String} name - name of player who is submitting score
+   * @param {Number} rows - number of rows in board used
+   * @param {Number} cols - number of columns in board used
+   * @param {Number} mines - number of mines in board used
+   * @param {String} time - time board was completed in
+   * @param {Number} percent - % of board completed
+   */
   addScore(name, rows, cols, mines, time, percent){
 
+    // check if row, col, and mine keys exist
     if(this.latest[rows] == null){
       this.latest[rows] = {};
     }
@@ -28,23 +40,30 @@ class HighScoresJSON{
       this.latest[rows][cols][mines] = []
     }
 
+    // create data object
     var add_data = {'name': name, 'time': time, 'percent': percent};
     var index = 0;
 
+    // iterate through JSON object until we find the location this score should
+    // be placed in - sorted first by percent (descending) then time (ascending)
     while(index < this.latest[rows][cols][mines].length && (time >= this.latest[rows][cols][mines][index].time && percent >= this.latest[rows][cols][mines][index].percent)){
       index++;
     }
 
+    // insert the new score
     this.latest[rows][cols][mines].splice(index, 0, add_data);
 
-    console.log(this.latest);
   }
 
-  // push local scores copy to myjson
+  /**
+   * push local scores copy to myjson
+   * @returns {Promise} resolved when response is received from myjson server
+   */
   pushScores(){
 
     var callback = $.Deferred();
 
+    // send ajax request to myjson server with current JSON object
     $.when($.ajax({
       url:"https://api.myjson.com/bins/" + myjson_id,
       type: "PUT",
@@ -73,12 +92,18 @@ class HighScoresJSON{
 
   }
 
-  // gets raw json from myjson
+  /**
+   * gets raw json from myjson
+   * @returns {Promise}
+   */
   getJSON(){
     return $.get("https://api.myjson.com/bins/" + myjson_id);
   }
 
-  // pulls scores from myjson and updates status variables
+  /**
+   * pulls scores from myjson and updates status variables
+   * @returns {Promise}
+   */
   pullScores(){
 
     var callback = $.Deferred();
@@ -107,7 +132,11 @@ class HighScoresJSON{
 
   }
 
-  // administrative function
+  /**
+   * administrative function - clears myJSON file.
+   * shouldn't be called, generally
+   * @returns {Promise}
+   */
   resetScores(){
 
     var callback = $.Deferred();
@@ -124,7 +153,15 @@ class HighScoresJSON{
 
   }
 
-  // get scores from the local score copy based on variables
+  /**
+   * get scores from the local score copy based on variables
+   * @param {Number} rows - number of rows in board used
+   * @param {Number} cols - number of columns in board used
+   * @param {Number} mines - number of mines in board used
+   * @param {Number} start_index - index of first score to return
+   * @param {Number} count - max number of scores to return
+   * @returns {Object} returns the status of local copy and the requested data
+   */
   getScores(rows, cols, mines, start_index, count){
 
     if(!this.good_status){
@@ -143,7 +180,13 @@ class HighScoresJSON{
 
   }
 
-  // get number of scores that have the given criteria
+  /**
+   * get number of scores that have the given criteria
+   * @param {Number} rows - number of rows in board used
+   * @param {Number} cols - number of columns in board used
+   * @param {Number} mines - number of mines in board used
+   * @returns {Number}
+   */
   getNumScores(rows, cols, mines){
 
     if(this.latest[rows] != null){

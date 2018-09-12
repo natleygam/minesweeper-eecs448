@@ -46,6 +46,10 @@ class ModalManager {
     $('#modal_win').modal(operation);
   }
 
+  /**
+   * manage high score modal
+   * @param {String} operation - hide or show modal
+   */
   highScoreModal(operation) {
     $('#modal_high_scores').modal(operation);
   }

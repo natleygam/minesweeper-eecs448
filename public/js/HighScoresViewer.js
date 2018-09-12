@@ -1,29 +1,44 @@
+/**
+ * number of scores to display per high score page
+ * @type {Number}
+ */
 var scores_per_page = 10;
 
+/**
+ * manages functions related to high score modal and displaying high scores
+ */
 class HighScoresViewer{
 
+  /**
+   * @param {HighScoresJSON} json_caller - instance of HighScoresJSON to use for myJSON interactions
+   */
   constructor(json_caller){
     this.json_caller = json_caller;
+    // current row, column, mines values to use for queries
     this.rows_val;
     this.cols_val;
     this.mines_val;
+    // current page to display
     this.cur_page = 1;
 
+    // DOM elements of row, col, mines input boxes
     this.rows_elem = document.getElementById("hs_board_rows");
     this.cols_elem = document.getElementById("hs_board_cols");
     this.mines_elem = document.getElementById("hs_mine_count");
 
+    // create high score table
     for(var i = 0; i < scores_per_page; i++){
       var new_row = document.getElementById('hs_table').insertRow(i+1);
       for(var j = 0; j < 4; j++){
         new_row.insertCell(j);
       }
       new_row.childNodes[0].style.backgroundColor = "royalblue";
-      //new_row.childNodes[1].innerHTML = "aaaa";
-      //new_row.childNodes[0].setAttribute('width', '10%');
     }
   }
 
+  /**
+   * gets the values currently in the input boxes and displays the first page of high scores for them
+   */
   update_score_criteria(){
     this.rows_val = Number(this.rows_elem.value);
     this.cols_val = Number(this.cols_elem.value);
@@ -32,6 +47,12 @@ class HighScoresViewer{
     this.set_page(1);
   }
 
+  /**
+   * manually sets the row, col, and mine values internally and in the input boxes
+   * @param {Number} rows - number of rows to set
+   * @param {Number} cols - number of columns to set
+   * @param {Number} mines - number of mines to set
+   */
   set_score_criteria(rows, cols, mines){
     this.rows_val = rows;
     this.rows_elem.value = rows;
@@ -46,6 +67,11 @@ class HighScoresViewer{
     this.mines_elem.parentElement.className += " is-filled";
   }
 
+  /**
+   * initialize table information when the high score modal is opened
+   * also updates JSON from server
+   * @return {Promise}
+   */
   initialize(){
     var callback = $.Deferred();
 
@@ -66,6 +92,10 @@ class HighScoresViewer{
 
   }
 
+  /**
+   * update scores from the local JSON copy based on currently stored
+   * rows, cols, mines, and page number
+   */
   display_scores(){
     var table = document.getElementById("hs_table");
     var scores = this.json_caller.getScores(this.rows_val, this.cols_val, this.mines_val, (this.cur_page-1)*scores_per_page, scores_per_page);
@@ -83,14 +113,25 @@ class HighScoresViewer{
     }
   }
 
+  /**
+   * move to the next page of scores
+   */
   next_page(){
     this.set_page(this.cur_page+1);
   }
 
+  /**
+   * move to the previous page of scores
+   */
   prev_page(){
     this.set_page(this.cur_page-1);
   }
 
+  /**
+   * move to the given page number of scores
+   * also enable/disable the previous/next page buttons based on the total
+   * number of scores and the page being looked at
+   */
   set_page(page_num){
     this.cur_page = page_num
     this.display_scores();

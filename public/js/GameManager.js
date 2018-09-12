@@ -136,12 +136,17 @@ class GameManager {
     this.modal_manager.gameLoseModal('show');
   }
 
+  /**
+   * presents high score modal
+   */
   showHighScores() {
-
     this.hs_viewer.initialize();
     this.modal_manager.highScoreModal('show');
   }
 
+  /**
+   * hides high score modal
+   */
   hideHighScores() {
     this.modal_manager.highScoreModal('hide');
   }
