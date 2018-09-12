@@ -79,12 +79,12 @@ class GameManager {
       }
       $('#modal_bad_config').modal('show');
     } else {
+      // create new instance of game board
+      this.board = new GameBoard(board_rows, board_cols, mine_count);
       // build game board upon good config
-      this.board.buildGameBoard(board_rows, board_cols, mine_count);
+      this.board.buildGameBoard();
       // call function to ready game start modal
       this.modal_manager.operationGameStart();
-      // set the initial mine count
-      this.board.initialMineCount(mine_count);
       // set the initial flag count
       var flag_count = mine_count;
       this.board.initialFlagCount(flag_count);
@@ -112,10 +112,10 @@ class GameManager {
     this.modal_manager.operationReset();
     // resetting stopwatch
     this.stopwatch.reset();
-    // resetting flag count
-    this.board.initialFlagCount(this.board.initial_flag_count);
+    // create new instance of game board
+    this.board = new GameBoard(this.board.num_rows, this.board.num_cols, this.board.initial_mine_count);
     // building new board with current config
-    this.board.buildGameBoard(this.board.num_rows, this.board.num_cols, this.board.initial_mine_count);
+    this.board.buildGameBoard();
     // displaying gameboard again
     this.board.displayGameBoard(this.board.initial_board);
     // present snackbar alerting user that reset was successful
