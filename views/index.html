@@ -25,6 +25,7 @@
           <img class="img-fluid" style="height:03vw;" src="/images/minesweeper-quick-lose.png">
           <div class="modal-header">
             <h2 class="modal-title">Game Setup</h2>
+            <button type="button" class="btn btn-raised btn-info" onclick="javascript: game_manager.showHighScores();">High Scores</button>
           </div>
           <div class="modal-body">
             <p class="card-text">Give us some information and we'll set up your game.</p>
@@ -181,6 +182,21 @@
             <h3 class="modal-title">High Scores</h3>
           </div>
           <div class="modal-body">
+            <div style="display: flex; flex-direction: row;">
+              <span class="form-group">
+                <label for="hs_board_rows" class="bmd-label-floating">Number of rows</label>
+                <input type="number" class="form-control" id="hs_board_rows">
+              </span>
+              <span class="form-group">
+                <label for="hs_board_cols" class="bmd-label-floating">Number of columns</label>
+                <input type="number" class="form-control" id="hs_board_cols">
+              </span>
+              <span class="form-group">
+                <label for="hs_mine_count" class="bmd-label-floating">Mine count</label>
+                <input type="number" class="form-control" id="hs_mine_count">
+              </span>
+              <button id="get_scores" type="button" class="btn btn-raised btn-info" onclick="javscript: game_manager.hs_viewer.update_score_criteria();">Get Scores</button>
+            </div>
             <table class="table table-bordered" style="background-color: lightblue;" id="hs_table">
               <tr style="background-color: blue; color: white;">
                 <td></td>
@@ -191,8 +207,8 @@
             </table>
           </div>
           <div class="modal-footer">
-            <button id="prev_hs_page" type="button" class="btn btn-raised btn-info" onclick="game_manager.hs_viewer.prev_page()">Previous</button>
-            <button id="next_hs_page" type="button" class="btn btn-raised btn-info" onclick="game_manager.hs_viewer.next_page()">Next</button>
+            <button id="prev_hs_page" type="button" class="btn btn-raised btn-info" onclick="javascript: game_manager.hs_viewer.prev_page();">Previous</button>
+            <button id="next_hs_page" type="button" class="btn btn-raised btn-info" onclick="javascript: game_manager.hs_viewer.next_page();">Next</button>
           </div>
         </div>
       </div>

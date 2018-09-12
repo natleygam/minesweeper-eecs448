@@ -2,12 +2,16 @@ var scores_per_page = 10;
 
 class HighScoresViewer{
 
-  constructor(){
-    this.json_caller = new HighScoresJSON();
-    this.rows_val = 0;
-    this.cols_val = 0;
-    this.mines_val = 0;
+  constructor(json_caller){
+    this.json_caller = json_caller;
+    this.rows_val;
+    this.cols_val;
+    this.mines_val;
     this.cur_page = 1;
+
+    this.rows_elem = document.getElementById("hs_board_rows");
+    this.cols_elem = document.getElementById("hs_board_cols");
+    this.mines_elem = document.getElementById("hs_mine_count");
 
     for(var i = 0; i < scores_per_page; i++){
       var new_row = document.getElementById('hs_table').insertRow(i+1);
@@ -20,24 +24,32 @@ class HighScoresViewer{
     }
   }
 
-  set_rows_val(rows){
+  update_score_criteria(){
+    this.rows_val = Number(this.rows_elem.value);
+    this.cols_val = Number(this.cols_elem.value);
+    this.mines_val = Number(this.mines_elem.value);
+
+    this.set_page(1);
+  }
+
+  set_score_criteria(rows, cols, mines){
     this.rows_val = rows;
-  }
+    this.rows_elem.value = rows;
+    this.rows_elem.parentElement.className += " is-filled";
 
-  set_cols_val(cols){
     this.cols_val = cols;
-  }
+    this.cols_elem.value = cols;
+    this.cols_elem.parentElement.className += " is-filled";
 
-  set_mines_val(mines){
     this.mines_val = mines;
+    this.mines_elem.value = mines;
+    this.mines_elem.parentElement.className += " is-filled";
   }
 
   initialize(){
     var callback = $.Deferred();
 
-    this.set_rows_val(8);
-    this.set_cols_val(8);
-    this.set_mines_val(10);
+    this.set_score_criteria(8, 8, 10);
 
     $.when(this.json_caller.pullScores()).done(
       () => {
@@ -64,8 +76,9 @@ class HighScoresViewer{
       table.childNodes[1].childNodes[i+2].childNodes[3].innerHTML = scores.data[i].percent + "%";
     }
     for(var i = scores.data.length; i < scores_per_page; i++){
-      for(var j = 0; j < 4; j++){
-        table.childNodes[1].childNodes[i+2].childNodes[j].innerHTML = i+1+(this.cur_page-1)*scores_per_page;
+      table.childNodes[1].childNodes[i+2].childNodes[0].innerHTML = i+1+(this.cur_page-1)*scores_per_page;
+      for(var j = 1; j < 4; j++){
+        table.childNodes[1].childNodes[i+2].childNodes[j].innerHTML = "";
       }
     }
   }

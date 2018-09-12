@@ -17,7 +17,9 @@ class GameManager {
      */
     this.modal_manager = new ModalManager();
 
-    this.hs_viewer = new HighScoresViewer();
+    this.json_caller = new HighScoresJSON();
+
+    this.hs_viewer = new HighScoresViewer(this.json_caller);
   }
 
   // object methods
@@ -138,5 +140,9 @@ class GameManager {
 
     this.hs_viewer.initialize();
     this.modal_manager.highScoreModal('show');
+  }
+
+  hideHighScores() {
+    this.modal_manager.highScoreModal('hide');
   }
 }
