@@ -9,11 +9,8 @@ var scores_per_page = 10;
  */
 class HighScoresViewer{
 
-  /**
-   * @param {HighScoresJSON} json_caller - instance of HighScoresJSON to use for myJSON interactions
-   */
-  constructor(json_caller){
-    this.json_caller = json_caller;
+  constructor(){
+    this.json_caller = new HighScoresJSON();
     // current row, column, mines values to use for queries
     this.rows_val;
     this.cols_val;
@@ -101,7 +98,6 @@ class HighScoresViewer{
     var scores = this.json_caller.getScores(this.rows_val, this.cols_val, this.mines_val, (this.cur_page-1)*scores_per_page, scores_per_page);
     for(var i = 0; i < scores.data.length; i++){
       table.childNodes[1].childNodes[i+2].childNodes[0].innerHTML = i+1+(this.cur_page-1)*scores_per_page;
-      table.childNodes[1].childNodes[i+2].childNodes[0].setAttribute('class', 'bg-primary');
       table.childNodes[1].childNodes[i+2].childNodes[1].innerHTML = scores.data[i].name;
       table.childNodes[1].childNodes[i+2].childNodes[2].innerHTML = scores.data[i].time;
       table.childNodes[1].childNodes[i+2].childNodes[3].innerHTML = scores.data[i].percent + "%";
