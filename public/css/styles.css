@@ -3,6 +3,13 @@ body {
   font-family: 'VT323', monospace;
 }
 
+#modal_game_setup {
+  background-image:url(/images/team_logo.png);
+  background-size:10%;
+  background-position: .60vw 87vh;
+  background-repeat: no-repeat;
+}
+
 #modal_dialog_game_board {
     position: relative;
     display: table;
