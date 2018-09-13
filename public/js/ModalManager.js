@@ -78,17 +78,10 @@ class ModalManager {
   }
 
   /**
-    * Runs operations needed to ready game board modal
-  */
-  operationGameBoard() {
-    // hide start game modal
-    this.gameStartModal('hide');
-  }
-
-  /**
     * Runs operations needed for game reset
   */
   operationReset() {
+    this.gameStartModal('hide');
     this.gameLoseModal('hide');
     this.gameWinModal('hide');
   }

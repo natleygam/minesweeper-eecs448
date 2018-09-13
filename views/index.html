@@ -73,7 +73,7 @@
               <img src="/images/flag.png" style="width:25px;"/>
               <span id="flag_count">10</span>
             </span>
-            <a class = "navbar-item" onclick="javsscript: game_manager.resetGame();">
+            <a class = "navbar-item" onclick="javsscript: game_manager.newGame();">
               <img src="/images/smiley.png" id="board_image_smiley" style="width:25px;"/>
             </a>
             <div>
@@ -99,14 +99,14 @@
     <!--
     start game modal
     -->
-    <div class="modal fade bg-success" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_start_game" onkeypress="javascript: if(event.keyCode == 13) game_manager.startGame();">
+    <div class="modal fade bg-success" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_start_game" onkeypress="javascript: if(event.keyCode == 13) game_manager.newGame();">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h2 class="modal-title">Ready?</h2>
           </div>
           <div class="modal-body">
-            <button type="button" class="btn btn-raised btn-success" onclick="javsscript: game_manager.startGame();">Yep</button>
+            <button type="button" class="btn btn-raised btn-success" onclick="javsscript: game_manager.newGame();">Yep</button>
             <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.getConfig();">Nope, let's go back</button>
           </div>
         </div>
@@ -149,7 +149,7 @@
             You clicked on a mine.
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-raised btn-success" style="margin-right:.5vw;" onclick="javascript: game_manager.resetGame();">New Game</button>
+            <button type="button" class="btn btn-raised btn-success" style="margin-right:.5vw;" onclick="javascript: game_manager.newGame();">New Game</button>
             <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.getConfig();">Back to Menu</button>
           </div>
         </div>
@@ -170,7 +170,7 @@
             Elapsed time: <span id="win_time">(put time here)</span>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-raised btn-success" style="margin-right:.5vw;" onclick="javascript: game_manager.resetGame();">New Game</button>
+            <button type="button" class="btn btn-raised btn-success" style="margin-right:.5vw;" onclick="javascript: game_manager.newGame();">New Game</button>
             <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.getConfig();">Back to Menu</button>
           </div>
         </div>

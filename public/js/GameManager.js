@@ -10,7 +10,7 @@ class GameManager {
     /**
      * @type {GameBoard}
      */
-    this.board = new GameBoard();
+    this.board;
 
     /**
      * @type {ModalManager}
@@ -19,7 +19,7 @@ class GameManager {
 
     this.json_caller = new HighScoresJSON();
 
-    this.hs_viewer = new HighScoresViewer(this.json_caller);
+    this.hs_viewer = new HighScoresViewer();
   }
 
   // object methods
@@ -85,41 +85,30 @@ class GameManager {
       this.board.buildGameBoard();
       // call function to ready game start modal
       this.modal_manager.operationGameStart();
-      // set the initial flag count
-      var flag_count = mine_count;
-      this.board.initialFlagCount(flag_count);
     }
   }
 
-  /**
-    * Dismisses start game modal
-    * Calls function to display game board
-  */
-  startGame() {
-    // call function to ready game board modal
-    this.modal_manager.operationGameBoard();
-    // display gameboard
-    this.board.displayGameBoard();
-  }
 
   /**
-    * Resets game with current settings by re-presenting game board modal
-    * Resets stopwatch
-    * Presents snackbar upon completion
-  */
-  resetGame() {
-    // calls function to run reset operations for modals
+   * hides start game, win game, and lose game modals
+   * resets stopwatch
+   * builds and displays new game board
+   */
+  newGame(){
+
     this.modal_manager.operationReset();
     // resetting stopwatch
     this.stopwatch.reset();
-    // create new instance of game board
-    this.board = new GameBoard(this.board.num_rows, this.board.num_cols, this.board.initial_mine_count);
     // building new board with current config
     this.board.buildGameBoard();
     // displaying gameboard again
-    this.board.displayGameBoard(this.board.initial_board);
+    this.board.drawGameBoard();
+
+    this.modal_manager.gameBoardModal('show');
+
     // present snackbar alerting user that reset was successful
     $.snackbar({content: "Game reset!"});
+
   }
 
   /**

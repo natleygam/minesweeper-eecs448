@@ -35,11 +35,10 @@ $('#table_game_board').contextmenu(function(data) {
 
   if(cell.getAttribute('isDisplayed') != "true") {
     game_manager.board.cellFlagged(cell);
-    if (game_manager.board.current_flag_count == 0) {
-      var is_win = game_manager.board.checkWin();
-      if (is_win === true) {
-        game_manager.winGame();
-      }
+
+    var is_win = game_manager.board.checkWin();
+    if (is_win) {
+      game_manager.winGame();
     }
   }
 
