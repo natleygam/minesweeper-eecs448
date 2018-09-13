@@ -53,20 +53,14 @@ class GameManager {
 
     // check for bad entry on board_rows and board_cols
     // hide error phrases on modal if entry is good
-    if (board_rows == "" || board_rows < 2) {
+    if (board_rows == "" || board_rows < 2 || board_rows > 50) {
       bad_board_size = true;
-    } else {
-      //document.getElementById('phrase_board_size').style.display = "none";
     }
-    if (board_cols == "" || board_cols < 2) {
+    if (board_cols == "" || board_cols < 2 || board_cols > 50) {
       bad_board_size = true;
-    } else {
-      //document.getElementById('phrase_board_size').style.display = "none";
     }
     if (mine_count == "" || mine_count < 1 || mine_count > ((board_rows * board_cols)-1)) {
       bad_mine_count = true;
-    } else  {
-      //document.getElementById('phrase_mine_count').style.display = "none";
     }
 
     // show error modal if either error is triggered
@@ -79,6 +73,12 @@ class GameManager {
       }
       $('#modal_bad_config').modal('show');
     } else {
+      // adjust table class for board size
+      if (board_cols > 8) {
+        document.getElementById('table_game_board').setAttribute('class', 'table table-bordered table-responsive bg-secondary');
+      } else new Promise(function(resolve, reject) {
+        document.getElementById('table_game_board').setAttribute('class', 'table table-bordered bg-secondary');
+      });
       // create new instance of game board
       this.board = new GameBoard(board_rows, board_cols, mine_count);
       // build game board upon good config
