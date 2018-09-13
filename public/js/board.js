@@ -126,6 +126,8 @@ class GameBoard {
       height: 'auto', 'max-height':'75vh'
     });
 
+    this.initialFlagCount(this.initial_flag_count);
+
     // displaying game board modal
     $('#modal_game_board').modal('show');
 
