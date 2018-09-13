@@ -123,9 +123,15 @@ class GameManager {
   }
 
   /**
+    * Stops stopwatch
+    * Gets time
+    * Updates score label on win game modal
     * Presents win game modal
   */
   winGame() {
+    this.stopwatch.stop();
+    const score = this.stopwatch.getTime();
+    document.getElementById('win_time').innerHTML = score;
     this.modal_manager.gameWinModal('show');
   }
 

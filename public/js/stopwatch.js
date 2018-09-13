@@ -89,4 +89,31 @@ class Stopwatch {
     var label = document.getElementById('label_stopwatch')
     label.innerHTML = '00:00:00';
   };
+
+  /**
+    * Formats time as standard HH:MM:SS
+    * Returns time
+  */
+  getTime() {
+    var time = "";
+    if (this.hours < 9) {
+      time += "0" + this.hours;
+    } else {
+      time += this.hours;
+    }
+    time += ":";
+    if (this.minutes < 9) {
+      time += "0" + this.minutes;
+    } else {
+      time += this.minutes;
+    }
+    time += ":";
+    if (this.seconds < 9) {
+      time += "0" + this.seconds;
+    } else {
+      time += this.seconds;
+    }
+
+    return time;
+  }
 }
