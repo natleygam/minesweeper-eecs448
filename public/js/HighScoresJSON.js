@@ -46,12 +46,14 @@ class HighScoresJSON{
 
     // iterate through JSON object until we find the location this score should
     // be placed in - sorted first by percent (descending) then time (ascending)
-    while(index < this.latest[rows][cols][mines].length && (time >= this.latest[rows][cols][mines][index].time && percent >= this.latest[rows][cols][mines][index].percent)){
+    while(index < this.latest[rows][cols][mines].length && !(percent > Number(this.latest[rows][cols][mines][index].percent) || (time < this.latest[rows][cols][mines][index].time && percent == Number(this.latest[rows][cols][mines][index].percent)))) {
       index++;
     }
 
-    // insert the new score
-    this.latest[rows][cols][mines].splice(index, 0, add_data);
+    // insert the new score, if score cap not reached
+    if(index < 100){
+      this.latest[rows][cols][mines].splice(index, 0, add_data);
+    }
 
   }
 
