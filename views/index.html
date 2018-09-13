@@ -188,24 +188,26 @@
             <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.hideHighScores();">Back</button>
           </div>
           <div class="modal-body">
-            <div style="display: flex; flex-direction: row;">
-              <span class="form-group">
+            <form class="form-inline">
+              <div class="form-group">
                 <label for="hs_board_rows" class="bmd-label-floating">Number of rows</label>
                 <input type="number" class="form-control" id="hs_board_rows">
-              </span>
-              <span class="form-group">
+              </div>
+              <div class="form-group">
                 <label for="hs_board_cols" class="bmd-label-floating">Number of columns</label>
                 <input type="number" class="form-control" id="hs_board_cols">
-              </span>
-              <span class="form-group">
+              </div>
+              <div class="form-group">
                 <label for="hs_mine_count" class="bmd-label-floating">Mine count</label>
                 <input type="number" class="form-control" id="hs_mine_count">
-              </span>
-              <button id="get_scores" type="button" class="btn btn-raised btn-success" onclick="javscript: game_manager.hs_viewer.update_score_criteria();">Get Scores</button>
-            </div>
-            <table class="table table-bordered" style="background-color: lightblue;" id="hs_table">
-              <tr style="background-color: blue; color: white;">
-                <td></td>
+              </div>
+              <div class="form-group bmd-form-group">
+                <button id="get_scores" type="button" class="btn btn-sm btn-raised btn-success" style="margin-left:.2vw;" onclick="javscript: game_manager.hs_viewer.update_score_criteria();">Get Scores</button>
+              </div>
+            </form>
+            <table class="table table-bordered bg-light table-hover" id="hs_table">
+              <tr class="bg-info">
+                <td>Rank</td>
                 <td>Name</td>
                 <td>Time</td>
                 <td>% Cleared</td>
@@ -213,7 +215,7 @@
             </table>
           </div>
           <div class="modal-footer">
-            <button id="prev_hs_page" type="button" class="btn btn-raised btn-info" onclick="javascript: game_manager.hs_viewer.prev_page();">Previous</button>
+            <button id="prev_hs_page" type="button" class="btn btn-raised btn-secondary" style="margin-right:.5vw;" onclick="javascript: game_manager.hs_viewer.prev_page();">Previous</button>
             <button id="next_hs_page" type="button" class="btn btn-raised btn-info" onclick="javascript: game_manager.hs_viewer.next_page();">Next</button>
           </div>
         </div>
