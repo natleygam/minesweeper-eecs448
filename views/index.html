@@ -168,6 +168,18 @@
           <div class="modal-body">
             You won the game!<br/>
             Elapsed time: <span id="win_time">(put time here)</span>
+            <div id="is_highscore">
+              You've also earned a high score! Submit your name below.
+              <form>
+                <div class="form-group">
+                  <label for="input_high_score_name" class="bmd-label-floating">Your name</label>
+                  <input type="text" class="form-control" id="input_high_score_name">
+                </div>
+                <div class="form-group bmd-form-group">
+                  <button id="submit_score" type="button" class="btn btn-sm btn-raised btn-info" onclick="javscript: game_manager.json_caller.addScore();">Submit Score</button>
+                </div>
+              </form>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-raised btn-success" style="margin-right:.5vw;" onclick="javascript: game_manager.resetGame();">New Game</button>

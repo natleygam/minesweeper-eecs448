@@ -132,7 +132,62 @@ class GameManager {
     this.stopwatch.stop();
     const score = this.stopwatch.getTime();
     document.getElementById('win_time').innerHTML = score;
-    this.modal_manager.gameWinModal('show');
+
+    // check to see if user is using board size for high score
+    for (let i = 0; i < 3; i++) {
+      // user is using accepted board size
+      if (this.board.num_rows == (i + 1) * 8 && this.board.num_cols == (i + 1) * 8 ) {
+        // retrieve high scores for that board size
+        var callback = $.Deferred();
+        $.when(this.json_caller.pullScores()).done(
+          () => {
+            var sorted_scores = this.json_caller.latest[0]["scores"].sort(function(a, b) {
+              if (a.user_score < b.user_score)
+                return -1;
+              if (a.user_score > b.user_score)
+                return 1;
+              return 0;
+            });
+            // set sorted scores equal to local copy
+            this.json_caller.latest[0]["scores"] = sorted_scores;
+            // determine is user has earned a high score, only care about if top 10 scores
+            for (var j = 0; j < sorted_scores.length; j++) {
+              if (j < 10) {
+                // user earned high score
+                if (score < sorted_scores[j].user_score) {
+                  this.json_caller.user_high_score.status = true;
+                  this.json_caller.user_high_score.dimension_index = i;
+                  this.json_caller.user_high_score.score_index = j;
+                  this.json_caller.user_high_score.score = score;
+                  // call win modal with high score flag true
+                  this.modal_manager.gameWinModal('show', true);
+                  break;
+                } else if (j == 9) {
+                  // user did not beat other scores but is in top 10
+                  this.json_caller.user_high_score.status = true;
+                  this.json_caller.user_high_score.dimension_index = i;
+                  this.json_caller.user_high_score.score_index = j;
+                  this.json_caller.user_high_score.score = score;
+                  // call win modal with high score flag true
+                  this.modal_manager.gameWinModal('show', true);
+                  break;
+                }
+              }
+            }
+            // user did not earn high score
+            if (this.json_caller.user_high_score.status == false) {
+              this.modal_manager.gameWinModal('show', false);
+            }
+          }
+        ).fail(
+          (information) => {
+            callback.reject(information);
+          }
+        )
+      }
+    }
+    // user did not have specified board size
+    this.modal_manager.gameWinModal('show', false);
   }
 
   /**

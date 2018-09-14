@@ -41,8 +41,14 @@ class ModalManager {
   /**
     * Manage game win modal
     * @param {String} operation - hide or show modal
+    * @param {Bool} isHighscore - whether or not user earned a high score`
   */
-  gameWinModal(operation) {
+  gameWinModal(operation, isHighscore) {
+    if (isHighscore) {
+      document.getElementById('is_highscore').style.display = "block";
+    } else {
+      document.getElementById('is_highscore').style.display = "none";
+    }
     $('#modal_win').modal(operation);
   }
 
