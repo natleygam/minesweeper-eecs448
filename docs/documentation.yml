@@ -26,8 +26,46 @@ toc:
 
           more description here
 
+      - name: public/js/GameManager.js
+        description: |
+
+      - name: public/js/HighScoresJSON.js
+        description: |
+
+      - name: public/js/HighScoresViewer.js
+        description: |
+
+      - name: public/js/ModalManager.js
+        description: |
+
       - name: routes/index.js
         description: |
           serves page html
-          
+
           more description
+
+  - name: Works Cited
+    children:
+      - name: express
+        description: |
+          We used express for our server hosting.
+
+          https://www.npmjs.com/package/express
+
+      - name: ejs
+        description: |
+          We used ejs for our html view engine.
+
+          https://www.npmjs.com/package/ejs
+
+      - name: path
+        description: |
+          We used path for our routing functionality.
+
+          https://www.npmjs.com/package/path
+
+      - name: documentation.js
+        description: |
+          We used documentation.js for generating documentation from our js files.
+
+          https://www.npmjs.com/package/documentation
