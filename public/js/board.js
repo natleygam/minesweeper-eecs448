@@ -11,6 +11,7 @@ class GameBoard {
   constructor(num_rows, num_cols, mine_count) {
     // object properties
     this.board;
+    this.percent_bar = new PercentBar(10);
     this.num_rows = num_rows;
     this.num_cols = num_cols;
     this.mine_count = mine_count;
@@ -126,6 +127,7 @@ class GameBoard {
     this.flag_count = 0;
     this.flagged_mines = 0;
     this.updateFlagDisplay();
+    this.percent_bar.resetBar();
 
     // make all of the cells square, based on their widths
     var cell_size = $('#modal_game_board td .content').width();
@@ -201,7 +203,7 @@ class GameBoard {
 
     this.recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
     return false;
-    
+
   };
 
 
