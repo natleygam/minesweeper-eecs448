@@ -169,7 +169,6 @@ class GameManager {
     document.getElementById('win_time').innerHTML = score;
 
     // check to see if user is using board size for high score
-    console.log(this.board.preset_index);
     if (this.board.preset_index != undefined) {
       // retrieve high scores for preset board size
       var callback = $.Deferred();
