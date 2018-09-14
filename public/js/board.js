@@ -199,11 +199,9 @@ class GameBoard {
       return(true);
     }
 
-    //If Cell Value is Not mine
-    if(cell.getAttribute('value') != "M")
-    {
-      this.recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
-    }
+    this.recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
+    return false;
+    
   };
 
 
