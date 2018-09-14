@@ -23,6 +23,38 @@ class GameManager {
   }
 
   // object methods
+
+  /**
+    * Initializes for requested preset
+    * Sets preset index on board
+    * Calls this.board.buildGameBoard() and begins game operations
+    * @param {Number} preset_index - index of requested preset
+  */
+  presetConfig(preset_index) {
+    var board_rows, board_cols, mine_count;
+    if (preset_index == 0) {
+      board_rows = 8;
+      board_cols = 8;
+      mine_count = 10;
+    } else if (preset_index == 1) {
+      board_rows = 16;
+      board_cols = 16;
+      mine_count = 40;
+    } else if (preset_index == 2) {
+      board_rows = 16;
+      board_cols = 30;
+      mine_count = 99;
+    }
+
+    // create new instance of game board
+    this.board = new GameBoard(board_rows, board_cols, mine_count);
+    // build game board upon good config
+    this.board.buildGameBoard();
+    // call function to ready game start modal
+    this.modal_manager.operationGameStart();
+    // set preset index
+    this.board.preset_index = preset_index;
+  }
   /**
     * Calls modal to get game config
   */
@@ -120,7 +152,59 @@ class GameManager {
     this.stopwatch.stop();
     const score = this.stopwatch.getTime();
     document.getElementById('win_time').innerHTML = score;
-    this.modal_manager.gameWinModal('show');
+
+    // check to see if user is using board size for high score
+    if (this.board.preset_index != undefined) {
+      // retrieve high scores for preset board size
+      var callback = $.Deferred();
+      $.when(this.json_caller.pullScores()).done(
+        () => {
+          var sorted_scores = this.json_caller.latest[this.board.preset_index]["scores"].sort(function(a, b) {
+            if (a.user_score < b.user_score)
+              return -1;
+            if (a.user_score > b.user_score)
+              return 1;
+            return 0;
+          });
+          // set sorted scores equal to local copy
+          this.json_caller.latest[this.board.preset_index]["scores"] = sorted_scores;
+          // determine is user has earned a high score, only care about if top 10 scores
+          for (var j = 0; j < sorted_scores.length; j++) {
+            if (j < 10) {
+              // user earned high score
+              if (score < sorted_scores[j].user_score) {
+                this.json_caller.user_high_score.status = true;
+                this.json_caller.user_high_score.preset_index = this.board.preset_index;
+                this.json_caller.user_high_score.score_index = j;
+                this.json_caller.user_high_score.score = score;
+                // call win modal with high score flag true
+                this.modal_manager.gameWinModal('show', true);
+                break;
+              } else if (j == 9) {
+                // user did not beat other scores but is in top 10
+                this.json_caller.user_high_score.status = true;
+                this.json_caller.user_high_score.preset_index = this.board.preset_index;
+                this.json_caller.user_high_score.score_index = j;
+                this.json_caller.user_high_score.score = score;
+                // call win modal with high score flag true
+                this.modal_manager.gameWinModal('show', true);
+                break;
+              }
+            }
+          }
+          // user did not earn high score
+          if (this.json_caller.user_high_score.status == false) {
+            this.modal_manager.gameWinModal('show', false);
+          }
+        }
+      ).fail(
+        (information) => {
+          callback.reject(information);
+        }
+      )
+    }
+    // user did not have a preset
+    this.modal_manager.gameWinModal('show', false);
   }
 
   /**

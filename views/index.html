@@ -20,7 +20,7 @@
     game set up modal
     -->
     <div class="modal fade bg-info" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" id="modal_game_setup" onkeypress="javascript: if(event.keyCode == 13) game_manager.validateConfig();">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
           <img class="img-fluid" style="height:03vw;" src="/images/minesweeper-quick-lose.png">
           <div class="modal-header">
@@ -28,8 +28,14 @@
             <button type="button" class="btn btn-raised btn-info" onclick="javascript: game_manager.showHighScores();">High Scores</button>
           </div>
           <div class="modal-body">
-            <p class="card-text">Give us some information and we'll set up your game.</p>
+            <p class="card-text">Choose a preset.</p>
+            <form class="form-inline justify-content-between">
+              <button type="button" class="btn btn-raised btn-secondary" onclick="javascript: game_manager.presetConfig(0);">8x8, 10 Mines</button>
+              <button type="button" class="btn btn-raised btn-secondary" onclick="javascript: game_manager.presetConfig(1);">16x16, 40 Mines</button>
+              <button type="button" class="btn btn-raised btn-secondary" onclick="javascript: game_manager.presetConfig(2);">16x30, 99 Mines</button>
+            </form>
             <form>
+              <span class="card-text">Or give us some information and we'll set up your game.</span>
               <div class="form-group">
                 <label for="input_board_rows" class="bmd-label-floating">Number of rows</label>
                 <input type="number" class="form-control" id="input_board_rows">
@@ -168,6 +174,18 @@
           <div class="modal-body">
             You won the game!<br/>
             Elapsed time: <span id="win_time">(put time here)</span>
+            <div id="is_highscore">
+              You've also earned a high score! Submit your name below.
+              <form>
+                <div class="form-group">
+                  <label for="input_high_score_name" class="bmd-label-floating">Your name</label>
+                  <input type="text" class="form-control" id="input_high_score_name">
+                </div>
+                <div class="form-group bmd-form-group">
+                  <button id="submit_score" type="button" class="btn btn-sm btn-raised btn-info" onclick="javscript: game_manager.json_caller.addScore();">Submit Score</button>
+                </div>
+              </form>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-raised btn-success" style="margin-right:.5vw;" onclick="javascript: game_manager.newGame();">New Game</button>
@@ -188,35 +206,14 @@
             <button type="button" class="btn btn-raised btn-danger" onclick="javascript: game_manager.hideHighScores();">Back</button>
           </div>
           <div class="modal-body">
-            <form class="form-inline">
-              <div class="form-group">
-                <label for="hs_board_rows" class="bmd-label-floating">Number of rows</label>
-                <input type="number" class="form-control" id="hs_board_rows">
-              </div>
-              <div class="form-group">
-                <label for="hs_board_cols" class="bmd-label-floating">Number of columns</label>
-                <input type="number" class="form-control" id="hs_board_cols">
-              </div>
-              <div class="form-group">
-                <label for="hs_mine_count" class="bmd-label-floating">Mine count</label>
-                <input type="number" class="form-control" id="hs_mine_count">
-              </div>
-              <div class="form-group bmd-form-group">
-                <button id="get_scores" type="button" class="btn btn-sm btn-raised btn-success" style="margin-left:.2vw;" onclick="javscript: game_manager.hs_viewer.update_score_criteria();">Get Scores</button>
-              </div>
+            <p class="card-text">Choose a preset, view some scores.</p>
+            <form class="form-inline justify-content-between">
+              <button type="button" class="btn btn-raised btn-secondary" onclick="javascript: game_manager.hs_viewer.displayScores(0);">8x8, 10 Mines</button>
+              <button type="button" class="btn btn-raised btn-secondary" onclick="javascript: game_manager.hs_viewer.displayScores(1);">16x16, 40 Mines</button>
+              <button type="button" class="btn btn-raised btn-secondary" onclick="javascript: game_manager.hs_viewer.displayScores(2);">16x30, 99 Mines</button>
             </form>
             <table class="table table-bordered bg-light table-hover" id="hs_table">
-              <tr class="bg-info">
-                <td>Rank</td>
-                <td>Name</td>
-                <td>Time</td>
-                <td>% Cleared</td>
-              </tr>
             </table>
-          </div>
-          <div class="modal-footer">
-            <button id="prev_hs_page" type="button" class="btn btn-raised btn-secondary" style="margin-right:.5vw;" onclick="javascript: game_manager.hs_viewer.prev_page();">Previous</button>
-            <button id="next_hs_page" type="button" class="btn btn-raised btn-info" onclick="javascript: game_manager.hs_viewer.next_page();">Next</button>
           </div>
         </div>
       </div>

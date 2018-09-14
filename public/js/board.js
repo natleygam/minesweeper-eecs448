@@ -11,6 +11,7 @@ class GameBoard {
   constructor(num_rows, num_cols, mine_count) {
     // object properties
     this.board;
+    this.preset_index = undefined;
     this.num_rows = num_rows;
     this.num_cols = num_cols;
     this.mine_count = mine_count;
