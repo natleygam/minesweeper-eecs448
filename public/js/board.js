@@ -288,7 +288,7 @@ class GameBoard {
       // cell is not currently flagged
       // toggle only if user has flags left
       if (this.mine_count > this.flag_count) {
-        if(cell.tagName == "td")
+        if(cell.tagName == "TD")
         {
           cell.setAttribute('flagged', 'true');
           cell.setAttribute('background', "/images/flag.png");
