@@ -37,6 +37,7 @@ $('#table_game_board').contextmenu(function(data) {
     game_manager.board.cellFlagged(cell);
     if (game_manager.board.current_flag_count == 0) {
       var is_win = game_manager.board.checkWin();
+      is_win = true;
       if (is_win === true) {
         game_manager.winGame();
       }

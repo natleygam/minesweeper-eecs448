@@ -13,7 +13,7 @@ class HighScoresJSON{
     // object for user high score during run time
     this.user_high_score = {
       status: false,
-      dimension_index: -1,
+      preset_index: -1,
       score_index: -1,
       score: ""
     };
@@ -36,7 +36,7 @@ class HighScoresJSON{
       user_score: this.user_high_score.score
     };
     // insert into local copy of scores at specified index
-    this.latest[this.user_high_score.dimension_index].scores.splice(this.user_high_score.score_index, 0, score_listing);
+    this.latest[this.user_high_score.preset_index].scores.splice(this.user_high_score.score_index, 0, score_listing);
     // call push scores
     this.pushScores();
   }
