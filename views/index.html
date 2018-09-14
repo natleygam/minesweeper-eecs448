@@ -28,7 +28,13 @@
             <button type="button" class="btn btn-raised btn-info" onclick="javascript: game_manager.showHighScores();">High Scores</button>
           </div>
           <div class="modal-body">
-            <p class="card-text">Give us some information and we'll set up your game.</p>
+            <p class="card-text">Choose a preset.</p>
+            <form class="form-inline justify-content-between">
+              <button type="button" class="btn btn-raised btn-secondary" onclick="javascript: game_manager.presetConfig(0);">8x8, 10 Mines</button>
+              <button type="button" class="btn btn-raised btn-secondary" onclick="javascript: game_manager.presetConfig(1);">16x16, 40 Mines</button>
+              <button type="button" class="btn btn-raised btn-secondary" onclick="javascript: game_manager.presetConfig(2);">16x30, 99 Mines</button>
+            </form>
+            <p class="card-text">Or give us some information and we'll set up your game.</p>
             <form>
               <div class="form-group">
                 <label for="input_board_rows" class="bmd-label-floating">Number of rows</label>

@@ -7,6 +7,7 @@ class GameBoard {
   constructor(num_rows, num_cols, initial_mine_count) {
     this.initial_board;
     this.board;
+    this.preset_index = undefined;
     this.num_rows = num_rows;
     this.num_cols = num_cols;
     this.initial_mine_count = initial_mine_count;

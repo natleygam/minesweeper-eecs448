@@ -23,6 +23,28 @@ class GameManager {
   }
 
   // object methods
+
+  /**
+    * Initializes for requested preset
+    * Calls validate config when finished
+    * @param {Number} preset_index - index of requested preset
+  */
+  presetConfig(preset_index) {
+    if (preset_index == 0) {
+      document.getElementById('input_board_rows').value = 8;
+      document.getElementById('input_board_cols').value = 8;
+      document.getElementById('input_mine_count').value = 10;
+    } else if (preset_index == 1) {
+      document.getElementById('input_board_rows').value = 16;
+      document.getElementById('input_board_cols').value = 16;
+      document.getElementById('input_mine_count').value = 40;
+    } else if (preset_index == 2) {
+      document.getElementById('input_board_rows').value = 16;
+      document.getElementById('input_board_cols').value = 30;
+      document.getElementById('input_mine_count').value = 99;
+    }
+    this.validateConfig();
+  }
   /**
     * Calls modal to get game config
   */
