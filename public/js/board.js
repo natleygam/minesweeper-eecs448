@@ -176,7 +176,6 @@ class GameBoard {
   */
   checkWin()
   {
-    console.log("current mine count: " + this.initial_mine_count + "current flagged mines: " + this.current_flaged_mine_count);
     if(this.mine_count == this.flagged_mines)
     {
       return(true);
@@ -202,7 +201,7 @@ class GameBoard {
 
     this.recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
     return false;
-    
+
   };
 
 
@@ -225,7 +224,6 @@ class GameBoard {
       {
         if(cell.getAttribute('value') == "0" && cell.getAttribute('flagged') == "false")
         {
-          console.log("value 0 found" + cell.getAttribute('row') + cell.getAttribute('col'));
           this.displayValue(cell);
 
           //Look in all directions
@@ -290,10 +288,13 @@ class GameBoard {
       // cell is not currently flagged
       // toggle only if user has flags left
       if (this.mine_count > this.flag_count) {
-        cell.setAttribute('flagged', 'true');
-        cell.setAttribute('background', "/images/flag.png");
-        this.updateFlagCount("increment", cell);
-        console.log("current flag amount after decrement: " + this.current_flag_count);
+        if(cell.tagName == "td")
+        {
+          cell.setAttribute('flagged', 'true');
+          cell.setAttribute('background', "/images/flag.png");
+          this.updateFlagCount("increment", cell);
+          console.log("current flag amount after decrement: " + this.current_flag_count);
+        }
       }
 
     }
