@@ -190,8 +190,6 @@ class GameBoard {
    * @param {Object} cell - DOM object of the cell that was clicked
    */
   cellClicked(cell) {
-    console.log(cell);
-
     //If Cell Value is mine
     if(cell.getAttribute('value') == "M")
     {
@@ -293,7 +291,6 @@ class GameBoard {
           cell.setAttribute('flagged', 'true');
           cell.setAttribute('background', "/images/flag.png");
           this.updateFlagCount("increment", cell);
-          console.log("current flag amount after decrement: " + this.current_flag_count);
         }
       }
 

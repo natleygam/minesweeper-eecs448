@@ -97,6 +97,65 @@ class HighScoresJSON{
   }
 
   /**
+    * Determines if user has earned a high score to spec of board preset (if any)
+    * @param {String} score - the score the user has earned
+    * @param {Number} preset_index - the index of the preset the user has selected (if any)
+    * @return {Bool} is_high_score - whether or not the user has earned a high score
+  */
+  checkIfHighScore(score, preset_index) {
+    // check to see if user is using board size for high score
+    if (preset_index != undefined) {
+      // retrieve high scores for preset board size
+      var callback = $.Deferred();
+      $.when(this.pullScores()).done(
+        () => {
+          var sorted_scores = this.latest[preset_index]["scores"].sort(function(a, b) {
+            if (a.user_score < b.user_score)
+              return -1;
+            if (a.user_score > b.user_score)
+              return 1;
+            return 0;
+          });
+          // set sorted scores equal to local copy
+          this.latest[preset_index]["scores"] = sorted_scores;
+          // determine is user has earned a high score, only care about if top 10 scores
+          for (var j = 0; j < sorted_scores.length; j++) {
+            if (j < 10) {
+              // user earned high score
+              if (score < sorted_scores[j].user_score) {
+                this.user_high_score.status = true;
+                this.user_high_score.preset_index = preset_index;
+                this.user_high_score.score_index = j;
+                this.user_high_score.score = score;
+                console.log('returning true');
+                return true;
+              } else if (j == 9) {
+                // user did not beat other scores but is in top 10
+                this.user_high_score.status = true;
+                this.user_high_score.preset_index = preset_index;
+                this.user_high_score.score_index = j;
+                this.user_high_score.score = score;
+                return true;
+              }
+            }
+          }
+          // user did not earn high score
+          if (this.user_high_score.status == false) {
+            return false;
+          }
+        }
+      ).fail(
+        (information) => {
+          callback.reject(information);
+        }
+      )
+    } else {
+      // user did not have a preset
+      return false;
+    }
+  }
+
+  /**
    * pulls scores from myjson and updates status variables
    * @returns {Promise}
    */
@@ -123,7 +182,6 @@ class HighScoresJSON{
         callback.reject(information);
       }
     )
-
     return callback.promise();
 
   }
@@ -149,52 +207,52 @@ class HighScoresJSON{
 
   }
 
-  /**
-   * get scores from the local score copy based on variables
-   * @param {Number} rows - number of rows in board used
-   * @param {Number} cols - number of columns in board used
-   * @param {Number} mines - number of mines in board used
-   * @param {Number} start_index - index of first score to return
-   * @param {Number} count - max number of scores to return
-   * @returns {Object} returns the status of local copy and the requested data
-   */
-  getScores(rows, cols, mines, start_index, count){
-
-    if(!this.good_status){
-      return {'good_status': false};
-    }
-
-    if(this.latest[rows] != null){
-      if(this.latest[rows][cols] != null){
-        if(this.latest[rows][cols][mines] != null){
-          return {'good_status': true, 'data': this.latest[rows][cols][mines].slice(start_index, start_index+count)};
-        }
-      }
-    }
-
-    return {'good_status': true, 'data': []};
-
-  }
-
-  /**
-   * get number of scores that have the given criteria
-   * @param {Number} rows - number of rows in board used
-   * @param {Number} cols - number of columns in board used
-   * @param {Number} mines - number of mines in board used
-   * @returns {Number}
-   */
-  getNumScores(rows, cols, mines){
-
-    if(this.latest[rows] != null){
-      if(this.latest[rows][cols] != null){
-        if(this.latest[rows][cols][mines] != null){
-          return this.latest[rows][cols][mines].length;
-        }
-      }
-    }
-
-    return 0;
-
-  }
+  // /**
+  //  * get scores from the local score copy based on variables
+  //  * @param {Number} rows - number of rows in board used
+  //  * @param {Number} cols - number of columns in board used
+  //  * @param {Number} mines - number of mines in board used
+  //  * @param {Number} start_index - index of first score to return
+  //  * @param {Number} count - max number of scores to return
+  //  * @returns {Object} returns the status of local copy and the requested data
+  //  */
+  // getScores(rows, cols, mines, start_index, count){
+  //
+  //   if(!this.good_status){
+  //     return {'good_status': false};
+  //   }
+  //
+  //   if(this.latest[rows] != null){
+  //     if(this.latest[rows][cols] != null){
+  //       if(this.latest[rows][cols][mines] != null){
+  //         return {'good_status': true, 'data': this.latest[rows][cols][mines].slice(start_index, start_index+count)};
+  //       }
+  //     }
+  //   }
+  //
+  //   return {'good_status': true, 'data': []};
+  //
+  // }
+  //
+  // /**
+  //  * get number of scores that have the given criteria
+  //  * @param {Number} rows - number of rows in board used
+  //  * @param {Number} cols - number of columns in board used
+  //  * @param {Number} mines - number of mines in board used
+  //  * @returns {Number}
+  //  */
+  // getNumScores(rows, cols, mines){
+  //
+  //   if(this.latest[rows] != null){
+  //     if(this.latest[rows][cols] != null){
+  //       if(this.latest[rows][cols][mines] != null){
+  //         return this.latest[rows][cols][mines].length;
+  //       }
+  //     }
+  //   }
+  //
+  //   return 0;
+  //
+  // }
 
 }

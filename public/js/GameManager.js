@@ -146,65 +146,20 @@ class GameManager {
     * Stops stopwatch
     * Gets time
     * Updates score label on win game modal
+    * Calls function to determine if user earned high score
     * Presents win game modal
   */
   winGame() {
     this.stopwatch.stop();
     const score = this.stopwatch.getTime();
     document.getElementById('win_time').innerHTML = score;
-
-    // check to see if user is using board size for high score
-    if (this.board.preset_index != undefined) {
-      // retrieve high scores for preset board size
-      var callback = $.Deferred();
-      $.when(this.json_caller.pullScores()).done(
-        () => {
-          var sorted_scores = this.json_caller.latest[this.board.preset_index]["scores"].sort(function(a, b) {
-            if (a.user_score < b.user_score)
-              return -1;
-            if (a.user_score > b.user_score)
-              return 1;
-            return 0;
-          });
-          // set sorted scores equal to local copy
-          this.json_caller.latest[this.board.preset_index]["scores"] = sorted_scores;
-          // determine is user has earned a high score, only care about if top 10 scores
-          for (var j = 0; j < sorted_scores.length; j++) {
-            if (j < 10) {
-              // user earned high score
-              if (score < sorted_scores[j].user_score) {
-                this.json_caller.user_high_score.status = true;
-                this.json_caller.user_high_score.preset_index = this.board.preset_index;
-                this.json_caller.user_high_score.score_index = j;
-                this.json_caller.user_high_score.score = score;
-                // call win modal with high score flag true
-                this.modal_manager.gameWinModal('show', true);
-                break;
-              } else if (j == 9) {
-                // user did not beat other scores but is in top 10
-                this.json_caller.user_high_score.status = true;
-                this.json_caller.user_high_score.preset_index = this.board.preset_index;
-                this.json_caller.user_high_score.score_index = j;
-                this.json_caller.user_high_score.score = score;
-                // call win modal with high score flag true
-                this.modal_manager.gameWinModal('show', true);
-                break;
-              }
-            }
-          }
-          // user did not earn high score
-          if (this.json_caller.user_high_score.status == false) {
-            this.modal_manager.gameWinModal('show', false);
-          }
-        }
-      ).fail(
-        (information) => {
-          callback.reject(information);
-        }
-      )
-    }
-    // user did not have a preset
-    this.modal_manager.gameWinModal('show', false);
+    const json_caller = this.json_caller;
+    json_caller.user_high_score.status = this.json_caller.checkIfHighScore(score, this.board.preset_index);
+    const modal_manager = this.modal_manager;
+    // waiting for retrieval of scores to finish
+    setTimeout(function() {
+      modal_manager.gameWinModal('show', json_caller.user_high_score.status);
+    }, 500);
   }
 
   /**
