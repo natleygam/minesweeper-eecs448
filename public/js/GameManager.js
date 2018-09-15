@@ -136,9 +136,7 @@ class GameManager {
     // displaying gameboard again
     this.modal_manager.gameBoardModal('show');
     this.board.drawGameBoard();
-
-    // present snackbar alerting user that reset was successful
-    $.snackbar({content: "Game reset!"});
+    $.snackbar({content: "New game ready!"});
 
   }
 
