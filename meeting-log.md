@@ -75,3 +75,17 @@ Location: Spahr Library
   * Determined final issues/features implementations to be handled before code
     freeze
   * Discussed scheduling of next meeting for later this week
+
+## Meeting \#7
+Date: Tuesday, September 14, 2018
+
+Time: 4:15 - 5:30 PM
+
+Location: Spahr Library
+
+  * Squashed the (hopefully) final bugs
+  * Implemented several final features
+  * Discussed code to be written before code freeze
+  * Wrote readme.md
+  * Discussed what needs to be done to finish code documentation and licensing
+  * Discussed what needs to be done to finish project report
