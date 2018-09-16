@@ -190,10 +190,13 @@ class GameManager {
 
   /**
    * presents high score modal
+   * @param {Number} preset_index - initial index to open high scores with
    */
-  showHighScores() {
+  showHighScores(preset_index) {
 
-    $.when(this.hs_viewer.initialize()).done(
+    preset_index = (preset_index == undefined ? this.board.preset_index : preset_index);
+
+    $.when(this.hs_viewer.initialize(preset_index)).done(
       () => {
         this.modal_manager.highScoreModal('show');
       }
