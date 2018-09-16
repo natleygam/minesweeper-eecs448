@@ -35,11 +35,31 @@ class HighScoresJSON{
       };
       // insert into local copy of scores at specified index
       this.latest[this.user_high_score.preset_index].scores.splice(this.user_high_score.score_index, 0, score_listing);
-      // call push scores
-      this.pushScores();
+      // kick last score off if we've reached 10 (max number)
+      if(this.latest[this.user_high_score.preset_index].scores.length > 10){
+        this.latest[this.user_high_score.preset_index].scores.pop();
+      }
 
       // disable submit button so it can't be pressed again
       document.getElementById('submit_score').setAttribute('disabled', true);
+
+      // call push scores
+      $.when(this.pushScores()).done(
+        () => {
+          // reset stored high score
+          this.user_high_score = {
+            status: false
+          };
+        }
+      ).fail(
+        (information) => {
+          // present snackbar alerting user that submission was unsuccessful
+          $.snackbar({content: "AJAX call failed: " + information});
+
+          // enable submit button so user can try again
+          document.getElementById('submit_score').setAttribute('disabled', true);
+        }
+      )
     }
   }
 
@@ -63,17 +83,12 @@ class HighScoresJSON{
       (data, textStatus, jqXHR) => {
         if(textStatus == "success"){
           this.last_pulled = new Date();
-          this.user_high_score = {
-            status: false
-          };
           // present snackbar alerting user that submission was successful
           $.snackbar({content: "Highscore submitted!"});
           callback.resolve();
         }
         else{
           console.log("AJAX call failed: myJSON error");
-          // present snackbar alerting user that submission was unsuccessful
-          $.snackbar({content: "AJAX call failed: myJSON error"});
           callback.reject("myJSON error");
         }
       }
