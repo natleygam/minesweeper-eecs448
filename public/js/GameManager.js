@@ -168,8 +168,8 @@ class GameManager {
     ).fail(
       (information) => {
         // bad thing happened.
-        console.log("An error occured")
-        console.log(information);
+        // present snackbar alerting user
+        $.snackbar({content: "Getting scores failed: " + information});
         // by default
         this.modal_manager.gameWinModal('show', false);
       }
@@ -187,8 +187,18 @@ class GameManager {
    * presents high score modal
    */
   showHighScores() {
-    this.hs_viewer.initialize();
-    this.modal_manager.highScoreModal('show');
+
+    $.when(this.hs_viewer.initialize()).done(
+      () => {
+        this.modal_manager.highScoreModal('show');
+      }
+    ).fail(
+      (information) => {
+        // present snackbar alerting user that submission was unsuccessful
+        $.snackbar({content: "Error getting scores: " + information});
+      }
+    )
+    
   }
 
   /**
