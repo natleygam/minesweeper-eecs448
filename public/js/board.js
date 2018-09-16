@@ -12,6 +12,7 @@ class GameBoard {
     // object properties
     this.board;
     this.preset_index = undefined;
+    this.percent_bar = new PercentBar(num_rows*num_cols);
     this.num_rows = num_rows;
     this.num_cols = num_cols;
     this.mine_count = mine_count;
@@ -127,6 +128,7 @@ class GameBoard {
     this.flag_count = 0;
     this.flagged_mines = 0;
     this.updateFlagDisplay();
+    this.percent_bar.resetBar();
 
     // make all of the cells square, based on their widths
     var cell_size = $('#modal_game_board td .content').width();
@@ -142,12 +144,14 @@ class GameBoard {
   updateFlagCount(operation, cell) {
     if (operation == "increment") {
       this.flag_count++;
+      this.percent_bar.increaseProgress();
       if(cell.getAttribute('value') == "M"){
         this.flagged_mines++;
       }
     }
     else if (operation == "decrement") {
       this.flag_count--;
+      this.percent_bar.decreaseProgress();
       if(cell.getAttribute('value') == "M")
       {
         this.flagged_mines--;
@@ -267,6 +271,8 @@ class GameBoard {
     }
     cell.style.color = this.color_enum[value];
     cell.style.backgroundColor = "silver";
+
+    this.percent_bar.increaseProgress();
   }
 
 

@@ -92,6 +92,11 @@
           <div class="modal-body" id="modal_body_game_board">
             <table class="table table-bordered bg-secondary" id="table_game_board">
             </table>
+            <div class="progress" style="height:20px">
+              <div id="prog_bar" class="progress-bar progress-bar-success" role="progressbar" style="width:0%">
+              0%
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <label class="text-muted">
@@ -230,6 +235,7 @@
     <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
     <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
     <!-- Optional JavaScript -->
+    <script src="js/PercentBar.js"></script>
     <script src="js/Board.js"></script>
     <script src="js/Stopwatch.js"></script>
     <script src="js/ModalManager.js"></script>
