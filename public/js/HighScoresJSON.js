@@ -50,11 +50,14 @@ class HighScoresJSON{
           this.user_high_score = {
             status: false
           };
+
+          // present snackbar alerting user that submission was successful
+          $.snackbar({content: "Highscore submitted!"});
         }
       ).fail(
         (information) => {
           // present snackbar alerting user that submission was unsuccessful
-          $.snackbar({content: "AJAX call failed: " + information});
+          $.snackbar({content: "Error sending scores: " + information});
 
           // enable submit button so user can try again
           document.getElementById('submit_score').setAttribute('disabled', true);
@@ -83,18 +86,14 @@ class HighScoresJSON{
       (data, textStatus, jqXHR) => {
         if(textStatus == "success"){
           this.last_pulled = new Date();
-          // present snackbar alerting user that submission was successful
-          $.snackbar({content: "Highscore submitted!"});
           callback.resolve();
         }
         else{
-          console.log("AJAX call failed: myJSON error");
           callback.reject("myJSON error");
         }
       }
     ).fail(
       (jqXHR, textStatus, information) => {
-        console.log("AJAX call failed: " + information);
         callback.reject(information);
       }
     )
@@ -178,13 +177,11 @@ class HighScoresJSON{
           callback.resolve();
         }
         else{
-          console.log("AJAX call failed: myJSON error");
           callback.reject("myJSON error");
         }
       }
     ).fail(
       (jqXHR, textStatus, information) => {
-        console.log("GET call failed: " + information);
         callback.reject(information);
       }
     )

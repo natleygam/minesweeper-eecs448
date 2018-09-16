@@ -155,7 +155,8 @@ class GameManager {
   */
   winGame() {
     this.stopwatch.stop();
-    document.getElementById('win_time').innerHTML = this.stopwatch.getTime();
+    const score = this.stopwatch.getTime();
+    document.getElementById('win_time').innerHTML = score;
     // enable submit button
     document.getElementById('submit_score').removeAttribute('disabled');
 
@@ -169,7 +170,7 @@ class GameManager {
       (information) => {
         // bad thing happened.
         // present snackbar alerting user
-        $.snackbar({content: "Getting scores failed: " + information});
+        $.snackbar({content: "Error getting scores: " + information});
         // by default
         this.modal_manager.gameWinModal('show', false);
       }
@@ -198,7 +199,7 @@ class GameManager {
         $.snackbar({content: "Error getting scores: " + information});
       }
     )
-    
+
   }
 
   /**
