@@ -4,68 +4,129 @@ toc:
     children:
       - name: app.js
         description: |
-          main js file of project
+          Main file of the project.
 
-          add more description here
+          Handles administrative functions such as setting up view engine, routing, and exposing ports.
 
       - name: public/js/index.js
         description: |
-          controls general aspects of the page
-
-          more description here
+          Creates game manager object and listens for clicks in game board.
 
       - name: public/js/board.js
         description: |
-          controls board functions and data
+          Controls board functions and data with the Board class.
 
-          more description here
+          Is responsible for generating game boards, drawing the boards within the
+          main game modal, keeping track of flags, and properly handling click
+          and right click events on the board.
 
       - name: public/js/stopwatch.js
         description: |
-          controls stopwatch functions and display
+          Controls timing functions and data with the Stopwatch class.
 
-          more description here
+          Is responsible for tracking the current game length.
 
       - name: public/js/GameManager.js
         description: |
+          Controls game state.
+
+          Is responsible for sending commands to high score viewer/writer objects,
+          stopwatch object, modal manager, and for creating & managing game boards.
+
+          Handles game state changes such as moving from main menu to the game board,
+          winning/losing games, and displaying highscores, as well as validating
+          any user-input data associated with those events.
 
       - name: public/js/HighScoresJSON.js
         description: |
+          Controls high score pushing/pulling and wraps around calls to myJSON server.
+
+          Keeps local copy of high scores, and is responsible for checking user
+          scores against local copy to determine high scores, adding those scores,
+          and pushing them back to the myJSON server.
 
       - name: public/js/HighScoresViewer.js
         description: |
+          Controls high score viewing modal.
+
+          Relies on an instance of HighScoresJSON to pull down user scores, then
+          displays those scores in the modal.
 
       - name: public/js/ModalManager.js
         description: |
+          Controls individual modal show/hide events, as well as multiple concurrent
+          modal events associated with game state changes.
+
+      - name: public/js/PercentBar.js
+        description: |
+          Controls percent-completed bar below game board.
+
+          Responsible for resetting and updating the percent-complete bar.
 
       - name: routes/index.js
         description: |
-          serves page html
-
-          more description
+          Serves and renders page html.
 
   - name: Works Cited
     children:
       - name: express
         description: |
+          The express package provides a fast, simple web framework for node.js applications.
+
           We used express for our server hosting.
 
           https://www.npmjs.com/package/express
 
       - name: ejs
         description: |
+          EJS is a simple templating language and view engine that can be used to generate HTML using javascript..
+
           We used ejs for our html view engine.
 
           https://www.npmjs.com/package/ejs
 
       - name: path
         description: |
+          Path is a module for working with files and directories.
+
           We used path for our routing functionality.
 
           https://www.npmjs.com/package/path
 
       - name: documentation.js
         description: |
+          Documentation.js is a simple documentation generation package that uses the JSDoc format.
+
           We used documentation.js for generating documentation from our js files.
 
           https://www.npmjs.com/package/documentation
+
+      - name: jQuery
+        description: |
+          jQuery is a javascript library that contains many useful functions for interacting with the DOM, making asyncronous calls, etc.
+
+          We used jQuery for both of these purposes.
+
+          https://jquery.com/
+
+      - name: Bootstrap
+        description: |
+          Bootstap is a frontend HTML/CSS/JS library that simplifies many aspects of visual/frontend design.
+
+          We used Bootstrap for its modals, navbars, and progress bar (and assorted other small functions).
+
+          https://getbootstrap.com/docs/4.1/getting-started/introduction/
+
+      - name: Popper.js
+        description: |
+          Popper is a javascript library used to more easily make tooltips and small dialogs.
+
+          https://popper.js.org/
+
+      - name: SnackbarJS
+        description: |
+          SnackbarJS is a library for displaying snackbar/toast popups at the bottom of the window.
+
+          We used SnackbarJS for reset game/submit score popups in the game modal.
+
+          https://fezvrasta.github.io/snackbarjs/

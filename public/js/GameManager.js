@@ -1,34 +1,34 @@
+/**
+ * Controls game state - switches between config and game, etc.
+ * Sends commands to stopwatch, modal manager, high scores objects.
+ * Also creates and manages game boards.
+ */
 class GameManager {
-  // object properties
+
   constructor() {
-    /**
-     * instance of stopwatch for timing games
-     * @type {Stopwatch}
-     */
+
+    // instance of stopwatch for timing games
     this.stopwatch = new Stopwatch();
 
-    /**
-     * @type {GameBoard}
-     */
+    // stores current game board object
     this.board;
 
-    /**
-     * @type {ModalManager}
-     */
+    // creates modal manager object
     this.modal_manager = new ModalManager();
 
+    // creates direct high scores interaction object
     this.json_caller = new HighScoresJSON();
 
+    // creates manager for viewing high scores
     this.hs_viewer = new HighScoresViewer();
   }
 
-  // object methods
+
 
   /**
-    * Initializes for requested preset
-    * Sets preset index on board
-    * Calls this.board.buildGameBoard() and begins game operations
-    * @param {Number} preset_index - index of requested preset
+    * Initializes game board for requested preset.
+    * Calls this.board.buildGameBoard() and begins game operations.
+    * @param {Number} preset_index - index of requested preset (0, 1, or 2)
   */
   presetConfig(preset_index) {
     var board_rows, board_cols, mine_count;
@@ -53,8 +53,10 @@ class GameManager {
     // call function to ready game start modal
     this.modal_manager.operationGameStart();
   }
+
+
   /**
-    * Calls modal to get game config
+    * Resets stopwatch and calls modal to get game config
   */
   getConfig() {
     // resetting stopwatch in case coming from game lose modal
@@ -63,10 +65,12 @@ class GameManager {
     this.modal_manager.operationConfig();
   }
 
+
+
   /*
-    * Ensures board_rows, board_cols, and mine_count is in proper format
-    * Presents modal if in bad format
-    * Calls this.board.buildGame() if in good format
+    * Ensures board_rows, board_cols, and mine_count is in proper format.
+    * Presents modal if in bad format.
+    * Calls this.board.buildGame() if in good format.
   */
   validateConfig() {
     // reset visiblity of error phrases in modal
@@ -119,10 +123,11 @@ class GameManager {
   }
 
 
+
   /**
-   * hides start game, win game, and lose game modals
-   * resets stopwatch
-   * builds and displays new game board
+   * Hides start game, win game, and lose game modals.
+   * Resets stopwatch.
+   * Builds and displays new game board.
    */
   newGame(){
 
@@ -134,32 +139,38 @@ class GameManager {
     // displaying gameboard again
     this.modal_manager.gameBoardModal('show');
     this.board.drawGameBoard();
+
     $.snackbar({content: "New game ready!"});
 
   }
 
+
+
   /**
-    * Stops stopwatch
-    * Gets time
-    * Updates score label on win game modal
-    * Calls function to determine if user earned high score
-    * Presents win game modal
+    * Stops stopwatch.
+    * Gets time.
+    * Updates score label on win game modal.
+    * Calls function to determine if user earned high score.
+    * Presents win game modal depending on if a high score was earned.
   */
   winGame() {
     this.stopwatch.stop();
-    const score = this.stopwatch.getTime();
-    document.getElementById('win_time').innerHTML = score;
+    document.getElementById('win_time').innerHTML = this.stopwatch.getTime();
     // enable submit button
     document.getElementById('submit_score').removeAttribute('disabled');
 
+    // wait for caller to pull highscores from myJSON and check if a hs was earned
     $.when(this.json_caller.checkIfHighScore(score, this.board.preset_index)).done(
       (hs_state) => {
+        // show win game modal based on if a high score was earned or not
         this.modal_manager.gameWinModal('show', hs_state);
       }
     ).fail(
       (information) => {
+        // bad thing happened.
         console.log("An error occured")
         console.log(information);
+        // by default
         this.modal_manager.gameWinModal('show', false);
       }
     )

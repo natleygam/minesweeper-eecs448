@@ -86,6 +86,12 @@
                       </a></li>
                     
                       <li><a
+                        href='#publicjspercentbarjs'
+                        class='regular pre-open'>
+                        .public/js/PercentBar.js
+                      </a></li>
+                    
+                      <li><a
                         href='#routesindexjs'
                         class='regular pre-open'>
                         .routes/index.js
@@ -135,6 +141,30 @@
                         href='#documentationjs'
                         class='regular pre-open'>
                         .documentation.js
+                      </a></li>
+                    
+                      <li><a
+                        href='#jquery'
+                        class='regular pre-open'>
+                        .jQuery
+                      </a></li>
+                    
+                      <li><a
+                        href='#bootstrap'
+                        class='regular pre-open'>
+                        .Bootstrap
+                      </a></li>
+                    
+                      <li><a
+                        href='#popperjs'
+                        class='regular pre-open'>
+                        .Popper.js
+                      </a></li>
+                    
+                      <li><a
+                        href='#snackbarjs'
+                        class='regular pre-open'>
+                        .SnackbarJS
                       </a></li>
                     
                     </ul>
@@ -284,91 +314,77 @@
               
                 
                 <li><a
-                  href='#stopwatch'
-                  class="">
-                  stopwatch
-                  
+                  href='#gamemanager'
+                  class=" toggle-sibling">
+                  GameManager
+                  <span class='icon'>▸</span>
                 </a>
                 
-                </li>
-              
-                
-                <li><a
-                  href='#modal_manager'
-                  class="">
-                  modal_manager
+                <div class='toggle-target display-none'>
                   
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#presetconfig'
-                  class="">
-                  presetConfig
                   
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#getconfig'
-                  class="">
-                  getConfig
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#gamemanagerstopwatch'
+                        class='regular pre-open'>
+                        #stopwatch
+                      </a></li>
+                      
+                      <li><a
+                        href='#gamemanagermodal_manager'
+                        class='regular pre-open'>
+                        #modal_manager
+                      </a></li>
+                      
+                      <li><a
+                        href='#gamemanagerpresetconfig'
+                        class='regular pre-open'>
+                        #presetConfig
+                      </a></li>
+                      
+                      <li><a
+                        href='#gamemanagergetconfig'
+                        class='regular pre-open'>
+                        #getConfig
+                      </a></li>
+                      
+                      <li><a
+                        href='#gamemanagernewgame'
+                        class='regular pre-open'>
+                        #newGame
+                      </a></li>
+                      
+                      <li><a
+                        href='#gamemanagerwingame'
+                        class='regular pre-open'>
+                        #winGame
+                      </a></li>
+                      
+                      <li><a
+                        href='#gamemanagerlosegame'
+                        class='regular pre-open'>
+                        #loseGame
+                      </a></li>
+                      
+                      <li><a
+                        href='#gamemanagershowhighscores'
+                        class='regular pre-open'>
+                        #showHighScores
+                      </a></li>
+                      
+                      <li><a
+                        href='#gamemanagerhidehighscores'
+                        class='regular pre-open'>
+                        #hideHighScores
+                      </a></li>
+                      
+                    </ul>
                   
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#newgame'
-                  class="">
-                  newGame
                   
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#wingame'
-                  class="">
-                  winGame
                   
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#losegame'
-                  class="">
-                  loseGame
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#showhighscores'
-                  class="">
-                  showHighScores
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#hidehighscores'
-                  class="">
-                  hideHighScores
-                  
-                </a>
+                </div>
                 
                 </li>
               
@@ -425,6 +441,12 @@
                       </a></li>
                       
                       <li><a
+                        href='#highscoresjsoncheckifhighscore'
+                        class='regular pre-open'>
+                        #checkIfHighScore
+                      </a></li>
+                      
+                      <li><a
                         href='#highscoresjsonpullscores'
                         class='regular pre-open'>
                         #pullScores
@@ -434,18 +456,6 @@
                         href='#highscoresjsonresetscores'
                         class='regular pre-open'>
                         #resetScores
-                      </a></li>
-                      
-                      <li><a
-                        href='#highscoresjsongetscores'
-                        class='regular pre-open'>
-                        #getScores
-                      </a></li>
-                      
-                      <li><a
-                        href='#highscoresjsongetnumscores'
-                        class='regular pre-open'>
-                        #getNumScores
                       </a></li>
                       
                     </ul>
@@ -714,6 +724,7 @@
   
 
   <h1>minesweeper-eecs448</h1>
+<p>This implementation of Minesweeper has tried to remain true to the game's Windows 3.1 roots while using more modern technologies. The application is built using <a href="https://nodejs.org/en/">NodeJS</a>, makes use of a remote JSON storage service by the name of <a href="http://myjson.com">myjson</a>, and is ready for deployment as a Docker container. </p>
 
  
    
@@ -753,8 +764,8 @@
 
   
 
-  <p>main js file of project</p>
-<p>add more description here</p>
+  <p>Main file of the project.</p>
+<p>Handles administrative functions such as setting up view engine, routing, and exposing ports.</p>
 
  
    
@@ -800,8 +811,7 @@
 
   
 
-  <p>controls general aspects of the page</p>
-<p>more description here</p>
+  <p>Creates game manager object and listens for clicks in game board.</p>
 
  
    
@@ -847,8 +857,10 @@
 
   
 
-  <p>controls board functions and data</p>
-<p>more description here</p>
+  <p>Controls board functions and data with the Board class.</p>
+<p>Is responsible for generating game boards, drawing the boards within the
+main game modal, keeping track of flags, and properly handling click
+and right click events on the board.</p>
 
  
    
@@ -894,8 +906,8 @@
 
   
 
-  <p>controls stopwatch functions and display</p>
-<p>more description here</p>
+  <p>Controls timing functions and data with the Stopwatch class.</p>
+<p>Is responsible for tracking the current game length.</p>
 
  
    
@@ -941,7 +953,12 @@
 
   
 
-  
+  <p>Controls game state.</p>
+<p>Is responsible for sending commands to high score viewer/writer objects,
+stopwatch object, modal manager, and for creating &#x26; managing game boards.</p>
+<p>Handles game state changes such as moving from main menu to the game board,
+winning/losing games, and displaying highscores, as well as validating
+any user-input data associated with those events.</p>
 
  
    
@@ -987,7 +1004,10 @@
 
   
 
-  
+  <p>Controls high score pushing/pulling and wraps around calls to myJSON server.</p>
+<p>Keeps local copy of high scores, and is responsible for checking user
+scores against local copy to determine high scores, adding those scores,
+and pushing them back to the myJSON server.</p>
 
  
    
@@ -1033,7 +1053,9 @@
 
   
 
-  
+  <p>Controls high score viewing modal.</p>
+<p>Relies on an instance of HighScoresJSON to pull down user scores, then
+displays those scores in the modal.</p>
 
  
    
@@ -1079,7 +1101,55 @@
 
   
 
+  <p>Controls individual modal show/hide events, as well as multiple concurrent
+modal events associated with game state changes.</p>
+
+ 
+   
   
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='publicjspercentbarjs'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>public/js/PercentBar.js</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Controls percent-completed bar below game board.</p>
+<p>Responsible for resetting and updating the percent-complete bar.</p>
 
  
    
@@ -1125,8 +1195,7 @@
 
   
 
-  <p>serves page html</p>
-<p>more description</p>
+  <p>Serves and renders page html.</p>
 
  
    
@@ -1226,7 +1295,8 @@
 
   
 
-  <p>We used express for our server hosting.</p>
+  <p>The express package provides a fast, simple web framework for node.js applications.</p>
+<p>We used express for our server hosting.</p>
 <p><a href="https://www.npmjs.com/package/express">https://www.npmjs.com/package/express</a></p>
 
  
@@ -1273,7 +1343,8 @@
 
   
 
-  <p>We used ejs for our html view engine.</p>
+  <p>EJS is a simple templating language and view engine that can be used to generate HTML using javascript..</p>
+<p>We used ejs for our html view engine.</p>
 <p><a href="https://www.npmjs.com/package/ejs">https://www.npmjs.com/package/ejs</a></p>
 
  
@@ -1320,7 +1391,8 @@
 
   
 
-  <p>We used path for our routing functionality.</p>
+  <p>Path is a module for working with files and directories.</p>
+<p>We used path for our routing functionality.</p>
 <p><a href="https://www.npmjs.com/package/path">https://www.npmjs.com/package/path</a></p>
 
  
@@ -1367,8 +1439,200 @@
 
   
 
-  <p>We used documentation.js for generating documentation from our js files.</p>
+  <p>Documentation.js is a simple documentation generation package that uses the JSDoc format.</p>
+<p>We used documentation.js for generating documentation from our js files.</p>
 <p><a href="https://www.npmjs.com/package/documentation">https://www.npmjs.com/package/documentation</a></p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='jquery'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>jQuery</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>jQuery is a javascript library that contains many useful functions for interacting with the DOM, making asyncronous calls, etc.</p>
+<p>We used jQuery for both of these purposes.</p>
+<p><a href="https://jquery.com/">https://jquery.com/</a></p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='bootstrap'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>Bootstrap</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Bootstap is a frontend HTML/CSS/JS library that simplifies many aspects of visual/frontend design.</p>
+<p>We used Bootstrap for its modals, navbars, and progress bar (and assorted other small functions).</p>
+<p><a href="https://getbootstrap.com/docs/4.1/getting-started/introduction/">https://getbootstrap.com/docs/4.1/getting-started/introduction/</a></p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='popperjs'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>Popper.js</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Popper is a javascript library used to more easily make tooltips and small dialogs.</p>
+<p><a href="https://popper.js.org/">https://popper.js.org/</a></p>
+
+ 
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='snackbarjs'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SnackbarJS</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>SnackbarJS is a library for displaying snackbar/toast popups at the bottom of the window.</p>
+<p>We used SnackbarJS for reset game/submit score popups in the game modal.</p>
+<p><a href="https://fezvrasta.github.io/snackbarjs/">https://fezvrasta.github.io/snackbarjs/</a></p>
 
  
    
@@ -1423,7 +1687,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/app.js#L7-L7'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/app.js#L7-L7'>
       <span>app.js</span>
       </a>
     
@@ -1480,7 +1744,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/routes/index.js#L5-L5'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/routes/index.js#L5-L5'>
       <span>routes/index.js</span>
       </a>
     
@@ -1537,7 +1801,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/app.js#L13-L13'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/app.js#L13-L13'>
       <span>app.js</span>
       </a>
     
@@ -1594,7 +1858,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/app.js#L19-L19'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/app.js#L19-L19'>
       <span>app.js</span>
       </a>
     
@@ -1651,7 +1915,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/app.js#L29-L29'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/app.js#L29-L29'>
       <span>app.js</span>
       </a>
     
@@ -1708,7 +1972,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/app.js#L36-L36'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/app.js#L36-L36'>
       <span>app.js</span>
       </a>
     
@@ -1765,7 +2029,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L4-L301'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L4-L298'>
       <span>public/js/board.js</span>
       </a>
     
@@ -1776,7 +2040,7 @@
 
  
   
-    <div class='pre p1 fill-light mt0'>new GameBoard(num_rows: any, num_cols: any, mine_count: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, board_rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, board_cols: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</div>
+    <div class='pre p1 fill-light mt0'>new GameBoard(num_rows: any, num_cols: any, mine_count: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, preset_index: any, board_rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, board_cols: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</div>
    
   
   
@@ -1813,6 +2077,14 @@
             <span class='code bold'>mine_count</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
 	    number of mines specified for board
 
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>preset_index</span> <code class='quiet'>(any)</code>
+	    
           </div>
           
         </div>
@@ -1866,7 +2138,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L39-L86'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L44-L91'>
       <span>public/js/board.js</span>
       </a>
     
@@ -1923,7 +2195,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L93-L134'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L98-L142'>
       <span>public/js/board.js</span>
       </a>
     
@@ -1980,7 +2252,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L142-L158'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L151-L169'>
       <span>public/js/board.js</span>
       </a>
     
@@ -1991,7 +2263,7 @@
 
  
   
-    <div class='pre p1 fill-light mt0'>updateFlagCount(operation: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, cell: any)</div>
+    <div class='pre p1 fill-light mt0'>updateFlagCount(operation: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, cell: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
    
   
   
@@ -2018,8 +2290,9 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>cell</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>cell</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    DOM object of the cell that was flagged
+
           </div>
           
         </div>
@@ -2059,7 +2332,7 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L165-L167'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L176-L178'>
       <span>public/js/board.js</span>
       </a>
     
@@ -2116,16 +2389,16 @@
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L177-L184'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L188-L191'>
       <span>public/js/board.js</span>
       </a>
     
   </div>
   
 
-  <p>Function to trigger with each on click
-That checks if the user has statisfied every condition to win the game
-Returns true if user has flagged all mines</p>
+  <p>Function to trigger with each on click.
+Checks if the user has statisfied every condition to win the game.
+Returns true if user has flagged all mines.</p>
 
  
   
@@ -2183,7 +2456,7 @@ Returns true if user has flagged all mines</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L193-L206'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L201-L213'>
       <span>public/js/board.js</span>
       </a>
     
@@ -2195,7 +2468,7 @@ when telling what other cells will need to be cleared due to game rules</p>
 
  
   
-    <div class='pre p1 fill-light mt0'>cellClicked(cell: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+    <div class='pre p1 fill-light mt0'>cellClicked(cell: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
    
   
   
@@ -2226,6 +2499,14 @@ when telling what other cells will need to be cleared due to game rules</p>
   
 
   
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>:
+        true if this click caused game lose condition
+
+      
+    
+  
 
   
 
@@ -2255,7 +2536,7 @@ when telling what other cells will need to be cleared due to game rules</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L215-L255'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L222-L250'>
       <span>public/js/board.js</span>
       </a>
     
@@ -2335,7 +2616,7 @@ when telling what other cells will need to be cleared due to game rules</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L263-L274'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L258-L269'>
       <span>public/js/board.js</span>
       </a>
     
@@ -2406,7 +2687,7 @@ when telling what other cells will need to be cleared due to game rules</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/board.js#L282-L300'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/board.js#L277-L297'>
       <span>public/js/board.js</span>
       </a>
     
@@ -2477,12 +2758,67 @@ when telling what other cells will need to be cleared due to game rules</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='stopwatch'>
-      stopwatch
+    <h3 class='fl m0' id='gamemanager'>
+      GameManager
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L8-L8'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L6-L194'>
+      <span>public/js/GameManager.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>controls game state - switches between config and game, etc.
+sends commands to stopwatch, modal manager, high scores objects
+also creates and manages game boards</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>new GameManager()</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='gamemanagerstopwatch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>stopwatch</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L13-L13'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -2527,19 +2863,24 @@ when telling what other cells will need to be cleared due to game rules</p>
   
 </section>
 
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='gamemanagermodal_manager'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>modal_manager</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='modal_manager'>
-      modal_manager
-    </h3>
     
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L18-L18'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L23-L23'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -2583,19 +2924,24 @@ when telling what other cells will need to be cleared due to game rules</p>
   
 </section>
 
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='gamemanagerpresetconfig'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>presetConfig(preset_index)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='presetconfig'>
-      presetConfig
-    </h3>
     
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L33-L57'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L38-L60'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -2651,19 +2997,24 @@ Calls this.board.buildGameBoard() and begins game operations</p>
   
 </section>
 
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='gamemanagergetconfig'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>getConfig()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='getconfig'>
-      getConfig
-    </h3>
     
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L61-L66'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L64-L69'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -2703,19 +3054,24 @@ Calls this.board.buildGameBoard() and begins game operations</p>
   
 </section>
 
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='gamemanagernewgame'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>newGame()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='newgame'>
-      newGame
-    </h3>
     
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L129-L143'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L132-L144'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -2757,19 +3113,24 @@ builds and displays new game board</p>
   
 </section>
 
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='gamemanagerwingame'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>winGame()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='wingame'>
-      winGame
-    </h3>
     
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L151-L208'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L153-L171'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -2779,6 +3140,7 @@ builds and displays new game board</p>
   <p>Stops stopwatch
 Gets time
 Updates score label on win game modal
+Calls function to determine if user earned high score
 Presents win game modal</p>
 
  
@@ -2812,19 +3174,24 @@ Presents win game modal</p>
   
 </section>
 
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='gamemanagerlosegame'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>loseGame()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='losegame'>
-      loseGame
-    </h3>
     
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L213-L215'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L176-L178'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -2864,19 +3231,24 @@ Presents win game modal</p>
   
 </section>
 
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='gamemanagershowhighscores'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>showHighScores()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='showhighscores'>
-      showHighScores
-    </h3>
     
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L220-L223'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L183-L186'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -2916,19 +3288,24 @@ Presents win game modal</p>
   
 </section>
 
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='gamemanagerhidehighscores'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>hideHighScores()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='hidehighscores'>
-      hideHighScores
-    </h3>
     
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L228-L230'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L191-L193'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -2968,6 +3345,16 @@ Presents win game modal</p>
   
 </section>
 
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+</section>
+
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -2980,7 +3367,7 @@ Presents win game modal</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/GameManager.js#L13-L13'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/GameManager.js#L18-L18'>
       <span>public/js/GameManager.js</span>
       </a>
     
@@ -3036,7 +3423,7 @@ Presents win game modal</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresJSON.js#L5-L5'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresJSON.js#L5-L5'>
       <span>public/js/HighScoresJSON.js</span>
       </a>
     
@@ -3093,7 +3480,7 @@ Presents win game modal</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresJSON.js#L10-L200'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresJSON.js#L10-L277'>
       <span>public/js/HighScoresJSON.js</span>
       </a>
     
@@ -3146,7 +3533,7 @@ Presents win game modal</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresJSON.js#L32-L42'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresJSON.js#L29-L64'>
       <span>public/js/HighScoresJSON.js</span>
       </a>
     
@@ -3204,7 +3591,7 @@ Calls push scores</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresJSON.js#L49-L89'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresJSON.js#L71-L104'>
       <span>public/js/HighScoresJSON.js</span>
       </a>
     
@@ -3270,7 +3657,7 @@ resets high score state variables</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresJSON.js#L95-L97'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresJSON.js#L110-L112'>
       <span>public/js/HighScoresJSON.js</span>
       </a>
     
@@ -3321,6 +3708,94 @@ resets high score state variables</p>
       </div>
     </div>
   
+    <div class='border-bottom' id='highscoresjsoncheckifhighscore'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>checkIfHighScore(score, preset_index)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresJSON.js#L120-L162'>
+      <span>public/js/HighScoresJSON.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Determines if user has earned a high score to spec of board preset (if any)</p>
+
+ 
+  
+    <div class='pre p1 fill-light mt0'>checkIfHighScore(score: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, preset_index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>): Bool</div>
+   
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>score</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    the score the user has earned
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>preset_index</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+	    the index of the preset the user has selected (if any)
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>Bool</code>:
+        is_high_score - whether or not the user has earned a high score
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
     <div class='border-bottom' id='highscoresjsonpullscores'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -3335,7 +3810,7 @@ resets high score state variables</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresJSON.js#L103-L129'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresJSON.js#L168-L193'>
       <span>public/js/HighScoresJSON.js</span>
       </a>
     
@@ -3400,7 +3875,7 @@ resets high score state variables</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresJSON.js#L136-L150'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresJSON.js#L200-L227'>
       <span>public/js/HighScoresJSON.js</span>
       </a>
     
@@ -3452,218 +3927,6 @@ shouldn't be called, generally</p>
       </div>
     </div>
   
-    <div class='border-bottom' id='highscoresjsongetscores'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>getScores(rows, cols, mines, start_index, count)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresJSON.js#L161-L177'>
-      <span>public/js/HighScoresJSON.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>get scores from the local score copy based on variables</p>
-
- 
-  
-    <div class='pre p1 fill-light mt0'>getScores(rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, cols: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, mines: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, start_index: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, count: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
-   
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>rows</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-	    number of rows in board used
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>cols</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-	    number of columns in board used
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>mines</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-	    number of mines in board used
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>start_index</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-	    index of first score to return
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>count</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-	    max number of scores to return
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
-        returns the status of local copy and the requested data
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='highscoresjsongetnumscores'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>getNumScores(rows, cols, mines)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresJSON.js#L186-L198'>
-      <span>public/js/HighScoresJSON.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>get number of scores that have the given criteria</p>
-
- 
-  
-    <div class='pre p1 fill-light mt0'>getNumScores(rows: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, cols: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, mines: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></div>
-   
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>rows</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-	    number of rows in board used
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>cols</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-	    number of columns in board used
-
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>mines</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-	    number of mines in board used
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
 </div>
 
   
@@ -3683,7 +3946,7 @@ shouldn't be called, generally</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresViewer.js#L5-L5'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresViewer.js#L5-L5'>
       <span>public/js/HighScoresViewer.js</span>
       </a>
     
@@ -3740,7 +4003,7 @@ shouldn't be called, generally</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresViewer.js#L10-L73'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresViewer.js#L10-L73'>
       <span>public/js/HighScoresViewer.js</span>
       </a>
     
@@ -3807,7 +4070,7 @@ shouldn't be called, generally</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresViewer.js#L25-L41'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresViewer.js#L25-L41'>
       <span>public/js/HighScoresViewer.js</span>
       </a>
     
@@ -3874,7 +4137,7 @@ Also updates JSON from server</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/HighScoresViewer.js#L47-L72'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/HighScoresViewer.js#L47-L72'>
       <span>public/js/HighScoresViewer.js</span>
       </a>
     
@@ -3950,7 +4213,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/index.js#L10-L25'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/index.js#L10-L25'>
       <span>public/js/index.js</span>
       </a>
     
@@ -4015,7 +4278,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/index.js#L33-L53'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/index.js#L33-L53'>
       <span>public/js/index.js</span>
       </a>
     
@@ -4088,7 +4351,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L5-L7'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L5-L7'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4140,7 +4403,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L13-L15'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L13-L15'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4206,7 +4469,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L21-L23'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L21-L23'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4272,7 +4535,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L29-L31'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L29-L31'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4338,7 +4601,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L37-L39'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L37-L39'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4404,7 +4667,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L46-L53'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L46-L53'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4479,7 +4742,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L59-L61'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L59-L61'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4545,7 +4808,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L66-L74'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L66-L74'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4597,7 +4860,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L79-L84'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L79-L84'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4649,7 +4912,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/ModalManager.js#L89-L93'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/ModalManager.js#L89-L93'>
       <span>public/js/ModalManager.js</span>
       </a>
     
@@ -4701,7 +4964,7 @@ rows, cols, mines, and page number</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/stopwatch.js#L4-L119'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/stopwatch.js#L4-L119'>
       <span>public/js/stopwatch.js</span>
       </a>
     
@@ -4754,7 +5017,7 @@ rows, cols, mines, and page number</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/stopwatch.js#L18-L20'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/stopwatch.js#L18-L20'>
       <span>public/js/stopwatch.js</span>
       </a>
     
@@ -4811,7 +5074,7 @@ rows, cols, mines, and page number</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/stopwatch.js#L25-L57'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/stopwatch.js#L25-L57'>
       <span>public/js/stopwatch.js</span>
       </a>
     
@@ -4868,7 +5131,7 @@ rows, cols, mines, and page number</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/stopwatch.js#L65-L69'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/stopwatch.js#L65-L69'>
       <span>public/js/stopwatch.js</span>
       </a>
     
@@ -4957,7 +5220,7 @@ rows, cols, mines, and page number</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/stopwatch.js#L75-L77'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/stopwatch.js#L75-L77'>
       <span>public/js/stopwatch.js</span>
       </a>
     
@@ -5015,7 +5278,7 @@ Does not reset object properties</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/stopwatch.js#L83-L91'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/stopwatch.js#L83-L91'>
       <span>public/js/stopwatch.js</span>
       </a>
     
@@ -5073,7 +5336,7 @@ Resets label to 00:00:00</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/public/js/stopwatch.js#L97-L118'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/public/js/stopwatch.js#L97-L118'>
       <span>public/js/stopwatch.js</span>
       </a>
     
@@ -5136,7 +5399,7 @@ Returns time</p>
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/f19bdcb7bf10536a6b6a3229a150d0576507b255/routes/index.js#L11-L11'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/EvanBrown96/minesweeper-eecs448/blob/e077cb95595b2ff568147a75e4a1a3590fa2048d/routes/index.js#L11-L11'>
       <span>routes/index.js</span>
       </a>
     

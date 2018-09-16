@@ -11,13 +11,17 @@ class GameBoard {
   constructor(num_rows, num_cols, mine_count, preset_index) {
     // object properties
     this.board;
+    // will be 0, 1, or 2 for one of the three preset board sizes, undefined otherwise
     this.preset_index = preset_index;
+    // create percent bar under board
     this.percent_bar = new PercentBar(num_rows*num_cols);
     this.num_rows = num_rows;
     this.num_cols = num_cols;
     this.mine_count = mine_count;
     this.flag_count = 0;
+    // number of flags that are also on mines
     this.flagged_mines = 0;
+    // goes to false once user has clicked for the first time on a new board
     this.first_click = true;
     // what color to make each number in the cell
     this.color_enum = {
@@ -32,7 +36,7 @@ class GameBoard {
     }
   }
 
-  // object methods
+
 
   /**
     * Builds game board to spec of currently stored num_rows, num_cols, and mine_count
@@ -113,8 +117,8 @@ class GameBoard {
         current_cell.setAttribute('col', j);
         current_cell.setAttribute('value', this.board[i][j]);
         current_cell.setAttribute('flagged', false);
+        current_cell.setAttribute('isDisplayed', false);
         current_cell.innerHTML = "<div class='content'></div>";
-        //current_cell.style.fontSize = "40px";
       }
     }
 
@@ -125,9 +129,12 @@ class GameBoard {
       height: 'auto', 'max-height':'75vh'
     });
 
+    // reset flag counts and display
     this.flag_count = 0;
     this.flagged_mines = 0;
     this.updateFlagDisplay();
+
+    // reset percent-completed bar
     this.percent_bar.resetBar();
 
     // make all of the cells square, based on their widths
@@ -140,6 +147,7 @@ class GameBoard {
   /**
     * Updates flag count according to operation
     * @param {String} operation - increment or decrement flag count
+    * @param {Object} cell - DOM object of the cell that was flagged
   */
   updateFlagCount(operation, cell) {
     if (operation == "increment") {
@@ -173,17 +181,14 @@ class GameBoard {
 
 
   /**
-    * Function to trigger with each on click
-    * That checks if the user has statisfied every condition to win the game
-    * Returns true if user has flagged all mines
+    * Function to trigger with each on click.
+    * Checks if the user has statisfied every condition to win the game.
+    * Returns true if user has flagged all mines.
     @returns {Boolean}
   */
   checkWin()
   {
-    if(this.mine_count == this.flagged_mines)
-    {
-      return(true);
-    }
+    return (this.mine_count == this.flagged_mines);
   }
 
 
@@ -192,15 +197,17 @@ class GameBoard {
    * Calls displayValue() to show cell values and then handles the rules
    * when telling what other cells will need to be cleared due to game rules
    * @param {Object} cell - DOM object of the cell that was clicked
+   * @returns {Boolean} - true if this click caused game lose condition
    */
   cellClicked(cell) {
     //If Cell Value is mine
     if(cell.getAttribute('value') == "M")
     {
       // user lost, return true
-      return(true);
+      return true;
     }
 
+    // otherwise display cell and any relevant adjacent ones
     this.recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
     return false;
 
@@ -213,19 +220,17 @@ class GameBoard {
    * @param {Number} i - row index of current cell
    * @param {Number} j - column index of current cell
    */
-  recReveal(i, j)
-  {
-    if(parseInt(i, 10) < this.board.length && parseInt(j, 10) < this.board[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0)
-    {
+  recReveal(i, j) {
+    // check if (i, j) is within board
+    if(parseInt(i, 10) < this.board.length && parseInt(j, 10) < this.board[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0) {
       //Get Cell at i,j
       var table = document.getElementById('table_game_board');
       var row = table.rows[i];
       var cell = row.cells[j];
 
-      if(!cell.getAttribute('isDisplayed'))
-      {
-        if(cell.getAttribute('value') == "0" && cell.getAttribute('flagged') == "false")
-        {
+      // don't do anything if the cell is already displayed or flagged
+      if(cell.getAttribute('isDisplayed') == "false" && cell.getAttribute('flagged') == "false") {
+        if(cell.getAttribute('value') == "0") {
           this.displayValue(cell);
 
           //Look in all directions
@@ -238,16 +243,7 @@ class GameBoard {
           this.recReveal(parseInt(i, 10) - 1,j);
           this.recReveal(parseInt(i, 10) - 1,parseInt(j, 10) + 1);
         }
-        else if(cell.getAttribute('value') == "M")
-        {
-          // could be wrong, but I don't think this will ever occur, since
-          // recReveal will only be initially called on non-mine cells from the
-          // conditionals in cellClicked, and will only be called recursively
-          // by cells that have no adjacent mines - Evan
-
-        }
-        else if(cell.getAttribute('flagged') == "false")
-        {
+        else {
           this.displayValue(cell);
         }
       }
@@ -262,8 +258,6 @@ class GameBoard {
    */
   displayValue(cell)
   {
-    //var cellId = cell.getAttribute('row') + ',' + cell.getAttribute('col');
-    //cell.setAttribute('id', cellId);
     var value = cell.getAttribute('value');
     cell.setAttribute('isDisplayed', true);
     if(value != "0"){
@@ -283,7 +277,6 @@ class GameBoard {
   */
   cellFlagged(cell) {
     // cell is currently flagged
-    // toggle
     if (cell.getAttribute('flagged') == 'true') {
       cell.setAttribute('flagged', 'false');
       cell.setAttribute('background', "");
@@ -292,6 +285,7 @@ class GameBoard {
       // cell is not currently flagged
       // toggle only if user has flags left
       if (this.mine_count > this.flag_count) {
+        // check that an actual cell was clicked
         if(cell.tagName == "TD")
         {
           cell.setAttribute('flagged', 'true');
