@@ -123,13 +123,6 @@ class GameBoard {
       }
     }
 
-    // move this to css file
-    // resizing modal
-    $('#modal_game_board').find('.modal-body').css({
-      width: 'auto',
-      height: 'auto', 'max-height':'75vh'
-    });
-
     // reset flag counts and display
     this.flag_count = 0;
     this.flagged_mines = 0;
