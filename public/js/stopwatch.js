@@ -96,19 +96,19 @@ class Stopwatch {
   */
   getTime() {
     var time = "";
-    if (this.hours < 9) {
+    if (this.hours < 10) {
       time += "0" + this.hours;
     } else {
       time += this.hours;
     }
     time += ":";
-    if (this.minutes < 9) {
+    if (this.minutes < 10) {
       time += "0" + this.minutes;
     } else {
       time += this.minutes;
     }
     time += ":";
-    if (this.seconds < 9) {
+    if (this.seconds < 10) {
       time += "0" + this.seconds;
     } else {
       time += this.seconds;
