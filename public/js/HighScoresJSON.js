@@ -12,10 +12,7 @@ class HighScoresJSON{
   constructor(){
     // object for user high score during run time
     this.user_high_score = {
-      status: false,
-      preset_index: -1,
-      score_index: -1,
-      score: ""
+      status: false
     };
     // stores latest JSON object pulled
     this.latest;
@@ -30,15 +27,20 @@ class HighScoresJSON{
     * Calls push scores
   */
   addScore() {
-    // build score object
-    const score_listing = {
-      user_name: document.getElementById('input_high_score_name').value,
-      user_score: this.user_high_score.score
-    };
-    // insert into local copy of scores at specified index
-    this.latest[this.user_high_score.preset_index].scores.splice(this.user_high_score.score_index, 0, score_listing);
-    // call push scores
-    this.pushScores();
+    if(this.user_high_score.status){
+      // build score object
+      const score_listing = {
+        user_name: document.getElementById('input_high_score_name').value,
+        user_score: this.user_high_score.score
+      };
+      // insert into local copy of scores at specified index
+      this.latest[this.user_high_score.preset_index].scores.splice(this.user_high_score.score_index, 0, score_listing);
+      // call push scores
+      this.pushScores();
+
+      // disable submit button so it can't be pressed again
+      document.getElementById('submit_score').setAttribute('disabled', true);
+    }
   }
 
   /**
@@ -62,9 +64,7 @@ class HighScoresJSON{
         if(textStatus == "success"){
           this.last_pulled = new Date();
           this.user_high_score = {
-            status: false,
-            index: -1,
-            score: ""
+            status: false
           };
           // present snackbar alerting user that submission was successful
           $.snackbar({content: "Highscore submitted!"});
@@ -107,41 +107,29 @@ class HighScoresJSON{
     if (preset_index != undefined) {
       // retrieve high scores for preset board size
       var callback = $.Deferred();
+
       $.when(this.pullScores()).done(
         () => {
-          var sorted_scores = this.latest[preset_index]["scores"].sort(function(a, b) {
-            if (a.user_score < b.user_score)
-              return -1;
-            if (a.user_score > b.user_score)
-              return 1;
-            return 0;
-          });
-          // set sorted scores equal to local copy
-          this.latest[preset_index]["scores"] = sorted_scores;
-          // determine is user has earned a high score, only care about if top 10 scores
-          for (var j = 0; j < sorted_scores.length; j++) {
-            if (j < 10) {
-              // user earned high score
-              if (score < sorted_scores[j].user_score) {
-                this.user_high_score.status = true;
-                this.user_high_score.preset_index = preset_index;
-                this.user_high_score.score_index = j;
-                this.user_high_score.score = score;
-                console.log('returning true');
-                return true;
-              } else if (j == 9) {
-                // user did not beat other scores but is in top 10
-                this.user_high_score.status = true;
-                this.user_high_score.preset_index = preset_index;
-                this.user_high_score.score_index = j;
-                this.user_high_score.score = score;
-                return true;
-              }
-            }
+          var ind = 0;
+
+          while(ind < this.latest[preset_index]["scores"].length && score >= this.latest[preset_index]["scores"][ind].user_score){
+            ind++;
           }
-          // user did not earn high score
-          if (this.user_high_score.status == false) {
-            return false;
+
+          if(ind < 10){
+            this.user_high_score = {
+              status: true,
+              preset_index: preset_index,
+              score_index: ind,
+              score: score
+            };
+            callback.resolve(true);
+          }
+          else{
+            this.user_high_score = {
+              status: false
+            };
+            callback.resolve(false);
           }
         }
       ).fail(
@@ -149,9 +137,12 @@ class HighScoresJSON{
           callback.reject(information);
         }
       )
+
+      return callback.promise();
+
     } else {
       // user did not have a preset
-      return false;
+      return $.Deferred().resolve(false);
     }
   }
 
@@ -195,7 +186,20 @@ class HighScoresJSON{
 
     var callback = $.Deferred();
 
-    this.latest = {};
+    this.latest = [
+                    {
+                      "board_size": "8x8 (10)",
+                      "scores": []
+                    },
+                    {
+                      "board_size": "16x16 (40)",
+                      "scores": []
+                    },
+                    {
+                      "board_size": "16x30 (99)",
+                      "scores": []
+                    }
+                  ];
 
     $.when(this.pushScores()).done(
       callback.resolve()

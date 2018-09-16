@@ -47,13 +47,11 @@ class GameManager {
     }
 
     // create new instance of game board
-    this.board = new GameBoard(board_rows, board_cols, mine_count);
+    this.board = new GameBoard(board_rows, board_cols, mine_count, preset_index);
     // build game board upon good config
     this.board.buildGameBoard();
     // call function to ready game start modal
     this.modal_manager.operationGameStart();
-    // set preset index
-    this.board.preset_index = preset_index;
   }
   /**
     * Calls modal to get game config
@@ -151,13 +149,20 @@ class GameManager {
     this.stopwatch.stop();
     const score = this.stopwatch.getTime();
     document.getElementById('win_time').innerHTML = score;
-    const json_caller = this.json_caller;
-    json_caller.user_high_score.status = this.json_caller.checkIfHighScore(score, this.board.preset_index);
-    const modal_manager = this.modal_manager;
-    // waiting for retrieval of scores to finish
-    setTimeout(function() {
-      modal_manager.gameWinModal('show', json_caller.user_high_score.status);
-    }, 500);
+    // enable submit button
+    document.getElementById('submit_score').removeAttribute('disabled');
+
+    $.when(this.json_caller.checkIfHighScore(score, this.board.preset_index)).done(
+      (hs_state) => {
+        this.modal_manager.gameWinModal('show', hs_state);
+      }
+    ).fail(
+      (information) => {
+        console.log("An error occured")
+        console.log(information);
+        this.modal_manager.gameWinModal('show', false);
+      }
+    )
   }
 
   /**

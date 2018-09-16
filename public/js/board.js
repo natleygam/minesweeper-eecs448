@@ -8,10 +8,10 @@ class GameBoard {
     * @param {Number} board_cols - number of cols specified for board
     * @param {Number} mine_count - number of mines specified for board
     */
-  constructor(num_rows, num_cols, mine_count) {
+  constructor(num_rows, num_cols, mine_count, preset_index) {
     // object properties
     this.board;
-    this.preset_index = undefined;
+    this.preset_index = preset_index;
     this.percent_bar = new PercentBar(num_rows*num_cols);
     this.num_rows = num_rows;
     this.num_cols = num_cols;
