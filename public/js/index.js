@@ -43,7 +43,6 @@ $('#table_game_board').contextmenu(function(data) {
     game_manager.board.cellFlagged(cell);
 
     var is_win = game_manager.board.checkWin();
-    is_win = true;
     if (is_win) {
       game_manager.winGame();
     }
