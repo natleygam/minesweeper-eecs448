@@ -11,10 +11,12 @@ class HighScoresViewer{
   /**
    * Pulls scores from server, then calls displayScores()
    * to initialize table information when the high score modal is opened.
-   * @param {Number} preset_index - initial index to open high scores with
+   * @param {Number} [preset_index=0] - initial index to open high scores with
    * @return {Promise}
    */
   initialize(preset_index){
+
+    preset_index = (preset_index == undefined ? 0 : preset_index);
 
     var callback = $.Deferred();
 

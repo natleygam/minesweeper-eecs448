@@ -190,7 +190,7 @@ class GameManager {
 
   /**
    * presents high score modal
-   * @param {Number} preset_index - initial index to open high scores with
+   * @param {Number} [preset_index=this.board.preset_index] - initial index to open high scores with
    */
   showHighScores(preset_index) {
 
