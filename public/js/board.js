@@ -4,9 +4,10 @@
 class GameBoard {
 
   /**
-    * @param {Number} board_rows - number of rows specified for board
-    * @param {Number} board_cols - number of cols specified for board
+    * @param {Number} num_rows - number of rows specified for board
+    * @param {Number} num_cols - number of cols specified for board
     * @param {Number} mine_count - number of mines specified for board
+    * @param {Number} [preset_index] - which preset this board is (0, 1, 2)
     */
   constructor(num_rows, num_cols, mine_count, preset_index) {
     // object properties

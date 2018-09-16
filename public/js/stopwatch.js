@@ -2,7 +2,7 @@
   * Definition of stopwatch object
 */
 class Stopwatch {
-  // object properties
+
   constructor() {
     this.seconds = 0;
     this.minutes = 0;
@@ -10,7 +10,7 @@ class Stopwatch {
     this.watch;
   }
 
-  // object methods
+
 
   /**
     * tells stopwatch to begin counting
@@ -18,6 +18,8 @@ class Stopwatch {
   run() {
     this.watch = setTimeout(this.increment.bind(this), 1000);
   }
+
+
 
   /**
     * Increments properties of stopwatch
@@ -56,6 +58,8 @@ class Stopwatch {
     this.run();
   };
 
+
+
   /**
     * directly set time of stopwatch
     * @param {Number} seconds - number of seconds to display
@@ -68,6 +72,8 @@ class Stopwatch {
     this.hours = hours;
   }
 
+
+
   /**
     * Haults increment of stopwatch by clearing timeout
     * Does not reset object properties
@@ -75,6 +81,8 @@ class Stopwatch {
   stop() {
     clearTimeout(this.watch);
   }
+
+
 
   /**
     * Clears set timeout and resets stopwatch variables
@@ -89,6 +97,8 @@ class Stopwatch {
     var label = document.getElementById('label_stopwatch')
     label.innerHTML = '00:00:00';
   };
+
+
 
   /**
     * Formats time as standard HH:MM:SS

@@ -177,12 +177,16 @@ class GameManager {
     )
   }
 
+
+
   /**
     * Presents lose game modal
   */
   loseGame() {
     this.modal_manager.gameLoseModal('show');
   }
+
+
 
   /**
    * presents high score modal
@@ -201,6 +205,8 @@ class GameManager {
     )
 
   }
+
+
 
   /**
    * hides high score modal

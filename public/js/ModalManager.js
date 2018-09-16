@@ -1,10 +1,13 @@
+/**
+ * provides functions for interacting with all the various modals.
+ */
 class ModalManager {
-  /**
-    * Constructor for ModalManager instance
-  */
+
   constructor() {
 
   }
+
+
 
   /**
     * Manage config modal
@@ -14,6 +17,8 @@ class ModalManager {
     $('#modal_game_setup').modal(operation);
   }
 
+
+
   /**
     * Manage start game modal
     * @param {String} operation - hide or show modal
@@ -21,6 +26,8 @@ class ModalManager {
   gameStartModal(operation) {
     $('#modal_start_game').modal(operation);
   }
+
+
 
   /**
     * Manage game board modal
@@ -30,6 +37,8 @@ class ModalManager {
     $('#modal_game_board').modal(operation);
   }
 
+
+
   /**
     * Manage game lose modal
     * @param {String} operation - hide or show modal
@@ -37,6 +46,8 @@ class ModalManager {
   gameLoseModal(operation) {
     $('#modal_lose').modal(operation);
   }
+
+
 
   /**
     * Manage game win modal
@@ -52,6 +63,8 @@ class ModalManager {
     $('#modal_win').modal(operation);
   }
 
+
+
   /**
    * manage high score modal
    * @param {String} operation - hide or show modal
@@ -59,6 +72,8 @@ class ModalManager {
   highScoreModal(operation) {
     $('#modal_high_scores').modal(operation);
   }
+
+
 
   /**
     * Runs operations needed to ready config modal
@@ -73,6 +88,8 @@ class ModalManager {
     this.configModal('show');
   }
 
+
+
   /**
     * Runs operations needed to ready game start modal
   */
@@ -82,6 +99,8 @@ class ModalManager {
     // show game start modal
     this.gameStartModal('show');
   }
+
+
 
   /**
     * Runs operations needed for game reset

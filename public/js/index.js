@@ -1,7 +1,13 @@
-// creating instance of game manager
+/**
+ * Instance of game manager used for everything
+ * @type {GameManager}
+ */
 var game_manager = new GameManager();
+
 // calling game manager to get config for game
 game_manager.getConfig();
+
+
 
 /**
   * click listener for board clear events
@@ -23,6 +29,7 @@ $('#table_game_board').click(function(data) {
     }
   }
 });
+
 
 
 /**

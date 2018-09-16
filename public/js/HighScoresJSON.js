@@ -4,6 +4,8 @@
  */
 var myjson_id = "aqthk";
 
+
+
 /**
  * allows for interaction with myjson high score file
  */
@@ -22,17 +24,20 @@ class HighScoresJSON{
     this.last_pulled;
   }
 
+
+
   /**
-    * Adds user score to high scores locally
-    * Calls push scores
+    * Adds queued user score to high scores, then calls pushScores
   */
   addScore() {
     if(this.user_high_score.status){
+
       // build score object
       const score_listing = {
         user_name: document.getElementById('input_high_score_name').value,
         user_score: this.user_high_score.score
       };
+
       // insert into local copy of scores at specified index
       this.latest[this.user_high_score.preset_index].scores.splice(this.user_high_score.score_index, 0, score_listing);
       // kick last score off if we've reached 10 (max number)
@@ -66,9 +71,10 @@ class HighScoresJSON{
     }
   }
 
+
+
   /**
-   * push local scores copy to myjson
-   * resets high score state variables
+   * Push local scores copy to myjson.
    * @returns {Promise} resolved when response is received from myjson server
    */
   pushScores(){
@@ -102,6 +108,8 @@ class HighScoresJSON{
 
   }
 
+
+
   /**
    * gets raw json from myjson
    * @returns {Promise}
@@ -110,11 +118,13 @@ class HighScoresJSON{
     return $.get("https://api.myjson.com/bins/" + myjson_id);
   }
 
+
+
   /**
     * Determines if user has earned a high score to spec of board preset (if any)
     * @param {String} score - the score the user has earned
     * @param {Number} preset_index - the index of the preset the user has selected (if any)
-    * @return {Bool} is_high_score - whether or not the user has earned a high score
+    * @return {Promise} resolved with a boolean indicating whether or not the user earned a high score
   */
   checkIfHighScore(score, preset_index) {
     // check to see if user is using board size for high score
@@ -124,12 +134,13 @@ class HighScoresJSON{
 
       $.when(this.pullScores()).done(
         () => {
+          // find index in scores list where this score would be inserted
           var ind = 0;
-
           while(ind < this.latest[preset_index]["scores"].length && score >= this.latest[preset_index]["scores"][ind].user_score){
             ind++;
           }
 
+          // if within max cap of scores (10), queue score
           if(ind < 10){
             this.user_high_score = {
               status: true,
@@ -140,6 +151,7 @@ class HighScoresJSON{
             callback.resolve(true);
           }
           else{
+            // otherwise, resolve with false
             this.user_high_score = {
               status: false
             };
@@ -189,11 +201,10 @@ class HighScoresJSON{
 
   }
 
-  /**
-   * administrative function - clears myJSON file.
-   * shouldn't be called, generally
-   * @returns {Promise}
-   */
+
+
+  // administrative function - clears myJSON file.
+  // shouldn't be called, generally
   resetScores(){
 
     var callback = $.Deferred();

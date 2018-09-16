@@ -1,25 +1,16 @@
 /**
- * number of scores to display per high score page
- * @type {Number}
- */
-var scores_per_page = 10;
-
-/**
  * manages functions related to high score modal and displaying high scores
  */
 class HighScoresViewer{
 
-  /**
-   * @param {HighScoresJSON} json_caller - instance of HighScoresJSON to use for myJSON interactions
-   */
   constructor(){
+    // create myJSON wrapper
     this.json_caller = new HighScoresJSON();
   }
 
   /**
-   * Calls displayScores() to initialize table information when the high score modal is opened
-   * Calls with 0 preset index to begin with
-   * Also updates JSON from server
+   * Pulls scores from server, then calls displayScores()
+   * to initialize table information when the high score modal is opened.
    * @return {Promise}
    */
   initialize(){
@@ -40,9 +31,11 @@ class HighScoresViewer{
 
   }
 
+
+
   /**
-   * update scores from the local JSON copy based on currently stored
-   * rows, cols, mines, and page number
+   * update scores from the local JSON copy
+   * @param {Number} preset_index - which preset to display scores for (0, 1, 2)
    */
   displayScores(preset_index) {
     // get table
