@@ -51,6 +51,7 @@ class HighScoresJSON{
       // call push scores
       $.when(this.pushScores()).done(
         () => {
+
           // reset stored high score
           this.user_high_score = {
             status: false

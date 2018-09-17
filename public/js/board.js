@@ -194,6 +194,12 @@ class GameBoard {
    * @returns {Boolean} - true if this click caused game lose condition
    */
   cellClicked(cell) {
+
+    // if cell value is flagged, immediately return false because click shouldn't register
+    if(cell.getAttribute('flagged') == 'true'){
+      return false;
+    }
+
     //If Cell Value is mine
     if(cell.getAttribute('value') == "M")
     {

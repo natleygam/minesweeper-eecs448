@@ -15,19 +15,15 @@ game_manager.getConfig();
 */
 $('#table_game_board').click(function(data) {
   // check to see if first click
-  if (game_manager.board.first_click == true) {
-    // start stopwatch
-    game_manager.stopwatch.run();
-    game_manager.board.first_click = false;
-  }
+  game_manager.checkFirstClick();
+
   var cell = (data.target || data.srcElement).parentElement;
-  // if the cell is flagged, then don't do anything on click
-  if(cell.getAttribute('flagged') != 'true'){
-    var isLoss = game_manager.board.cellClicked(cell);
-    if (isLoss) {
-      game_manager.loseGame();
-    }
+
+  var isLoss = game_manager.board.cellClicked(cell);
+  if (isLoss) {
+    game_manager.loseGame();
   }
+
 });
 
 
@@ -39,11 +35,8 @@ $('#table_game_board').click(function(data) {
 */
 $('#table_game_board').contextmenu(function(data) {
   // check to see if first click
-  if (game_manager.board.first_click == true) {
-    // start stopwatch
-    game_manager.stopwatch.run();
-    game_manager.board.first_click = false;
-  }
+  game_manager.checkFirstClick();
+
   var cell = (data.target || data.srcElement).parentElement;
 
   if(cell.getAttribute('isDisplayed') != "true") {

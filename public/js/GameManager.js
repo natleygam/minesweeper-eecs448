@@ -147,6 +147,19 @@ class GameManager {
 
 
   /**
+   * helper function - if this was a first click, then start the Stopwatch
+   */
+  checkFirstClick(){
+    if (this.board.first_click == true) {
+      // start stopwatch
+      this.stopwatch.run();
+      this.board.first_click = false;
+    }
+  }
+
+
+
+  /**
     * Stops stopwatch.
     * Gets time.
     * Updates score label on win game modal.
