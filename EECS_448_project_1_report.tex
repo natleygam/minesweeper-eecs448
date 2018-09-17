@@ -1,0 +1,254 @@
+%
+% Setting document class
+%
+\documentclass[12pt]{report}
+
+%
+% Useful packages
+%
+\usepackage[a4paper]{geometry}
+\usepackage[myheadings]{fullpage}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
+\usepackage[T1]{fontenc}
+\usepackage[font=small, labelfont=bf]{caption}
+\usepackage{fourier}
+\usepackage[protrusion=true, expansion=true]{microtype}
+\usepackage[english]{babel}
+\usepackage{sectsty}
+\usepackage{url, lipsum}
+\usepackage{makecell}
+
+%
+% Code formatting
+%
+\usepackage{listings}
+\usepackage{color}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+%
+% Custom commands, custom declarations for title page
+%
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\onehalfspacing
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+%
+% Initialize header and footer
+%
+\pagestyle{fancy}
+\fancyhf{}
+
+% 
+% Setting up header
+%
+\lhead{
+\ifcase\value{page}
+\or
+EECS 448
+\else 
+EECS 448
+\fi
+}
+\rhead{
+\ifcase\value{page}
+\or
+Minesweeper
+\else 
+Minesweeper
+\fi
+}
+
+%
+% Setting up footer
+%
+\rfoot{Page \thepage \hspace{1pt} of \hspace{0.5pt} \pageref{LastPage}}
+
+%
+% Title Page
+%
+\begin{document}
+
+\title{ \normalsize \textsc{EECS 448 \\ Fragile Development}
+        \HRule{0.5pt} \\
+        \LARGE \textbf{\uppercase{Minesweeper}}
+        \HRule{2pt} \\ [0.5cm]
+        \normalsize \today \vspace*{5\baselineskip}}
+
+\date{}
+
+\author{
+        Benjamin Streit \\ 
+        Blake Rieschick \\
+        Evan Brown }
+
+\maketitle
+\newpage
+
+%
+% Section title formatting
+%
+\sectionfont{\scshape}
+
+%
+% BODY
+%
+
+%
+% APPLICATION OVERVIEW
+%
+\section*{Application Overview}
+Team Fragile Development's implementation of Minesweeper has tried to remain true to the game's Windows 3.1 roots while using more modern technologies. The application is built using NodeJS, makes use of a remote JSON storage service by the name of myjson, and is ready for deployment as a Docker container. 
+
+\section*{Delegation of Labor}
+To manage the project, Orangescrum, a team task management tool was used. Epics for Gameplay, Maintaining Modularity, Back-end Development, End Game, Containerization, and Documentation were created. From here, stories, bugs, feature requests, etc. were created and each team member selected tasks they deemed themselves suited for and assigned it to their user account.
+\\ \\
+A specific breakdown of labor performed is as follows:
+\begin{center}
+\begin{tabular}{ cc } 
+ \textbf{Benjamin Streit} & \makecell{General UI contributions \\ Stopwatch class \\
+ Basics of Board class \\ Portions of ModalManager class \\ Portions of GameManager class \\ Portions of HighScoresJSON \\
+ Portions of HighScoresViewer
+ \\ Docker-ization of application} \\ \hline
+ \textbf{Blake Rieschick} &  \makecell{General UI contributions \\ Board class \\ Portions of GameManager class \\ 
+ Bug fixes throughout application} \\ 
+ \hline
+ \textbf{Evan Brown} &  \makecell{General UI contributions \\ Portions of Board Class \\ Portions of ModalManager class \\ Portions of GameManager class \\ Portions of HighScoresJSON \\
+ Portions of HighScoresViewer \\ Documentation Software}
+\end{tabular}
+\end{center}
+
+%
+% CHALLENGES
+%
+\section*{Challenges}
+As expected, rather large board dimensions proved to be a rather large issue. During development it was noted that board dimensions much over 250 rows by 250 columns not only bogged down the board generation function, but would result with significant scrolling for the user - that's if the web page was not rendered unresponsive by the computation itself. Seeing the creation of an algorithm that can build such extraordinary boards as out of the project's scope, the team elected to set a reasonable upper limit to accepted board dimensions from the user. How reasonable the dimensions are was determined by how quickly a board with the given dimensions can be generated, and by how reasonably said board can be displayed. With this guideline in mind, an upper limit of 50 rows by 50 columns was set in the validation logic of user provided board configurations.
+\\\\
+An additional main difficulty experienced during development was the design and implementation of a back-end for reads and writes of user high scores. Initially, the back-end data was designed such that every unique board dimension and mine count combination was a high score category. This worked perfectly fine in a testing environment, but this system's inability to scale was quickly realized in a staging environment. A pivot was necessary, so in spirit of retaining the roots of the original Minesweeper, the high score system was redesigned to only include scores for preset board configurations matching that of the original 8x8 with 10 mines, 16x16 with 40 mines, and 16x30 with 99 mines. This back-end infrastructure allowed for much simpler and readable front-end high-score management, creating a better overall experience for both the developer and the user.  
+
+\section*{Feature Backlog}
+Overall, all but one envisioned enhancement made it to the demo-ready build before the code freeze date. The high score system that made it to the demo-ready build is efficient, practical, and thus satisfactory. However, the quest for a more robust back-end implementation was not quite satisfied. Ideally, the user would be able to query the back-end to look-up user high scores by user-name, score, date of score, as well as what board configuration was used. As time went on the team realized this ambition was a bit too grand for the time allotted, and a bit too far out of scope for the project assignment to be deemed necessary. Consequently, the team's yearning to build an extremely robust back-end was put on hold until a subsequent project.
+
+\section*{In Retrospect}
+In true college programming fashion, the team regrets not having more of a cohesive and all-encompassing design phase prior to writing the actual code of the application. A few days in, the code looked and felt weighed down, leading to several functions being refactored into two new classes. Afterwards, implementation was more streamlined, and each developer had a better understanding of the logic flow for the application. Along similar lines, a more explicit differentiation between versions of the application in circulation would behoove the team. Documentation of specific releases would be helpful, where features, bugs, etc. are noted. This level of documentation for releases would be in addition to the commit comments on the master branch. In future projects, a fully fleshed-out design phase and robust release documentation are a must, and will not be overlooked again.
+
+\section*{Meeting Log}
+\begin{lstlisting}
+## Meeting #1
+Date: Friday, August 31, 2018
+
+Time: 11:30 - 11:50 AM
+
+Location: In-Class
+
+  * General ideas for project framework
+  * Set up Slack group chat for all members
+
+## Meeting #2
+Date: Tuesday, September 4, 2018
+
+Time: 1:00 - 3:00 PM
+
+Location: Spahr Library
+
+  * Decided on node.js as basic framework for project
+  * Discussed usage of Docker
+  * Set up Github repo at https://github.com/EvanBrown96/minesweeper-eecs448
+  * Set up project at https://orangescrum.com
+
+## Meeting #3
+Date: Wednesday, September 5, 2018
+
+Time: 11:35 - 11:50 PM
+
+Location: Eaton Hall
+
+  * Discussed work done over past few days
+  * Created necessary Epics and associated Stories for foreseeable work on app
+  * Discussed next meeting time for later this week
+
+## Meeting #4
+Date: Friday, September 7, 2018
+
+Time: 11:35 - 11:50 PM
+
+Location: Eaton Hall
+
+  * Discussed work done over past few days
+  * Discussed issues/bugs that have come up during implementation
+  * Discussed moving board module to front-end as it's own class
+  * Discussed scheduling and location of next meeting
+
+## Meeting #5
+Date: Monday, September 10, 2018
+
+Time: 11:35 - 11:50 PM
+
+Location: Eaton Hall
+
+  * Discussed work done over the weekend
+  * Discussed issues/bugs that have come up during implementation
+  * Discussed moving module functionality to it's own class, introducing
+    GameManager and ModalManager classes
+  * Discussed work to be done before next meeting by each team member
+  * Discussed scheduling and location of next meeting
+
+## Meeting #6
+Date: Tuesday, September 11, 2018
+
+Time: 1:00 - 2:50 PM
+
+Location: Spahr Library
+
+  * Discussed work done since yesterday
+  * Discussed issues/bugs that have come up during implementation
+  * Squashed bugs
+  * Determined final issues/features implementations to be handled before code
+    freeze
+  * Discussed scheduling of next meeting for later this week
+  
+ ## Meeting #7
+Date: Tuesday, September 14, 2018
+
+Time: 4:15 - 5:30 PM
+
+Location: Spahr Library
+
+  * Squashed the (hopefully) final bugs
+  * Implemented several final features
+  * Discussed code to be written before code freeze
+  * Wrote readme.md
+  * Discussed what needs to be done to finish code documentation and licensing
+  * Discussed what needs to be done to finish project report
+
+\end{lstlisting}
+
+\end{document}
