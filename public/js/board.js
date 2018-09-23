@@ -51,7 +51,11 @@ class GameBoard {
         this.board[i][j] = "*";
       }
     }
+  }
 
+  populateGameBoard(cell) {
+    let firstRow = Number(cell.getAttribute('row'));
+    let firstCol = Number(cell.getAttribute('col'));
     // populating game board
     var mine_placed;
     for(var i = 0; i < this.mine_count; i++) {
@@ -59,7 +63,7 @@ class GameBoard {
       do {
         var row = Math.floor(Math.random() * this.num_rows);
         var col = Math.floor(Math.random() * this.num_cols);
-        if(this.board[row][col] == "*"){
+        if(this.board[row][col] == "*" && !(row == firstRow && col == firstCol)){
           mine_placed = true;
           this.board[row][col] = "M";
         }
@@ -91,7 +95,24 @@ class GameBoard {
     }
   }
 
-
+  updateGameBoard() {
+    var table = document.getElementById('table_game_board');
+    $("#table_game_board tr").remove();
+    for (var i = 0; i < this.board.length; i++) {
+      var new_row = table.insertRow(i);
+      for (var j = 0; j < this.board[0].length; j++) {
+        var new_cell = new_row.insertCell(j);
+        var current_row = table.rows[i];
+        var current_cell = current_row.cells[j];
+        current_cell.setAttribute('row', i);
+        current_cell.setAttribute('col', j);
+        current_cell.setAttribute('value', this.board[i][j]);
+        current_cell.setAttribute('flagged', false);
+        current_cell.setAttribute('isDisplayed', false);
+        current_cell.innerHTML = "<div class='content'></div>";
+      }
+    }
+  }
 
   /**
     * Displays game board in table
