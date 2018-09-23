@@ -149,8 +149,10 @@ class GameManager {
   /**
    * helper function - if this was a first click, then start the Stopwatch
    */
-  checkFirstClick(){
+  checkFirstClick(cell){
     if (this.board.first_click == true) {
+      this.board.populateGameBoard(cell);
+      this.board.updateGameBoard();
       // start stopwatch
       this.stopwatch.run();
       this.board.first_click = false;

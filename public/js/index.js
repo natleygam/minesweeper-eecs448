@@ -14,11 +14,11 @@ game_manager.getConfig();
   * @param {Event} data
 */
 $('#table_game_board').click(function(data) {
-  // check to see if first click
-  game_manager.checkFirstClick();
+
 
   var cell = (data.target || data.srcElement).parentElement;
-
+  // check to see if first click
+  game_manager.checkFirstClick(cell);
   var isLoss = game_manager.board.cellClicked(cell,false);
   if (isLoss) {
     game_manager.loseGame();
