@@ -19,7 +19,7 @@ $('#table_game_board').click(function(data) {
 
   var cell = (data.target || data.srcElement).parentElement;
 
-  var isLoss = game_manager.board.cellClicked(cell);
+  var isLoss = game_manager.board.cellClicked(cell,false);
   if (isLoss) {
     game_manager.loseGame();
   }
