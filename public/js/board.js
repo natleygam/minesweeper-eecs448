@@ -206,6 +206,9 @@ class GameBoard {
       // user lost, return true
       return true;
     }
+    if(cell.getAttribute('value') >= 1 && cell.getAttribute('value') <= 8 && this.countFlags(cell.getAttribute('row'), cell.getAttribute('col')) == cell.getAttribute('value')) {
+      console.log(this.countFlags(cell.getAttribute('row'), cell.getAttribute('col')));
+    }
 
     // otherwise display cell and any relevant adjacent ones
     this.recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
@@ -213,7 +216,19 @@ class GameBoard {
 
   };
 
-
+  countFlags(row, col) {
+    let count = 0;
+    for (let i=Number(row)-1; i<Number(row)+2; i++) {
+      for (let j=Number(col)-1; j<Number(col)+2; j++) {
+        if (parseInt(i, 10) < this.board.length && parseInt(j, 10) < this.board[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0) {
+          if (document.getElementById('table_game_board').rows[i].cells[j].getAttribute('flagged') == "true") {
+            count++;
+          }
+        }
+      }
+    }
+    return count;
+  }
 
   /**
    * Recursively reveals the the cell at (i, j) and any adjacent cells, if applicable
