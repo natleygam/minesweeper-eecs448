@@ -215,7 +215,12 @@ class GameBoard {
     return false;
 
   };
-
+  
+  /**
+   * Counts flags around the cell at (row, col)
+   * @param {Number} row - row index of current cell
+   * @param {Number} col - column index of current cell
+   */
   countFlags(row, col) {
     let count = 0;
     for (let i=Number(row)-1; i<Number(row)+2; i++) {
