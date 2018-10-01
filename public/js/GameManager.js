@@ -64,8 +64,14 @@ class GameManager {
     // calls function to ready config modal
     this.modal_manager.operationConfig();
   }
+  
+  cheatMode(){
+  this.board.displayBoard();
+}
 
-
+goBack(){
+  this.board.updateGameBoard();
+}
 
   /*
     * Ensures board_rows, board_cols, and mine_count is in proper format.
