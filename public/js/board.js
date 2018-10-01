@@ -37,7 +37,15 @@ class GameBoard {
     }
   }
 
+  displayBoard() {
 
+    for(var i = 0; i < this.num_rows; i++) {
+      for(var j = 0; j < this.num_cols; j++) {
+        this.recReveal(i,j);
+      }
+    }
+    
+  }
 
   /**
     * Builds game board to spec of currently stored num_rows, num_cols, and mine_count
