@@ -9,10 +9,10 @@ class GameManager {
 
     // instance of stopwatch for timing games
     this.stopwatch = new Stopwatch();
-
+	
     // stores current game board object
     this.board;
-
+	this.revealedArray = []; 
     // creates modal manager object
     this.modal_manager = new ModalManager();
 
@@ -48,6 +48,7 @@ class GameManager {
 
     // create new instance of game board
     this.board = new GameBoard(board_rows, board_cols, mine_count, preset_index);
+	this.cheatBoard = this.board;
     // build game board upon good config
     this.board.buildGameBoard();
     // call function to ready game start modal
@@ -65,12 +66,29 @@ class GameManager {
     this.modal_manager.operationConfig();
   }
   
-  cheatMode(){
+cheatMode(){
+  var table = document.getElementById('table_game_board');
+	for (var i = 0; i < this.board.num_rows; i++) {
+		var row = table.rows[i];
+		for (var j = 0; j < this.board.num_cols; j++) {
+			var cell = row.cells[j];
+			if(cell.getAttribute('isDisplayed') == "true"){
+				this.revealedArray.push([i,j]);
+			}
+			
+		}
+	}
+	  
   this.board.displayBoard();
 }
 
 goBack(){
   this.board.updateGameBoard();
+  var table = document.getElementById('table_game_board');
+     
+	for (var i = 0; i < this.revealedArray.length; i++) {
+		this.board.recReveal(this.revealedArray[i][0],this.revealedArray[i][1]);
+	}
 }
 
   /*
