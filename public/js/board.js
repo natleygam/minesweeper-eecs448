@@ -37,7 +37,15 @@ class GameBoard {
     }
   }
 
+  displayBoard() {
 
+    for(var i = 0; i < this.num_rows; i++) {
+      for(var j = 0; j < this.num_cols; j++) {
+        this.recReveal(i,j);
+      }
+    }
+
+  }
 
   /**
     * Builds game board to spec of currently stored num_rows, num_cols, and mine_count
@@ -51,7 +59,11 @@ class GameBoard {
         this.board[i][j] = "*";
       }
     }
+  }
 
+  populateGameBoard(cell) {
+    let firstRow = Number(cell.getAttribute('row'));
+    let firstCol = Number(cell.getAttribute('col'));
     // populating game board
     var mine_placed;
     for(var i = 0; i < this.mine_count; i++) {
@@ -59,7 +71,7 @@ class GameBoard {
       do {
         var row = Math.floor(Math.random() * this.num_rows);
         var col = Math.floor(Math.random() * this.num_cols);
-        if(this.board[row][col] == "*"){
+        if(this.board[row][col] == "*" && !(row == firstRow && col == firstCol)){
           mine_placed = true;
           this.board[row][col] = "M";
         }
@@ -91,7 +103,24 @@ class GameBoard {
     }
   }
 
-
+  updateGameBoard() {
+    var table = document.getElementById('table_game_board');
+    $("#table_game_board tr").remove();
+    for (var i = 0; i < this.board.length; i++) {
+      var new_row = table.insertRow(i);
+      for (var j = 0; j < this.board[0].length; j++) {
+        var new_cell = new_row.insertCell(j);
+        var current_row = table.rows[i];
+        var current_cell = current_row.cells[j];
+        current_cell.setAttribute('row', i);
+        current_cell.setAttribute('col', j);
+        current_cell.setAttribute('value', this.board[i][j]);
+        current_cell.setAttribute('flagged', false);
+        current_cell.setAttribute('isDisplayed', false);
+        current_cell.innerHTML = "<div class='content'></div>";
+      }
+    }
+  }
 
   /**
     * Displays game board in table
@@ -164,6 +193,17 @@ class GameBoard {
   }
 
 
+  recordState() {
+    let state = [];
+    for (let i=0; i<this.num_rows; i++) {
+      state[i] = [];
+      for (let j=0; j<this.num_cols; j++) {
+        state[i][j] = document.getElementById('table_game_board').rows[i].cells[j].getAttribute('isDisplayed');
+      }
+    }
+    console.log(state);
+  }
+
 
   /**
     * sets flag indicator above game board to remaining number of flags
@@ -193,8 +233,8 @@ class GameBoard {
    * @param {Object} cell - DOM object of the cell that was clicked
    * @returns {Boolean} - true if this click caused game lose condition
    */
-  cellClicked(cell) {
-
+  cellClicked(cell,recursive=true) {
+    this.recordState(); //don't need to call it here. just for testing. it's also one behind because it's updates after the click
     // if cell value is flagged, immediately return false because click shouldn't register
     if(cell.getAttribute('flagged') == 'true'){
       return false;
@@ -206,14 +246,57 @@ class GameBoard {
       // user lost, return true
       return true;
     }
+    //If trying to clear around numbered square
+    if(cell.getAttribute('value') >= 1 && cell.getAttribute('value') <= 8 && this.countFlags(cell.getAttribute('row'), cell.getAttribute('col')) == cell.getAttribute('value') && !recursive) {
+      return this.clearSurrounding(cell.getAttribute('row') , cell.getAttribute('col'));
+    }
 
     // otherwise display cell and any relevant adjacent ones
     this.recReveal(cell.getAttribute('row') , cell.getAttribute('col'))
     return false;
 
   };
+  /**
+   * Clicks all unclicked spaces around the cell at (row, col)
+   * @param {Number} row - row index of current cell
+   * @param {Number} col - column index of current cell
+   */
+  clearSurrounding(row, col) {
+    for (let i=Number(row)-1; i<=Number(row)+1; i++) {
+      for (let j=Number(col)-1; j<=Number(col)+1; j++) {
+        //checks if on the board
+        if (parseInt(i, 10) < this.board.length && parseInt(j, 10) < this.board[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0) {
+          //checks that space has not been displayed yet
+          if (document.getElementById('table_game_board').rows[i].cells[j].getAttribute('isDisplayed') == "false") {
+            //checks that the cell cleared was a mine
+            if (this.cellClicked(document.getElementById('table_game_board').rows[i].cells[j])) {
+              return true; //mine blows up
+            }
+          }
+        }
+      }
+    }
+    return false; //clear was safe
+  }
 
-
+  /**
+   * Counts flags around the cell at (row, col)
+   * @param {Number} row - row index of current cell
+   * @param {Number} col - column index of current cell
+   */
+  countFlags(row, col) {
+    let count = 0;
+    for (let i=Number(row)-1; i<=Number(row)+1; i++) {
+      for (let j=Number(col)-1; j<=Number(col)+1; j++) {
+        if (parseInt(i, 10) < this.board.length && parseInt(j, 10) < this.board[0].length && parseInt(i, 10) >= 0 && parseInt(j, 10) >= 0) {
+          if (document.getElementById('table_game_board').rows[i].cells[j].getAttribute('flagged') == "true") {
+            count++;
+          }
+        }
+      }
+    }
+    return count;
+  }
 
   /**
    * Recursively reveals the the cell at (i, j) and any adjacent cells, if applicable
