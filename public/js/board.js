@@ -44,7 +44,7 @@ class GameBoard {
         this.recReveal(i,j);
       }
     }
-    
+
   }
 
   /**
@@ -193,6 +193,17 @@ class GameBoard {
   }
 
 
+  recordState() {
+    let state = [];
+    for (let i=0; i<this.num_rows; i++) {
+      state[i] = [];
+      for (let j=0; j<this.num_cols; j++) {
+        state[i][j] = document.getElementById('table_game_board').rows[i].cells[j].getAttribute('isDisplayed');
+      }
+    }
+    console.log(state);
+  }
+
 
   /**
     * sets flag indicator above game board to remaining number of flags
@@ -223,7 +234,7 @@ class GameBoard {
    * @returns {Boolean} - true if this click caused game lose condition
    */
   cellClicked(cell,recursive=true) {
-
+    this.recordState(); //don't need to call it here. just for testing. it's also one behind because it's updates after the click
     // if cell value is flagged, immediately return false because click shouldn't register
     if(cell.getAttribute('flagged') == 'true'){
       return false;
